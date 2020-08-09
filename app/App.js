@@ -27,19 +27,13 @@ import {
 import { NavigationContainer } from '@react-navigation/native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 
+import Home from './Home'
+import Calendar from './Calendar'
+import Poll from './Poll'
+import Clubs from './Clubs'
+import More from './More'
+
 const Tab = createBottomTabNavigator();
-
-function Home(){
-	return (
-		<View/>
-	)
-}
-
-function Settings(){
-	return (
-		<View/>
-	)
-}
 
 class App extends React.Component {
 	render() {
@@ -47,7 +41,10 @@ class App extends React.Component {
 			<NavigationContainer>
 				<Tab.Navigator>
 					<Tab.Screen name="Home" component={Home} />
-					<Tab.Screen name="Settings" component={Settings} />
+					<Tab.Screen name="Calendar" component={Calendar} />
+					<Tab.Screen name="Polls" component={Poll} />
+					<Tab.Screen name="Clubs" component={Clubs} />
+					<Tab.Screen name="More" component={More} />
 				</Tab.Navigator>
 			</NavigationContainer>
 		)
