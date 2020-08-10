@@ -25,7 +25,7 @@ const LunchEvent = ({item}) => {
 	const extra = visible?(<Text>{'\n'}{item.item.text}{'\n\n'}Location: {item.item.loc}</Text>):(<></>);
 	return(
 		<View>
-			<TouchableOpacity style={styles.item} onPress={()=>setVisible(!visible)}>
+			<TouchableOpacity style={styles.item} onPress={()=>setVisible(!visible)} activeOpacity={0.8}>
 				<Text style={styles.title}>{item.item.title}</Text>
 				{extra}
 			</TouchableOpacity>

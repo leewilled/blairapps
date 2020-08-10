@@ -26,7 +26,7 @@ const ClubElement = ({item}) => {
   const extra = visible?(<Text>{'\n'}Location: {item.item.loc} {"\n\n"}Sponsor: {item.item.sponsor}</Text>):(<></>);
   return(
 	<View>
-	  <TouchableOpacity style={styles.item} onPress={()=>setVisible(!visible)}>
+	  <TouchableOpacity style={styles.item} onPress={()=>setVisible(!visible)} activeOpacity={0.8}>
 		<Text style={styles.title}>{item.item.name}</Text>
 		{extra}
 	  </TouchableOpacity>
