@@ -27,6 +27,7 @@ import Resources from './Resources'
 import StudentWeek from './StudentWeek'
 import SSLOps from './SSLOps'
 import LunchEvents from './LunchEvents'
+import { LinearGradient } from 'react-native-linear-gradient'
 
 const Stack = createStackNavigator()
 
@@ -78,7 +79,7 @@ class More extends React.Component {
 						options={{
 							title:'Announcements',
 							headerTitleStyle:[styles.headerTitle,{alignSelf:'center'}],
-							headerLeft:null
+							headerLeft:null,
 						}}
 					/>
 					<Stack.Screen 
