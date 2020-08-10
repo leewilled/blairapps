@@ -6,6 +6,8 @@ import {
   View,
   Text,
   StatusBar,
+  FlatList,
+  TouchableOpacity
 } from 'react-native';
 
 import {
@@ -16,12 +18,91 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
+import { NavigationContainer } from '@react-navigation/native'
+import { createStackNavigator } from '@react-navigation/stack'
+
+import styles from './styles/morestyles'
+import Announcements from './Announcements'
+import Resources from './Resources'
+import StudentWeek from './StudentWeek'
+import SSLOps from './SSLOps'
+
+const Stack = createStackNavigator()
+
+class MoreSwitch extends React.Component {
+	constructor(props) {
+		super(props)
+		this.props = props
+	}
+	
+	render() {
+		return (
+			<View style={{flex:1}}>
+				<FlatList
+					data={[
+						{name:"Announcements",key:"announce"},
+						{name:"Resources",key:"resources"},
+						{name:"Student of the Week",key:"studentweek"},
+						{name:"SSL Opportunities",key:"sslops"}
+					]}
+					renderItem={({item})=>
+						<TouchableOpacity style={styles.moreitem} onPress={()=>this.props.navigation.navigate(item.key)}>
+							<Text style={styles.moretext}>{item.name}</Text>
+						</TouchableOpacity>
+					}
+				/>
+			</View>
+		)
+	}
+}
+
 class More extends React.Component {
 	render() {
 		return (
-			<View>
-			
-			</View>
+			<NavigationContainer independent={true}>
+				<Stack.Navigator>
+					<Stack.Screen 
+						name="Chooser" 
+						component={MoreSwitch}
+						options={{
+							title:'More',
+							headerTitleStyle:styles.headerTitle
+						}}
+					/>
+					<Stack.Screen 
+						name="announce" 
+						component={Announcements}
+						options={{
+							title:'Announcements',
+							headerTitleStyle:styles.headerTitle
+						}}
+					/>
+					<Stack.Screen 
+						name="resources" 
+						component={Resources}
+						options={{
+							title:'Resources',
+							headerTitleStyle:styles.headerTitle
+						}}
+					/>
+					<Stack.Screen 
+						name="studentweek" 
+						component={StudentWeek}
+						options={{
+							title:'Student of the Week',
+							headerTitleStyle:styles.headerTitle
+						}}
+					/>
+					<Stack.Screen 
+						name="sslops" 
+						component={SSLOps}
+						options={{
+							title:'SSL Opportunities',
+							headerTitleStyle:styles.headerTitle
+						}}
+					/>
+				</Stack.Navigator>
+			</NavigationContainer>
 		)
 	}
 }
