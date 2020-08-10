@@ -55,8 +55,8 @@ class Clubs extends React.Component {
       .then((json) => {
         //onsole.log("done bitch?")
         //console.log(json);
-        this.setState({data: JSON.parse(json)});
-        this.setState({dataSearch:JSON.parse(json)});
+        this.setState({data: JSON.parse(json).clubs});
+        this.setState({dataSearch:JSON.parse(json).clubs });
       })
       .catch((error) => console.error(error))
       .finally(() => {
