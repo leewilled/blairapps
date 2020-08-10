@@ -40,6 +40,7 @@ class App extends React.Component {
 		return (
 			<NavigationContainer >
 				<Tab.Navigator tabBarOptions={{
+					activeTintColor: 'red',
 					labelStyle:{
 					fontSize:20
 				}}}>
