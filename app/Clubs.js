@@ -68,6 +68,9 @@ class Clubs extends React.Component {
     this.setState({ search:search });
     ds = this.state.dataSearch.filter((thing)=>{return thing.name.startsWith(search)})
     this.setState({dataSearch: ds})
+    if (search == ""){
+      this.setState({dataSearch:this.state.data})
+    }
   };
   clearSearch  = (search)=>{
     ds = this.state.data;
@@ -84,6 +87,7 @@ class Clubs extends React.Component {
         lightTheme
         placeholder="Type Here..."
         onChangeText={this.updateSearch}
+        onCancel={this.clearSearch}
         onClear={this.clearSearch}
         value={this.state.search}/>
       <FlatList
