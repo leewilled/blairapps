@@ -19,6 +19,7 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 import { SearchBar } from 'react-native-elements';
+import styles from './styles/liststyles'
 
 const ClubElement = ({item}) => {
   const [visible, setVisible] = useState(0)
@@ -101,19 +102,5 @@ class Clubs extends React.Component {
     );
   }
 }
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    marginTop: StatusBar.currentHeight || 0,
-  },
-  item: {
-    backgroundColor: '#bababa',
-    padding: 20,
-    marginVertical: 8,
-    marginHorizontal: 16,
-  },
-  title: {
-    fontSize: 32,
-  },
-});
+
 export default Clubs;
