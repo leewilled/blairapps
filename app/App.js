@@ -38,9 +38,12 @@ const Tab = createBottomTabNavigator();
 class App extends React.Component {
 	render() {
 		return (
-			<NavigationContainer>
-				<Tab.Navigator>
-					<Tab.Screen name="Home" component={Home} />
+			<NavigationContainer >
+				<Tab.Navigator tabBarOptions={{
+					labelStyle:{
+					fontSize:20
+				}}}>
+					<Tab.Screen name="Home" component={Home} style={{fontSize:30}} />
 					<Tab.Screen name="Calendar" component={Calendar} />
 					<Tab.Screen name="Polls" component={Poll} />
 					<Tab.Screen name="Clubs" component={Clubs} />
@@ -51,4 +54,8 @@ class App extends React.Component {
 	}
 }
 
+const styles = StyleSheet.create({
+	
+}
+);
 export default App;
