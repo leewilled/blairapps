@@ -26,6 +26,7 @@ import Announcements from './Announcements'
 import Resources from './Resources'
 import StudentWeek from './StudentWeek'
 import SSLOps from './SSLOps'
+import LunchEvents from './LunchEvents'
 
 const Stack = createStackNavigator()
 
@@ -37,12 +38,13 @@ class MoreSwitch extends React.Component {
 	
 	render() {
 		return (
-			<View style={{flex:1}}>
+			<View style={{flex:1,backgroundColor:'red'}}>
 				<FlatList
 					data={[
 						{name:"Announcements",key:"announce"},
 						{name:"Resources",key:"resources"},
 						{name:"Student of the Week",key:"studentweek"},
+						{name:"Lunch Events",key:"lunchevent"},
 						{name:"SSL Opportunities",key:"sslops"}
 					]}
 					renderItem={({item})=>
@@ -66,7 +68,8 @@ class More extends React.Component {
 						component={MoreSwitch}
 						options={{
 							title:'More',
-							headerTitleStyle:styles.headerTitle
+							headerTitleStyle:styles.headerTitle,
+							headerStyle:{borderBottomWidth:0.5,borderBottomColor:'black'},
 						}}
 					/>
 					<Stack.Screen 
@@ -74,7 +77,8 @@ class More extends React.Component {
 						component={Announcements}
 						options={{
 							title:'Announcements',
-							headerTitleStyle:styles.headerTitle
+							headerTitleStyle:[styles.headerTitle,{alignSelf:'center'}],
+							headerLeft:null
 						}}
 					/>
 					<Stack.Screen 
@@ -82,7 +86,8 @@ class More extends React.Component {
 						component={Resources}
 						options={{
 							title:'Resources',
-							headerTitleStyle:styles.headerTitle
+							headerTitleStyle:[styles.headerTitle,{alignSelf:'center'}],
+							headerLeft:null
 						}}
 					/>
 					<Stack.Screen 
@@ -90,7 +95,17 @@ class More extends React.Component {
 						component={StudentWeek}
 						options={{
 							title:'Student of the Week',
-							headerTitleStyle:styles.headerTitle
+							headerTitleStyle:[styles.headerTitle,{alignSelf:'center'}],
+							headerLeft:null
+						}}
+					/>
+					<Stack.Screen 
+						name="lunchevent" 
+						component={LunchEvents}
+						options={{
+							title:'Lunch Events',
+							headerTitleStyle:[styles.headerTitle,{alignSelf:'center'}],
+							headerLeft:null
 						}}
 					/>
 					<Stack.Screen 
@@ -98,7 +113,8 @@ class More extends React.Component {
 						component={SSLOps}
 						options={{
 							title:'SSL Opportunities',
-							headerTitleStyle:styles.headerTitle
+							headerTitleStyle:[styles.headerTitle,{alignSelf:'center'}],
+							headerLeft:null
 						}}
 					/>
 				</Stack.Navigator>

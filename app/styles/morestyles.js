@@ -3,8 +3,8 @@ import {StyleSheet, Dimensions} from 'react-native';
 const styles=StyleSheet.create({
 	moreitem: {
 		backgroundColor:'red',
-		borderColor:'white',
-		borderWidth:0.5,
+		borderBottomColor:'white',
+		borderBottomWidth:0.5,
 		height: Dimensions.get('window').height*0.075,
 		justifyContent:'center'
 	},
