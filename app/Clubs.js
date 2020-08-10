@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -8,6 +8,7 @@ import {
   StatusBar,
   ActivityIndicator, 
   FlatList,
+  TouchableOpacity
 } from 'react-native';
 
 import {
@@ -20,12 +21,15 @@ import {
 import { SearchBar } from 'react-native-elements';
 
 const ClubElement = ({item}) => {
-  //console.log(item)
+  const [visible, setVisible] = useState(0)
+  const extra = visible?(<Text>{'\n'}Location: {item.item.loc} {"\n\n"}Sponsor: {item.item.sponsor}</Text>):(<></>);
   return(
-  <View style={styles.item}>
-    <Text style={styles.title}>{item.item.name}</Text>
-    <Text>Location: {item.item.loc} {"\n"}Sponsor: {item.item.sponsor}</Text>
-  </View>
+	<View>
+	  <TouchableOpacity style={styles.item} onPress={()=>setVisible(!visible)}>
+		<Text style={styles.title}>{item.item.name}</Text>
+		{extra}
+	  </TouchableOpacity>
+	</View>
   )
 }
 class Clubs extends React.Component {
@@ -66,14 +70,12 @@ class Clubs extends React.Component {
   }
   updateSearch = (search) => {
     this.setState({ search:search });
-    ds = this.state.dataSearch.filter((thing)=>{return thing.name.startsWith(search)})
+	const searchPool = search.startsWith(this.state.search)?this.state.dataSearch:this.state.data;
+    const ds = searchPool.filter((thing)=>{return thing.name.toLowerCase().startsWith(search.toLowerCase())})
     this.setState({dataSearch: ds})
-    if (search == ""){
-      this.setState({dataSearch:this.state.data})
-    }
   };
   clearSearch  = (search)=>{
-    ds = this.state.data;
+    const ds = this.state.data;
     this.setState({dataSearch:ds})
   }
   render() {
@@ -85,7 +87,7 @@ class Clubs extends React.Component {
       <SafeAreaView style={styles.container}>
         <SearchBar
         lightTheme
-        placeholder="Type Here..."
+        placeholder="Search Clubs"
         onChangeText={this.updateSearch}
         onCancel={this.clearSearch}
         onClear={this.clearSearch}
