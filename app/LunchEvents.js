@@ -56,9 +56,6 @@ class LunchEvents extends React.Component {
 			this.setState({data: JSON.parse(json)});
 		})
 		.catch((error) => console.error(error))
-		.finally(() => {
-			this.setState({ isLoading: false });
-		});
 	}
 	
 	render() {
