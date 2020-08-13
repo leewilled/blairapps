@@ -20,6 +20,7 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 import { SearchBar } from 'react-native-elements';
 import styles from './styles/liststyles'
+import { url } from './resources/fetchInfo.json'
 
 const ClubElement = ({item}) => {
   const [visible, setVisible] = useState(0)
@@ -49,7 +50,7 @@ class Clubs extends React.Component {
 
   componentDidMount() {
     
-    fetch('https://6dc2642ae9b3.ngrok.io/api/en/clubs',{
+    fetch(`${url}/api/en/clubs`,{
       headers: {
         'Cache-Control': 'no-cache'
       } })

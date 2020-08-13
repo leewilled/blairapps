@@ -14,6 +14,13 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 32,
   },
+  date: {
+	  fontSize:12,
+	  marginBottom:'-3%',
+	  alignSelf:'flex-end',
+	  marginTop:'-3%',
+	  marginRight:'-3%'
+  }
 });
 
 export default styles;

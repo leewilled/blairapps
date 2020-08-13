@@ -18,10 +18,15 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 
 import styles from './styles/liststyles'
+import { url } from './resources/fetchInfo.json'
 
 const Announcement = ({item}) => {
+	const date = new Date
+	const dateStr = `${date.getMonth()+1}/${date.getUTCDate()}/${date.getFullYear()}`
+	const dateInfo = dateStr===item.item.date&&item.item.time!==undefined?item.item.time:item.item.date;
 	return (
 		<View style={styles.item}>
+			{dateInfo!==undefined?<Text style={styles.date}>{dateInfo}</Text>:<></>}
 			<Text style={styles.title}>{item.item.message}</Text>
 		</View>
 	)
@@ -37,7 +42,7 @@ class Announcements extends React.Component {
 	}
 	
 	componentDidMount() {
-		fetch('https://6dc2642ae9b3.ngrok.io/api/en/announcements',{
+		fetch(`${url}/api/en/announcements`,{
 			headers: {
 				'Cache-Control': 'no-cache'
 			}

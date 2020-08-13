@@ -19,6 +19,7 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 
 import styles from './styles/liststyles'
+import { url } from './resources/fetchInfo.json'
 
 const LunchEvent = ({item}) => {
 	const [visible, setVisible] = useState(0)
@@ -43,7 +44,7 @@ class LunchEvents extends React.Component {
 	}
 	
 	componentDidMount() {
-		fetch('https://6dc2642ae9b3.ngrok.io/api/en/lunchEvents',{
+		fetch(`${url}/api/en/lunchEvents`,{
 			headers: {
 				'Cache-Control': 'no-cache'
 			}
