@@ -55,12 +55,9 @@ class Clubs extends React.Component {
         'Cache-Control': 'no-cache'
       } })
       .then((response) => {
-        //console.log(response.text());
         return response.text();
       })
       .then((json) => {
-        //onsole.log("done bitch?")
-        //console.log(json);
         this.setState({data: JSON.parse(json).clubs});
         this.setState({dataSearch:JSON.parse(json).clubs });
       })

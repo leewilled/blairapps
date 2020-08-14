@@ -27,6 +27,7 @@ import Resources from './Resources'
 import StudentWeek from './StudentWeek'
 import SSLOps from './SSLOps'
 import LunchEvents from './LunchEvents'
+import ChallengeWeek from './ChallengeWeek'
 import { LinearGradient } from 'react-native-linear-gradient'
 
 const Stack = createStackNavigator()
@@ -46,7 +47,8 @@ class MoreSwitch extends React.Component {
 						{name:"Resources",key:"resources"},
 						{name:"Student of the Week",key:"studentweek"},
 						{name:"Lunch Events",key:"lunchevent"},
-						{name:"SSL Opportunities",key:"sslops"}
+						{name:"SSL Opportunities",key:"sslops"},
+						{name:"Challenge of the Week",key:"challengeweek"},
 					]}
 					renderItem={({item})=>
 						<TouchableOpacity style={styles.moreitem} onPress={()=>this.props.navigation.navigate(item.key)}>
@@ -114,6 +116,15 @@ class More extends React.Component {
 						component={SSLOps}
 						options={{
 							title:'SSL Opportunities',
+							headerTitleStyle:[styles.headerTitle,{alignSelf:'center'}],
+							headerLeft:null
+						}}
+					/>
+					<Stack.Screen 
+						name="challengeweek" 
+						component={ChallengeWeek}
+						options={{
+							title:'Challenge of the Week',
 							headerTitleStyle:[styles.headerTitle,{alignSelf:'center'}],
 							headerLeft:null
 						}}
