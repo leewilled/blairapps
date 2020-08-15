@@ -23,8 +23,9 @@ import { url } from './resources/fetchInfo.json'
 
 const Announcement = ({item}) => {
 	const date = new Date
-	const dateStr = `${date.getMonth()+1}/${date.getUTCDate()}/${date.getFullYear()}`
+	const dateStr = `${date.getMonth()+1}/${date.getDate()}/${date.getFullYear()}`
 	const dateInfo = dateStr===item.item.date&&item.item.time!==undefined?item.item.time:item.item.date;
+	console.log(dateStr)
 	return (
 		<View style={styles.item}>
 			{dateInfo!==undefined?<Text style={styles.date}>{dateInfo}</Text>:<></>}
