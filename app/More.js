@@ -22,7 +22,7 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 
 import styles from './styles/morestyles'
-import Announcements from './Announcements'
+import Announcements, {TeacherList} from './Announcements'
 import Resources from './Resources'
 import StudentWeek from './StudentWeek'
 import SSLOps from './SSLOps'
@@ -128,6 +128,14 @@ class More extends React.Component {
 							headerTitleStyle:[styles.headerTitle,{alignSelf:'center'}],
 							headerLeft:null
 						}}
+					/>
+					<Stack.Screen 
+						name="TeacherList" 
+						component={TeacherList}
+						options={({route})=>({
+							headerTitleStyle:[styles.headerTitle,{alignSelf:'center',marginLeft:"-20%"}],
+							title:route.params.name
+						})}
 					/>
 				</Stack.Navigator>
 			</NavigationContainer>

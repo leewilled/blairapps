@@ -7,6 +7,7 @@ import {
   Text,
   StatusBar,
   FlatList,
+  TouchableOpacity,
 } from 'react-native';
 
 import {
@@ -32,12 +33,34 @@ const Announcement = ({item}) => {
 	)
 }
 
+export const TeacherList = ({route}) => {
+	return <View style={styles.container}>
+		<FlatList
+			data={route.params.data}
+			renderItem={item=><Announcement item={item}/>}
+			keyExtractor={item=>JSON.stringify(item)}
+		/>
+	</View>
+}
+
+function TeacherButton(props) {
+	return (
+		<View>
+		  <TouchableOpacity style={styles.item} onPress={()=>props.navigation.navigate('TeacherList',{data:props.data,name:props.name})} activeOpacity={0.8}>
+			<Text style={styles.title}>{props.name}</Text>
+		  </TouchableOpacity>
+		</View>
+	)
+}
+
 class Announcements extends React.Component {
 	
 	constructor(props) {
 		super(props)
 		this.state = {
-			data: []
+			data: [],
+			teacherNames: [],
+			isLoading:true
 		}
 	}
 	
@@ -49,21 +72,26 @@ class Announcements extends React.Component {
 			}
 		)
 		.then((response) => {
-			return response.text();
+			return response.text()
 		})
-		.then((json) => {
-			this.setState({data: JSON.parse(json).data});
+		.then((txt) => {
+			const data = JSON.parse(txt).data;
+			const teacherNames = [...new Set(data.filter(x=>x.teacher!=null&&x.teacher.trim()!=='').map(x=>x.teacher))];
+			teacherNames.sort()
+			this.setState({data: data, teacherNames: teacherNames.map(x=>({name:x})),isLoading:false});
 		})
 		.catch((error) => console.error(error))
 	}
 	
 	render() {
+		if (this.state.isLoading) return <></>
 		return (
 			<View style={styles.container}>
+				<TeacherButton data={this.state.data.filter(x=>x.teacher==null||x.teacher.trim()==='')} name="No Teacher" navigation={this.props.navigation}/>
 				<FlatList
-					data={this.state.data}
-					renderItem={item=><Announcement item={item}/>}
-					keyExtractor={item=>JSON.stringify(item)}
+					data={this.state.teacherNames}
+					renderItem={({item})=><TeacherButton item={item} data={this.state.data.filter(x=>x.teacher===item.name)} name={item.name} navigation={this.props.navigation}/>}
+					keyExtractor={(item,index)=>item.name+index}
 				/>
 			</View>
 		)
