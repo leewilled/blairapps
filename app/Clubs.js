@@ -81,8 +81,6 @@ class Clubs extends React.Component {
     const { data , dataSearch, isLoading,search} = this.state;
 
     return (
-      
-
       <SafeAreaView style={styles.container}>
         <SearchBar
         lightTheme
