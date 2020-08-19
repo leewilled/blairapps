@@ -24,6 +24,7 @@ import Calendar from './Calendar'
 import Poll from './Poll'
 import Clubs from './Clubs'
 import More from './More'
+import Staff from './Staff'
 
 const Tab = createBottomTabNavigator();
 
@@ -34,12 +35,13 @@ class App extends React.Component {
 				<Tab.Navigator tabBarOptions={{
 					activeTintColor: 'red',
 					labelStyle:{
-					fontSize:20
+					fontSize:16
 				}}}>
-					<Tab.Screen name="Home" component={Home} style={{fontSize:30}} />
+					<Tab.Screen name="Home" component={Home} />
 					<Tab.Screen name="Calendar" component={Calendar} />
 					<Tab.Screen name="Polls" component={Poll} />
 					<Tab.Screen name="Clubs" component={Clubs} />
+					<Tab.Screen name="Staff" component={Staff} />
 					<Tab.Screen name="More" component={More} />
 				</Tab.Navigator>
 			</NavigationContainer>
@@ -47,8 +49,4 @@ class App extends React.Component {
 	}
 }
 
-const styles = StyleSheet.create({
-	
-}
-);
 export default App;
