@@ -22,11 +22,11 @@ import { url } from './resources/fetchInfo.json';
 
 const SSLElement = ({item}) => {
   const [visible, setVisible] = useState(0)
-  const extra = visible?(<Text>{'\n'}{item.item.title} {"\n\n"}Details: {item.item.text}{"\n\n"}Where: {item.item.loc}{"\n\n"}Teacher: {item.item.teacher}</Text>):(<></>);
+  const extra = visible?(<Text>{'\n'}Details: {item.item.text}{"\n\n"}Where: {item.item.loc}{"\n\n"}Teacher: {item.item.teacher}</Text>):(<></>);
   return(
     <View>
       <TouchableOpacity style={styles.item} onPress={()=>setVisible(!visible)} activeOpacity={0.8}>
-      <Text style={styles.title}>{item.item.name}</Text>
+      <Text style={styles.title}>{item.item.title}</Text>
       {extra}
       </TouchableOpacity>
     </View>
