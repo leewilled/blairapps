@@ -15,7 +15,29 @@ const styles=StyleSheet.create({
 	headerTitle: {
 		fontWeight:'bold',
 		fontSize:24
-	}
+	},
+	resourceContainer: {
+		alignItems: 'center',
+    	marginTop: '3%',
+	},
+	image: {
+		height: 100,
+		width: 400,
+		borderTopRightRadius: 16,
+		borderTopLeftRadius: 16,
+	},
+	textContainer: {
+		backgroundColor: 'black',
+		width: 400,
+		borderBottomLeftRadius: 16,
+		borderBottomRightRadius: 16,
+	},
+	resourceText: {
+		fontWeight: 'bold',
+		color: 'white',
+		fontSize:32,
+		textAlign:'center',
+	},
 });
 
 export default styles;
