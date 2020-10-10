@@ -50,7 +50,6 @@ class SSLOps extends React.Component {
 			}
 		)
 		.then((response) => {
-      console.log(response);
 			return response.text();
 		})
 		.then((json) => {
@@ -60,7 +59,6 @@ class SSLOps extends React.Component {
 	}
 	
 	render() {
-    console.log(this.state.data)
 		return (
 			<View style={styles.container}>
 				<FlatList

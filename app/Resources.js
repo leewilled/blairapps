@@ -8,6 +8,7 @@ import {
   StatusBar,
   Linking,
   Image,
+  TouchableOpacity
 } from 'react-native';
 
 import {
@@ -18,71 +19,28 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 import styles from './styles/morestyles';
+
+function ResourceLink(props) { 
+	return (
+		<TouchableOpacity style={styles.resourceContainer} onPress={() => Linking.openURL(props.url)}>
+          <Image source={props.img} style={styles.image}/>
+		  <View style={styles.textContainer}>
+            <Text style={styles.resourceText}>{props.name}</Text> 
+          </View>		  
+        </TouchableOpacity>
+	)
+}
+
 class Resources extends React.Component {
 	render() {
 		return (
 			<ScrollView>
-        <View style = {styles.resourceContainer}>
-          <Text onPress={() => Linking.openURL('https://classroom.mcpsmd.org/')}>
-            <Image source ={require('./assets/canvaslogo.png')} style = {styles.image}/>
-            <View style = {styles.textContainer}>
-              <Text style = {styles.resourceText}>
-                MyMCPS Classroom
-              </Text> 
-            </View>
-          </Text>  
-        </View>
-        <View style = {styles.resourceContainer}>
-          <Text onPress={() => Linking.openURL('https://md-mcps-psv.edupoint.com/Home_PXP2.aspx')}>
-            <Image source ={require('./assets/studentvue.jpg')} style = {styles.image}/>
-            <View style = {styles.textContainer}>
-              <Text style = {styles.resourceText}>
-                StudentVUE
-              </Text> 
-            </View>
-          </Text>  
-        </View>
-        <View style = {styles.resourceContainer}>
-          <Text onPress={() => Linking.openURL('https://mbhs.edu/newsevents/Announcements/Montgomery%20Blair%20High%20School%20Final%20Bell%20Schedule%20.pdf')}>
-            <Image source ={require('./assets/schedule.jpg')} style = {styles.image}/>
-            <View style = {styles.textContainer}>
-              <Text style = {styles.resourceText}>
-                1st Semester Schedule
-              </Text> 
-            </View>
-          </Text>
-        </View>
-        <View style = {styles.resourceContainer}>
-          <Text onPress={() => Linking.openURL('https://student.naviance.com/mbhs')}>
-            <Image source ={require('./assets/naviance.png')} style = {styles.image}/>
-            <View style = {styles.textContainer}>
-              <Text style = {styles.resourceText}>
-                Naviance
-              </Text> 
-            </View>
-          </Text>
-        </View>
-        <View style = {styles.resourceContainer}>
-          <Text onPress={() => Linking.openURL('https://blairblazersathletics.com/')}>
-            <Image source ={require('./assets/athletics.jpg')} style = {styles.image}/>
-            <View style = {styles.textContainer}>
-              <Text style = {styles.resourceText}>
-                Blair Athletics
-              </Text> 
-            </View>
-          </Text>
-        </View>
-        <View style = {styles.resourceContainer}>
-          <Text onPress={() => Linking.openURL('https://classroom.google.com/u/0/h')}>
-            <Image source ={require('./assets/googleclassroom.jpg')} style = {styles.image}/>
-            <View style = {styles.textContainer}>
-              <Text style = {styles.resourceText}>
-                Google Classroom
-              </Text> 
-            </View>
-          </Text>
-        </View>
-        
+				<ResourceLink url='https://classroom.mcpsmd.org/' img={require('./assets/canvaslogo.png')} name='MyMCPS Classroom'/>
+				<ResourceLink url='https://md-mcps-psv.edupoint.com/Home_PXP2.aspx' img={require('./assets/studentvue.jpg')} name='StudentVUE'/>
+				<ResourceLink url='https://mbhs.edu/newsevents/Announcements/Montgomery%20Blair%20High%20School%20Final%20Bell%20Schedule%20.pdf' img={require('./assets/schedule.jpg')} name='1st Semester Schedule'/>
+				<ResourceLink url='https://student.naviance.com/mbhs' img={require('./assets/naviance.png')} name='Naviance'/>
+				<ResourceLink url='https://blairblazersathletics.com/' img={require('./assets/athletics.jpg')} name='Blair Athletics'/>
+				<ResourceLink url='https://classroom.google.com/u/0/h' img={require('./assets/googleclassroom.jpg')} name='Google Classroom'/>
 			</ScrollView>
 		)
 	}

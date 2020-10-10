@@ -23,14 +23,13 @@ import styles from './styles/liststyles'
 import { url } from './resources/fetchInfo.json'
 
 const StaffElement = ({item}) => {
-  console.log(item)
   const [visible, setVisible] = useState(0)
-  const extra = visible?(<Text>{'\n'}Email: {item.item.emails}</Text>):(<></>);
+  const extra = [...item.item.emails.map(email=>(<Text key={email}>Email: {email}</Text>))]
   return(
 	<View>
 	  <TouchableOpacity style={styles.item} onPress={()=>setVisible(!visible)} activeOpacity={0.8}>
 		<Text style={styles.title}>{item.item.name}</Text>
-		{extra}
+		{visible?extra:<></>}
 	  </TouchableOpacity>
 	</View>
   )
@@ -59,8 +58,8 @@ class Staff extends React.Component {
         return response.text();
       })
       .then((json) => {
-        this.setState({data: JSON.parse(json).data[0].staff});
-        this.setState({dataSearch:JSON.parse(json).data[0].staff});
+        this.setState({data: JSON.parse(json).data});
+        this.setState({dataSearch:JSON.parse(json).data});
       })
       .catch((error) => console.error(error))
       .finally(() => {
@@ -71,7 +70,7 @@ class Staff extends React.Component {
   updateSearch = (search) => {
     this.setState({ search:search });
 	const searchPool = search.startsWith(this.state.search)?this.state.dataSearch:this.state.data;
-    const ds = searchPool.filter((thing)=>{return thing.name.toLowerCase().startsWith(search.toLowerCase())})
+    const ds = searchPool.filter((thing)=>{return thing.name.toLowerCase().split(' ').some(x=>x.startsWith(search.toLowerCase()))})
     this.setState({dataSearch: ds})
   };
   clearSearch  = (search)=>{
@@ -80,8 +79,6 @@ class Staff extends React.Component {
   }
   render() {
     const { data , dataSearch, isLoading,search} = this.state;
-    console.log(data)
-
     return (
       <SafeAreaView style={styles.container}>
         <SearchBar

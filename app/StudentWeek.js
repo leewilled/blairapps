@@ -40,14 +40,14 @@ class StudentWeek extends React.Component {
 	}
 	
 	render() {
-		console.log(this.state.data)
 		if (this.state.isLoading) {
 			return <View/>
 		} else {
+			const iconURI = this.state.data.icon !== undefined?`data:image/png;charset=utf-8;base64,${this.state.data.icon}`:'';
 			return (
 				<View style={{paddingTop:'5%',paddingLeft:'10%',paddingRight:'10%'}}>
 					<Text style={{fontSize:32,marginBottom:'10%',textAlign:'center'}}>{this.state.data.name}</Text>
-					<Image style = {{height: '50%', width:'100%'}}source={this.state.data.icon} />
+					<Image style = {{height: '50%', width:'100%'}}source={{uri:iconURI}} />
 					<View style = {{paddingTop:'5%'}}>
 						<Text style={{fontSize: 20}}>Grade {this.state.data.year}</Text>
 						<Text style={{fontSize: 20}}>{"\n"}Hobbies: {this.state.data.hobbies}</Text>
