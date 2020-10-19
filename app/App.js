@@ -6,6 +6,7 @@ import {
   View,
   Text,
   StatusBar,
+  Image,
 } from 'react-native';
 
 import {
@@ -27,6 +28,9 @@ import More from './More'
 import Staff from './Staff'
 import OpeningPage from './OpeningPage';
 import OpenPage from './OpenPage';
+import styles from './styles/morestyles';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+
 
 const Tab = createBottomTabNavigator();
 
@@ -38,16 +42,40 @@ class App extends React.Component {
 		super();
 		OpeningPage.load(v => this.setState({loaded: true}));
 	}
+	
 	render() {
 		return (
 			<NavigationContainer >
 				{this.state.loaded ? 
-				<Tab.Navigator tabBarOptions={{
-					activeTintColor: 'red',
-					labelStyle:{
-					fontSize:16
-				}}}>
-					<Tab.Screen name="Home" component={Home} />
+				<Tab.Navigator 
+				screenOptions={({ route }) => ({
+					tabBarIcon: ({ focused, color, size }) => {
+						let iconName;
+			
+						if (route.name === 'Home') {
+							iconName = focused ? 'ios-home' : 'ios-home-outline';
+						} else if (route.name === 'Calendar') {
+							iconName = focused ? 'ios-calendar' : 'ios-calendar-outline';
+						} else if (route.name === 'Polls') {
+							iconName = focused ? 'ios-pie-chart' : 'ios-pie-chart-outline';
+						} else if (route.name === 'Clubs') {
+							iconName = focused ? 'ios-people-circle' : 'ios-people-circle-outline';
+						} else if (route.name === 'Staff') {
+							iconName = focused ? 'ios-nutrition' : 'ios-nutrition-outline';
+						} else if (route.name === 'More') {
+							iconName = focused ? 'ios-ellipsis-horizontal' : 'ios-ellipsis-horizontal-outline';
+						}
+
+						return <Ionicons name={iconName} size={size} color={color} />;
+						},
+					})}
+					tabBarOptions={{
+						activeTintColor: 'red',
+						labelStyle:{
+						fontSize:16
+					}}}
+				>	
+					<Tab.Screen name="Home" component={Home}/>
 					<Tab.Screen name="Calendar" component={Calendar} />
 					<Tab.Screen name="Polls" component={Poll} />
 					<Tab.Screen name="Clubs" component={Clubs} options ={{title: 'Clubs'}}/>

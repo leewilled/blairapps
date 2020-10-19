@@ -7,15 +7,16 @@ const styles=StyleSheet.create({
 		borderBottomColor:'white',
 		borderBottomWidth:0.5,
 		height: Dimensions.get('window').height*0.075,
-		justifyContent:'center'
+		justifyContent:'center',
+		paddingLeft: '3%',
 	},
 	moretext: {
 		color:'#eee',
 		fontSize:20,
 	},
 	headerTitle: {
-		fontWeight:'bold',
-		fontSize:24
+		fontWeight: 'bold',
+		fontSize:24,
 	},
 	resourceContainer: {
 		alignItems: 'center',
@@ -51,6 +52,10 @@ const styles=StyleSheet.create({
 		borderRadius: 5,
 		height: '100%',
 		width: '100%',
+	},
+	tabBarIcon: {
+		height: 50,
+		width: 50,
 	}
 });
 

@@ -8,12 +8,13 @@ const styles = StyleSheet.create({
   item: {
     backgroundColor: '#bababa',
     padding: 20,
-    marginVertical: 8,
     marginHorizontal: 16,
-    borderRadius: 16,
+    borderBottomWidth: 1.5,
+    borderColor: 'black',
+    borderRadius: 12,
   },
   title: {
-    fontSize: 32,
+    fontSize: 28,
   },
   date: {
 	  fontSize:12,
