@@ -1,4 +1,5 @@
 import {StyleSheet, Dimensions} from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
 
 const styles=StyleSheet.create({
 	moreitem: {
@@ -38,6 +39,19 @@ const styles=StyleSheet.create({
 		fontSize:32,
 		textAlign:'center',
 	},
+	openPage: {
+		display: 'flex',
+		flexDirection: 'column',
+		justifyContent: 'center',
+		alignItems: 'center'
+	},
+	linearGradient: {
+		alignItems: 'center',
+		justifyContent: 'center',
+		borderRadius: 5,
+		height: '100%',
+		width: '100%',
+	}
 });
 
 export default styles;
