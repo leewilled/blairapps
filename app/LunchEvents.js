@@ -8,6 +8,7 @@ import {
   StatusBar,
   FlatList,
   TouchableOpacity,
+  Image,
 } from 'react-native';
 
 import {
@@ -17,22 +18,62 @@ import {
   DebugInstructions,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
-
+import { NavigationContainer } from '@react-navigation/native'
+import { createStackNavigator } from '@react-navigation/stack'
 import styles from './styles/liststyles'
 import { url } from './resources/fetchInfo.json'
+const Stack = createStackNavigator();
 
-const LunchEvent = ({item}) => {
-	const [visible, setVisible] = useState(0)
-	const extra = visible?(<Text>{'\n'}{item.item.text}{'\n\n'}Location: {item.item.loc}</Text>):(<></>);
+const LunchEvent = (props) => {
+	const item = props.item
 	return(
 		<View>
-			<TouchableOpacity style={styles.item} onPress={()=>setVisible(!visible)} activeOpacity={0.8}>
-				<Text style={styles.title}>{item.item.title}</Text>
-				{extra}
+			<TouchableOpacity style={styles.item1} onPress={()=>props.navigation.navigate('LunchInfo', {data:props.data,name:props.name,text:item.text,loc:item.loc})} activeOpacity={0.8}>
+			<View style = {{display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
+				<Image source = {require('./assets/lunch.png')} style = {{height: 40, width: 40, marginRight: 10}}/>
+				<Text style={styles.title}>{item.title}</Text>
+			</View>
 			</TouchableOpacity>
 		</View>
 	)
 }
+export const LunchInfo = ({route}) => {
+	const item = route.params;
+	return (
+	  <View style = {{padding: 10}}>
+		<View style ={styles.infoContainer}>
+			<Text style = {styles.title1}>Description: </Text>
+			<Text style = {styles.title}>{item.text}</Text>
+		</View>
+		<View style ={styles.infoContainer}>
+			<Text style = {styles.title1}>Location: </Text>
+			<Text style = {styles.link}>{item.loc}</Text>
+		</View>
+	  </View>
+	)
+  }
+function Lunch () {
+	return (
+	  <NavigationContainer independent={true}>
+		<Stack.Navigator>
+		  <Stack.Screen 
+			name = "LunchEvents"
+			component = {LunchEvents}
+			options={({
+			  headerShown: false
+			})}
+		  />
+		  <Stack.Screen 
+			name = "LunchInfo"
+			component = {LunchInfo}
+			options={({route})=>({
+			  title:route.params.name
+			})}
+		  />
+		</Stack.Navigator>
+	  </NavigationContainer>
+	) 
+  }
 
 class LunchEvents extends React.Component {
 	
@@ -64,7 +105,7 @@ class LunchEvents extends React.Component {
 			<View style={styles.container}>
 				<FlatList
 					data={this.state.data}
-					renderItem={item=><LunchEvent item={item}/>}
+					renderItem={({item}) => <LunchEvent item={item} name={item.title} navigation={this.props.navigation}/>}
 					keyExtractor={item=>JSON.stringify(item)}
 				/>
 			</View>
@@ -72,4 +113,4 @@ class LunchEvents extends React.Component {
 	}
 }
 
-export default LunchEvents;
+export default Lunch;

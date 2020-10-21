@@ -29,6 +29,22 @@ const styles = StyleSheet.create({
 	  alignSelf:'flex-end',
 	  marginTop:'-3%',
 	  marginRight:'-3%'
+  },
+  title1: {
+    fontSize: 28,
+    fontWeight: 'bold',
+  },
+  link: {
+    fontSize: 28,
+    textDecorationLine: 'underline',
+    textDecorationStyle: "solid",
+    textDecorationColor: "#000",
+  },
+  infoContainer: {
+    backgroundColor: 'white',
+    borderRadius: 6,
+    padding: 5,
+    marginBottom: 10,
   }
 });
 

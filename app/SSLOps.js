@@ -8,6 +8,7 @@ import {
   StatusBar,
   FlatList,
   TouchableOpacity,
+  Image,
 } from 'react-native';
 
 import {
@@ -17,21 +18,69 @@ import {
   DebugInstructions,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+import { NavigationContainer } from '@react-navigation/native'
+import { createStackNavigator } from '@react-navigation/stack'
 import styles from './styles/liststyles';
 import { url } from './resources/fetchInfo.json';
 
-const SSLElement = ({item}) => {
-  const [visible, setVisible] = useState(0)
-  const extra = visible?(<Text>{'\n'}Details: {item.item.text}{"\n\n"}Where: {item.item.loc}{"\n\n"}Teacher: {item.item.teacher}</Text>):(<></>);
-  return(
-    <View>
-      <TouchableOpacity style={styles.item} onPress={()=>setVisible(!visible)} activeOpacity={0.8}>
-      <Text style={styles.title}>{item.item.title}</Text>
-      {extra}
-      </TouchableOpacity>
-    </View>
+const Stack = createStackNavigator();
+
+export const SSLInfo = ({route}) => {
+	const item = route.params;
+	console
+	return (
+		<View style = {{padding: 10}}>
+			<View style ={styles.infoContainer}>
+				<Text style = {styles.title1}>Description: </Text>
+				<Text style = {styles.title}>{item.text}</Text>
+			</View>
+			<View style ={styles.infoContainer}>
+				<Text style = {styles.title1}>Who: </Text>
+				<Text style = {styles.link}>{item.teacher}</Text>
+			</View>
+					<View style ={styles.infoContainer}>
+				<Text style = {styles.title1}>Where: </Text>
+					<Text style = {styles.title}>{item.loc}</Text>
+			</View>
+		</View>
+	)
+  }
+
+function SSLElement (props) {
+	const item = props.item;
+	return(
+		<View>
+			<TouchableOpacity style={styles.item1} onPress={()=>props.navigation.navigate('SSLInfo', {data: props.data, name: item.item.title, text: item.item.text, loc:item.item.loc, teacher: item.item.teacher})} activeOpacity={0.8}>
+				<View style = {{display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
+					<Image source = {require('./assets/sslopps.png')} style = {{height: 40, width: 40, marginRight: 10}}/>
+					<Text style={styles.title}>{item.item.title}</Text>
+				</View>
+			</TouchableOpacity>
+		</View>
     )
 }
+function SSLOpp () {
+	return (
+	  <NavigationContainer independent={true}>
+		<Stack.Navigator>
+		  <Stack.Screen 
+			name = "SSLOps"
+			component = {SSLOps}
+			options={({
+			  headerShown: false
+			})}
+		  />
+		  <Stack.Screen 
+			name = "SSLInfo"
+			component = {SSLInfo}
+			options={({route})=>({
+			  title:route.params.title
+			})}
+		  />
+		</Stack.Navigator>
+	  </NavigationContainer>
+	) 
+  }
 
 class SSLOps extends React.Component {
 	
@@ -63,7 +112,7 @@ class SSLOps extends React.Component {
 			<View style={styles.container}>
 				<FlatList
 					data={this.state.data}
-					renderItem={item=><SSLElement item={item}/>}
+					renderItem={item=><SSLElement item={item} name={item.title} navigation={this.props.navigation}/>}
 					keyExtractor={item=>JSON.stringify(item)}
 				/>
 			</View>
@@ -71,4 +120,4 @@ class SSLOps extends React.Component {
 	}
 }
 
-export default SSLOps;
+export default SSLOpp;

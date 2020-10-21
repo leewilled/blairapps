@@ -10,7 +10,8 @@ import {
   FlatList,
   TouchableOpacity,
   Image,
-  TouchableHighlight
+  TouchableHighlight,
+  Linking
 } from 'react-native';
 
 import {
@@ -25,6 +26,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 import { SearchBar } from 'react-native-elements';
 import styles from './styles/liststyles'
 import { url } from './resources/fetchInfo.json'
+import LinearGradient from 'react-native-linear-gradient';
 
 const Stack = createStackNavigator();
 
@@ -32,7 +34,18 @@ export const ClubInfo = ({route}) => {
   const item = route.params;
   return (
     <View style = {{padding: 10}}>
-      <Text style = {{fontSize: 28}}>Meeting Time and Day: {'\n'}{item.meeting}{"\n\n"}Zoom Link: {'\n'}{item.link}{"\n\n"}Sponsor: {'\n'}{item.sponsor}</Text>
+      <View style ={styles.infoContainer}>
+        <Text style = {styles.title1}>Meeting Time and Day: </Text>
+        <Text style = {styles.title}>{item.meeting}</Text>
+      </View>
+      <View style ={styles.infoContainer}>
+        <Text style = {styles.title1}>Zoom Link: </Text>
+        <Text style = {styles.link} onPress={() => Linking.openURL(item.link)}>{item.link}</Text>
+      </View>
+			<View style ={styles.infoContainer}>
+        <Text style = {styles.title1}>Sponsor: </Text>
+			  <Text style = {styles.title}>{item.sponsor}</Text>
+      </View>
     </View>
   )
 }

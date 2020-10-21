@@ -30,7 +30,7 @@ const StaffElement = ({item}) => {
 	<View>
 	  <TouchableOpacity style={styles.item1} onPress={()=>setVisible(!visible)} activeOpacity={0.8}>
     <View style = {{display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
-      <Image source = {require('./assets/clubs.png')} style = {{height: 40, width: 40, marginRight: 10}}/>
+      <Image source = {require('./assets/staff.png')} style = {{height: 40, width: 40, marginRight: 10}}/>
       <Text style={styles.title}>{item.item.name}</Text>
     </View>
 		{visible?extra:<></>}
