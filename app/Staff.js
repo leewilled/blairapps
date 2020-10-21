@@ -8,7 +8,8 @@ import {
   StatusBar,
   ActivityIndicator, 
   FlatList,
-  TouchableOpacity
+  TouchableOpacity,
+  Image
 } from 'react-native';
 
 import {
@@ -24,11 +25,14 @@ import { url } from './resources/fetchInfo.json'
 
 const StaffElement = ({item}) => {
   const [visible, setVisible] = useState(0)
-  const extra = [...item.item.emails.map(email=>(<Text key={email}>Email: {email}</Text>))]
+  const extra = [...item.item.emails.map(email=>(<Text key={email}>{'\n'}Email: {email}</Text>))]
   return(
 	<View>
-	  <TouchableOpacity style={styles.item} onPress={()=>setVisible(!visible)} activeOpacity={0.8}>
-		<Text style={styles.title}>{item.item.name}</Text>
+	  <TouchableOpacity style={styles.item1} onPress={()=>setVisible(!visible)} activeOpacity={0.8}>
+    <View style = {{display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
+      <Image source = {require('./assets/clubs.png')} style = {{height: 40, width: 40, marginRight: 10}}/>
+      <Text style={styles.title}>{item.item.name}</Text>
+    </View>
 		{visible?extra:<></>}
 	  </TouchableOpacity>
 	</View>

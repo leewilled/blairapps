@@ -9,6 +9,7 @@ const styles=StyleSheet.create({
 		height: Dimensions.get('window').height*0.075,
 		justifyContent:'center',
 		paddingLeft: '3%',
+		fontSize: 32,
 	},
 	moretext: {
 		color:'#eee',

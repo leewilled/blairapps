@@ -13,6 +13,13 @@ const styles = StyleSheet.create({
     borderColor: 'black',
     borderRadius: 12,
   },
+  item1: {
+    backgroundColor: 'white',
+    padding: 15,
+    borderBottomWidth: 2,
+    borderColor: '#bababa',
+    width: '100%',
+  },
   title: {
     fontSize: 28,
   },
