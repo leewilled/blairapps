@@ -30,13 +30,14 @@ export const SSLInfo = ({route}) => {
 	console
 	return (
 		<View style = {{padding: 10}}>
+			<Text style = {styles.eventTitle}>{item.name}</Text>
 			<View style ={styles.infoContainer}>
 				<Text style = {styles.title1}>Description: </Text>
 				<Text style = {styles.title}>{item.text}</Text>
 			</View>
 			<View style ={styles.infoContainer}>
 				<Text style = {styles.title1}>Who: </Text>
-				<Text style = {styles.link}>{item.teacher}</Text>
+				<Text style = {styles.title}>{item.teacher}</Text>
 			</View>
 					<View style ={styles.infoContainer}>
 				<Text style = {styles.title1}>Where: </Text>

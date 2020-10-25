@@ -57,6 +57,33 @@ const styles=StyleSheet.create({
 	tabBarIcon: {
 		height: 50,
 		width: 50,
+	},
+	popup: {
+		height: '90%',
+		display: 'flex',
+		flexDirection: 'column',
+		justifyContent: "center",
+		alignItems: "center",
+	  },
+	modal: {
+		marginHorizontal: 20,
+		marginTop: '20%',
+		height: '100%',
+		backgroundColor: "white",
+		borderRadius: 20,
+		padding: 15,
+		shadowColor: "black",
+		shadowOffset: {
+			width: 0,
+			height: 2
+		},
+		shadowOpacity: 0.5,
+		shadowRadius: 7,
+	},
+	modalText: {
+		marginVertical: '10%',
+		textAlign: "center",
+		fontSize: 20,
 	}
 });
 

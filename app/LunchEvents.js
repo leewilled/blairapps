@@ -24,93 +24,98 @@ import styles from './styles/liststyles'
 import { url } from './resources/fetchInfo.json'
 const Stack = createStackNavigator();
 
-const LunchEvent = (props) => {
-	const item = props.item
-	return(
-		<View>
-			<TouchableOpacity style={styles.item1} onPress={()=>props.navigation.navigate('LunchInfo', {data:props.data,name:props.name,text:item.text,loc:item.loc})} activeOpacity={0.8}>
-			<View style = {{display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
-				<Image source = {require('./assets/lunch.png')} style = {{height: 40, width: 40, marginRight: 10}}/>
-				<Text style={styles.title}>{item.title}</Text>
-			</View>
-			</TouchableOpacity>
-		</View>
-	)
-}
 export const LunchInfo = ({route}) => {
-	const item = route.params;
-	return (
-	  <View style = {{padding: 10}}>
-		<View style ={styles.infoContainer}>
-			<Text style = {styles.title1}>Description: </Text>
-			<Text style = {styles.title}>{item.text}</Text>
-		</View>
-		<View style ={styles.infoContainer}>
-			<Text style = {styles.title1}>Location: </Text>
-			<Text style = {styles.link}>{item.loc}</Text>
-		</View>
-	  </View>
-	)
-  }
+    const item = route.params;
+    return (
+      <View style = {{padding: 10}}>
+        <Text style = {styles.eventTitle}>{item.name}</Text>
+        <View style ={styles.infoContainer}>
+            <Text style = {styles.title1}>Description: </Text>
+            <Text style = {styles.title}>{item.text}</Text>
+        </View>
+        <View style ={styles.infoContainer}>
+            <Text style = {styles.title1}>Location: </Text>
+            <Text style = {styles.title}>{item.loc}</Text>
+        </View>
+      </View>
+    )
+}
+
+function LunchEvent (props) {
+    const item = props.item
+    return(
+        <View>
+            <TouchableOpacity style={styles.item1} onPress={()=>props.navigation.navigate('LunchInfo', {data:props.data,name:item.title,text:item.text,loc:item.loc})} activeOpacity={0.8}>
+            <View style = {{display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
+                <Image source = {require('./assets/lunch.png')} style = {{height: 40, width: 40, marginRight: 10}}/>
+                <Text style={styles.title}>{item.title}</Text>
+            </View>
+            </TouchableOpacity>
+        </View>
+    )
+}
+
 function Lunch () {
-	return (
-	  <NavigationContainer independent={true}>
-		<Stack.Navigator>
-		  <Stack.Screen 
-			name = "LunchEvents"
-			component = {LunchEvents}
-			options={({
-			  headerShown: false
-			})}
-		  />
-		  <Stack.Screen 
-			name = "LunchInfo"
-			component = {LunchInfo}
-			options={({route})=>({
-			  title:route.params.name
-			})}
-		  />
-		</Stack.Navigator>
-	  </NavigationContainer>
-	) 
+    return (
+      <NavigationContainer independent={true}>
+        <Stack.Navigator>
+          <Stack.Screen 
+            name = "LunchEvents"
+            component = {LunchEvents}
+            options={({
+              headerShown: false
+            })}
+          />
+          <Stack.Screen 
+            name = "LunchInfo"
+            component = {LunchInfo}
+            options={({route})=>({
+              headerTitleStyle:[styles.headerTitle,{alignSelf:'center'}],
+              title:route.params.name
+            })}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    ) 
   }
 
 class LunchEvents extends React.Component {
-	
-	constructor(props) {
-		super(props)
-		this.state = {
-			data: []
-		}
-	}
-	
-	componentDidMount() {
-		fetch(`${url}/api/en/lunchEvents`,{
-			headers: {
-				'Cache-Control': 'no-cache'
-			}
-			}
-		)
-		.then((response) => {
-			return response.text();
-		})
-		.then((json) => {
-			this.setState({data: JSON.parse(json)});
-		})
-		.catch((error) => console.error(error))
-	}
-	
-	render() {
-		return (
-			<View style={styles.container}>
-				<FlatList
-					data={this.state.data}
-					renderItem={({item}) => <LunchEvent item={item} name={item.title} navigation={this.props.navigation}/>}
-					keyExtractor={item=>JSON.stringify(item)}
-				/>
-			</View>
-		)
-	}
+    
+    constructor(props) {
+        super(props)
+        this.state = {
+            data: []
+        }
+    }
+    
+    componentDidMount() {
+        fetch(`${url}/api/en/lunchEvents`,{
+            headers: {
+                'Cache-Control': 'no-cache'
+            }
+            }
+        )
+        .then((response) => {
+            return response.text();
+        })
+        .then((json) => {
+            this.setState({data: JSON.parse(json)});
+        })
+        .catch((error) => console.error(error))
+    }
+    
+    render() {
+        return (
+            <View style={styles.container}>
+                <FlatList
+                    data={this.state.data}
+                    renderItem={({item}) => <LunchEvent item={item} name={this.props.title} navigation={this.props.navigation}/>}
+                    keyExtractor={item=>JSON.stringify(item)}
+                />
+            </View>
+        )
+    }
 }
 
 export default Lunch;
+

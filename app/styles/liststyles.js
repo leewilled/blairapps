@@ -34,6 +34,14 @@ const styles = StyleSheet.create({
     fontSize: 28,
     fontWeight: 'bold',
   },
+  title2: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    color: 'red',
+    textDecorationLine: 'underline',
+    textDecorationStyle: "solid",
+    textDecorationColor: "red",
+  },
   link: {
     fontSize: 28,
     textDecorationLine: 'underline',
@@ -43,6 +51,16 @@ const styles = StyleSheet.create({
   infoContainer: {
     backgroundColor: 'white',
     borderRadius: 6,
+    padding: 5,
+    marginBottom: 10,
+  },
+  headerTitle: {
+    fontSize: 24,
+  },
+  eventTitle: {
+    textAlign: 'center',
+    fontSize: 32,
+    fontWeight: 'bold',
     padding: 5,
     marginBottom: 10,
   }

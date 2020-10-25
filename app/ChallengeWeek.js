@@ -6,6 +6,7 @@ import {
   View,
   Text,
   StatusBar,
+  Linking,
 } from 'react-native';
 
 import {
@@ -15,7 +16,7 @@ import {
   DebugInstructions,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
-
+import styles from './styles/liststyles';
 import { url } from './resources/fetchInfo.json'
 
 class ChallengeWeek extends React.Component {
@@ -43,9 +44,10 @@ class ChallengeWeek extends React.Component {
 			return <View/>
 		} else {
 			return (
-				<View style={{alignItems:'center',paddingTop:'5%',paddingLeft:'10%',paddingRight:'10%'}}>
-					<Text style={{fontSize:32,marginBottom:'10%',textAlign:'center'}}>{this.state.data.title}</Text>
-					<Text style={{textAlign:'center'}}>{this.state.data.text}</Text>
+				<View style={{alignItems:'center',paddingTop:'5%',paddingiorizontal:'10%', height: '100%', backgroundColor: 'white'}}>
+					<Text style={{fontSize: 32, fontWeight: 'bold', marginBottom: '10%', color: 'red'}}>{this.state.data.title}</Text>
+					<Text style={{textAlign:'center', fontSize: 24, marginBottom: '5%'}}>{this.state.data.text}</Text>
+					<Text style={{textAlign:'center', fontSize: 20, textDecorationLine: 'underline', textDecorationStyle: "solid", textDecorationColor: "#000",}} onPress={() => Linking.openURL(this.state.data.link)}>{this.state.data.link}</Text>
 				</View>
 			)
 		}
