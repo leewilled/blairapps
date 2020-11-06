@@ -9,7 +9,8 @@ import {
   ActivityIndicator, 
   FlatList,
   TouchableOpacity,
-  Image
+  Image,
+  Linking
 } from 'react-native';
 
 import {
@@ -24,8 +25,8 @@ import styles from './styles/liststyles'
 import { url } from './resources/fetchInfo.json'
 
 const StaffElement = ({item}) => {
-  const [visible, setVisible] = useState(0)
-  const extra = [...item.item.emails.map(email=>(<Text key={email}>{'\n'}Email: {email}</Text>))]
+  const [visible, setVisible] = useState(false)
+  const extra = [...item.item.emails.map(email=>(<Text key={email}>{'\n'}Email: <Text style={styles.linktext} onPress={()=>Linking.openURL("mailto:"+email)}>{email}</Text></Text>))]
   return(
 	<View>
 	  <TouchableOpacity style={styles.item1} onPress={()=>setVisible(!visible)} activeOpacity={0.8}>

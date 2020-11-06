@@ -25,6 +25,7 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { SearchBar } from 'react-native-elements';
 import styles from './styles/liststyles'
+import morestyles from './styles/morestyles'
 import { url } from './resources/fetchInfo.json'
 import LinearGradient from 'react-native-linear-gradient';
 
@@ -79,7 +80,9 @@ function Club () {
           name = "ClubInfo"
           component = {ClubInfo}
           options={({route})=>({
-            title:route.params.name
+            title:route.params.name,
+			headerTitleStyle:[morestyles.headerTitle,{alignSelf:'center'}],
+			headerRight:()=>(<></>)
           })}
         />
       </Stack.Navigator>

@@ -31,9 +31,9 @@ const Announcement = ({item}) => {
 	const dateStr = `${date.getMonth()+1}/${date.getDate()}/${date.getFullYear()}`
 	const dateInfo = dateStr===item.item.date&&item.item.time!==undefined?item.item.time:item.item.date;
 	return (
-		<View style={styles.item}>
+		<View style={styles.item1}>
 			{dateInfo!==undefined?<Text style={styles.date}>{dateInfo}</Text>:<></>}
-			<Text style={styles.title}>{item.item.message}</Text>
+			<Text style={{fontSize:20}}>{item.item.message}</Text>
 		</View>
 	)
 }
@@ -51,13 +51,13 @@ export const TeacherList = ({route}) => {
 }
 
 function TeacherButton(props) {
-	const [color, setColor] = useState(props.color?props.color:'white')
+	const [color, setColor] = useState(props.color?props.color:'lightgrey')
 	return (
-		<View style={[styles.item,{flexDirection:'row'}]}>
+		<View style={[styles.item1,{flexDirection:'row'}]}>
 		  <TouchableOpacity style={{flex:1}} onPress={()=>props.navigation.navigate('TeacherList',{data:props.data,name:props.name})} activeOpacity={0.8}>
 			<Text style={styles.title}>{props.name}</Text>
 		  </TouchableOpacity>
-		  {props.icon?<Icon.Button color={color} backgroundColor="#bababa" name="star" size={30} style={{alignSelf:'center'}} onPress={()=>{setColor(color=='yellow'?'white':'yellow');props.addFavorite(props.name)}}/>:<></>}
+		  {props.icon?<Icon.Button color={color} name="star" size={30} style={{alignSelf:'center'}} backgroundColor="white" onPress={()=>{setColor(color=='#dba309'?'lightgrey':'#dba309');props.addFavorite(props.name)}}/>:<></>}
 		</View>
 	)
 }
@@ -120,7 +120,7 @@ class Announcements extends React.Component {
 				<TeacherButton data={this.state.data.filter(x=>x.teacher==null||x.teacher.trim()==='')} name="No Teacher" navigation={this.props.navigation} />
 				<FlatList
 					data={this.state.favoriteNames.concat(this.state.teacherNames.filter(x=>this.state.favoriteNames.map(({name})=>name).indexOf(x.name) < 0))}
-					renderItem={({item})=><TeacherButton color={this.state.favoriteNames.indexOf(item) >= 0?'yellow':'white'} item={item} data={this.state.data.filter(x=>x.teacher===item.name)} name={item.name} navigation={this.props.navigation} icon={true} addFavorite={this.addFavorite}/>}
+					renderItem={({item})=><TeacherButton color={this.state.favoriteNames.indexOf(item) >= 0?'#dba309':'lightgrey'} item={item} data={this.state.data.filter(x=>x.teacher===item.name)} name={item.name} navigation={this.props.navigation} icon={true} addFavorite={this.addFavorite}/>}
 					keyExtractor={(item,index)=>item.name+index}
 				/>
 			</View>

@@ -30,7 +30,6 @@ export const SSLInfo = ({route}) => {
 	console
 	return (
 		<View style = {{padding: 10}}>
-			<Text style = {styles.eventTitle}>{item.name}</Text>
 			<View style ={styles.infoContainer}>
 				<Text style = {styles.title1}>Description: </Text>
 				<Text style = {styles.title}>{item.text}</Text>
@@ -60,28 +59,6 @@ function SSLElement (props) {
 		</View>
     )
 }
-function SSLOpp () {
-	return (
-	  <NavigationContainer independent={true}>
-		<Stack.Navigator>
-		  <Stack.Screen 
-			name = "SSLOps"
-			component = {SSLOps}
-			options={({
-			  headerShown: false
-			})}
-		  />
-		  <Stack.Screen 
-			name = "SSLInfo"
-			component = {SSLInfo}
-			options={({route})=>({
-			  title:route.params.title
-			})}
-		  />
-		</Stack.Navigator>
-	  </NavigationContainer>
-	) 
-  }
 
 class SSLOps extends React.Component {
 	
@@ -121,4 +98,4 @@ class SSLOps extends React.Component {
 	}
 }
 
-export default SSLOpp;
+export default SSLOps;

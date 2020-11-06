@@ -6,12 +6,10 @@ const styles = StyleSheet.create({
     marginTop: StatusBar.currentHeight || 0,
   },
   item: {
-    backgroundColor: '#bababa',
+    backgroundColor: 'white',
     padding: 20,
-    marginHorizontal: 16,
     borderBottomWidth: 1.5,
-    borderColor: 'black',
-    borderRadius: 12,
+    borderColor: 'black'
   },
   item1: {
     backgroundColor: 'white',
@@ -63,6 +61,10 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     padding: 5,
     marginBottom: 10,
+  },
+  linktext: {
+	  color:'blue',
+	  textDecorationLine: 'underline'
   }
 });
 

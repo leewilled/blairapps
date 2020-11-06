@@ -28,7 +28,6 @@ export const LunchInfo = ({route}) => {
     const item = route.params;
     return (
       <View style = {{padding: 10}}>
-        <Text style = {styles.eventTitle}>{item.name}</Text>
         <View style ={styles.infoContainer}>
             <Text style = {styles.title1}>Description: </Text>
             <Text style = {styles.title}>{item.text}</Text>
@@ -54,30 +53,6 @@ function LunchEvent (props) {
         </View>
     )
 }
-
-function Lunch () {
-    return (
-      <NavigationContainer independent={true}>
-        <Stack.Navigator>
-          <Stack.Screen 
-            name = "LunchEvents"
-            component = {LunchEvents}
-            options={({
-              headerShown: false
-            })}
-          />
-          <Stack.Screen 
-            name = "LunchInfo"
-            component = {LunchInfo}
-            options={({route})=>({
-              headerTitleStyle:[styles.headerTitle,{alignSelf:'center'}],
-              title:route.params.name
-            })}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
-    ) 
-  }
 
 class LunchEvents extends React.Component {
     
@@ -117,5 +92,5 @@ class LunchEvents extends React.Component {
     }
 }
 
-export default Lunch;
+export default LunchEvents;
 

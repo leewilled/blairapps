@@ -25,8 +25,8 @@ import styles from './styles/morestyles'
 import Announcements, {TeacherList} from './Announcements'
 import Resources from './Resources'
 import StudentWeek from './StudentWeek'
-import SSLOps from './SSLOps'
-import LunchEvents from './LunchEvents'
+import SSLOps, {SSLInfo} from './SSLOps'
+import LunchEvents, {LunchInfo} from './LunchEvents'
 import ChallengeWeek from './ChallengeWeek'
 import { LinearGradient } from 'react-native-linear-gradient'
 
@@ -133,7 +133,24 @@ class More extends React.Component {
 						name="TeacherList" 
 						component={TeacherList}
 						options={({route})=>({
-							headerTitleStyle:[styles.headerTitle,{alignSelf:'center',marginLeft:"-20%"}],
+							headerTitleStyle:[styles.headerTitle,{alignSelf:'center'}],
+							title:route.params.name,
+							headerRight:()=>(<></>)
+						})}
+					/>
+					<Stack.Screen 
+						name="LunchInfo" 
+						component={LunchInfo}
+						options={({route})=>({
+							headerTitleStyle:[styles.headerTitle,{alignSelf:'center'}],
+							title:route.params.name
+						})}
+					/>
+					<Stack.Screen 
+						name="SSLInfo" 
+						component={SSLInfo}
+						options={({route})=>({
+							headerTitleStyle:[styles.headerTitle,{alignSelf:'center'}],
 							title:route.params.name
 						})}
 					/>
