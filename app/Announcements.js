@@ -69,8 +69,7 @@ class Announcements extends React.Component {
 		this.state = {
 			data: [],
 			teacherNames: [],
-			favoriteNames: [],
-			isLoading:true
+			favoriteNames: []
 		}
 	}
 	
@@ -117,7 +116,6 @@ class Announcements extends React.Component {
 	}
 	
 	render() {
-		if (this.state.isLoading) return <></>
 		return (
 			<View style={[styles.container]}>
 				<TeacherButton data={this.state.data.filter(x=>x.teacher==null||x.teacher.trim()==='')} name="No Teacher" navigation={this.props.navigation} />

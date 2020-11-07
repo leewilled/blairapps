@@ -76,7 +76,7 @@ class Calendar extends React.Component {
 	
 	render() {
 		return (
-			<View>
+			<View style={styles.container}>
 				<FlatList
 					data={this.state.data}
 					renderItem={item=><Event item={item}/>}

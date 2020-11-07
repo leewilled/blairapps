@@ -28,7 +28,7 @@ import StudentWeek from './StudentWeek'
 import SSLOps, {SSLInfo} from './SSLOps'
 import LunchEvents, {LunchInfo} from './LunchEvents'
 import ChallengeWeek from './ChallengeWeek'
-import { LinearGradient } from 'react-native-linear-gradient'
+import LinearGradient from 'react-native-linear-gradient'
 
 const Stack = createStackNavigator()
 
@@ -61,6 +61,11 @@ class MoreSwitch extends React.Component {
 	}
 }
 
+const background = (<LinearGradient
+                    colors={['#f99', 'white']}
+                    style = {{flex:1,borderBottomColor:'black',borderBottomWidth:0.5}}
+                    />)
+
 class More extends React.Component {
 	render() {
 		return (
@@ -72,7 +77,7 @@ class More extends React.Component {
 						options={{
 							title:'More',
 							headerTitleStyle:styles.headerTitle,
-							headerStyle:{borderBottomWidth:0.5,borderBottomColor:'black'},
+							headerBackground: ()=>background
 						}}
 					/>
 					<Stack.Screen 
@@ -82,6 +87,7 @@ class More extends React.Component {
 							title:'Announcements',
 							headerTitleStyle:[styles.headerTitle,{alignSelf:'center'}],
 							headerLeft:null,
+							headerBackground: ()=>background
 						}}
 					/>
 					<Stack.Screen 
@@ -90,7 +96,8 @@ class More extends React.Component {
 						options={{
 							title:'Resources',
 							headerTitleStyle:[styles.headerTitle,{alignSelf:'center'}],
-							headerLeft:null
+							headerLeft:null,
+							headerBackground: ()=>background
 						}}
 					/>
 					<Stack.Screen 
@@ -99,7 +106,8 @@ class More extends React.Component {
 						options={{
 							title:'Student of the Week',
 							headerTitleStyle:[styles.headerTitle,{alignSelf:'center'}],
-							headerLeft:null
+							headerLeft:null,
+							headerBackground: ()=>background
 						}}
 					/>
 					<Stack.Screen 
@@ -108,7 +116,8 @@ class More extends React.Component {
 						options={{
 							title:'Lunch Events',
 							headerTitleStyle:[styles.headerTitle,{alignSelf:'center'}],
-							headerLeft:null
+							headerLeft:null,
+							headerBackground: ()=>background
 						}}
 					/>
 					<Stack.Screen 
@@ -117,7 +126,8 @@ class More extends React.Component {
 						options={{
 							title:'SSL Opportunities',
 							headerTitleStyle:[styles.headerTitle,{alignSelf:'center'}],
-							headerLeft:null
+							headerLeft:null,
+							headerBackground: ()=>background
 						}}
 					/>
 					<Stack.Screen 
@@ -126,33 +136,37 @@ class More extends React.Component {
 						options={{
 							title:'Challenge of the Week',
 							headerTitleStyle:[styles.headerTitle,{alignSelf:'center'}],
-							headerLeft:null
+							headerLeft:null,
+							headerBackground: ()=>background
 						}}
 					/>
 					<Stack.Screen 
 						name="TeacherList" 
 						component={TeacherList}
 						options={({route})=>({
-							headerTitleStyle:[styles.headerTitle,{alignSelf:'center'}],
+							headerTitleStyle:[styles.headerTitle,{alignSelf:'center',fontSize:Math.min(24,24*23/route.params.name.length)}],
 							title:route.params.name,
-							headerRight:()=>(<></>)
+							headerRight:()=>(<></>),
+							headerBackground: ()=>background
 						})}
 					/>
 					<Stack.Screen 
 						name="LunchInfo" 
 						component={LunchInfo}
 						options={({route})=>({
-							headerTitleStyle:[styles.headerTitle,{alignSelf:'center'}],
+							headerTitleStyle:[styles.headerTitle,{alignSelf:'center',fontSize:Math.min(24,24*23/route.params.name.length)}],
 							title:route.params.name,
-							headerRight:()=>(<></>)
+							headerRight:()=>(<></>),
+							headerBackground: ()=>background
 						})}
 					/>
 					<Stack.Screen 
 						name="SSLInfo" 
 						component={SSLInfo}
 						options={({route})=>({
-							headerTitleStyle:[styles.headerTitle,{alignSelf:'center'}],
+							headerTitleStyle:[styles.headerTitle,{alignSelf:'center',fontSize:Math.min(24,24*23/route.params.name.length)}],
 							title:route.params.name,
+							headerBackground: ()=>background,
 							headerRight:()=>(<></>)
 						})}
 					/>
