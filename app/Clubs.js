@@ -37,15 +37,15 @@ export const ClubInfo = ({route}) => {
     <View style = {{padding: 10}}>
       <View style ={styles.infoContainer}>
         <Text style = {styles.title1}>Meeting Time and Day: </Text>
-        <Text style = {styles.title}>{item.meeting}</Text>
+        <Text style = {{fontSize:20}}>{item.meeting}</Text>
       </View>
       <View style ={styles.infoContainer}>
         <Text style = {styles.title1}>Zoom Link: </Text>
-        <Text style = {styles.link} onPress={() => Linking.openURL(item.link)}>{item.link}</Text>
+        <Text style = {[styles.linktext,{fontSize:20}]} onPress={() => Linking.openURL(item.link)}>{item.link}</Text>
       </View>
 			<View style ={styles.infoContainer}>
         <Text style = {styles.title1}>Sponsor: </Text>
-			  <Text style = {styles.title}>{item.sponsor}</Text>
+			  <Text style = {{fontSize:20}}>{item.sponsor}</Text>
       </View>
     </View>
   )
@@ -97,14 +97,22 @@ class Clubs extends React.Component {
     this.state = {
       data: [],
       dataSearch:[],
-      isLoading: true,
       search:""
     };
   }
 
   componentDidMount() {
-    
-    fetch(`${url}/api/en/clubs`,{
+    this.getData()
+	this.props.navigation.addListener(
+			'focus',
+			() => {
+				this.getData()
+			}
+		);
+  }
+  
+  getData() {
+	  fetch(`${url}/api/en/clubs`,{
       headers: {
         'Cache-Control': 'no-cache'
       } })
@@ -112,15 +120,11 @@ class Clubs extends React.Component {
         return response.text();
       })
       .then((json) => {
-        this.setState({data: JSON.parse(json).clubs});
-        this.setState({dataSearch:JSON.parse(json).clubs });
+        this.setState({data: JSON.parse(json).clubs,dataSearch:JSON.parse(json).clubs });
       })
       .catch((error) => console.error(error))
-      .finally(() => {
-        this.setState({ isLoading: false });
-      });
-      
   }
+  
   updateSearch = (search) => {
     this.setState({ search:search });
 	const searchPool = search.startsWith(this.state.search)?this.state.dataSearch:this.state.data;
@@ -132,7 +136,7 @@ class Clubs extends React.Component {
     this.setState({dataSearch:ds})
   }
   render() {
-    const { data , dataSearch, isLoading,search} = this.state;
+    const { data , dataSearch,search} = this.state;
 
     return (
       <SafeAreaView style={styles.container}>

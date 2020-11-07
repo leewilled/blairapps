@@ -48,14 +48,22 @@ class Staff extends React.Component {
     this.state = {
       data: [],
       dataSearch:[],
-      isLoading: true,
       search:""
     };
   }
 
   componentDidMount() {
-    
-    fetch(`${url}/api/en/teachers`,{
+    this.getData()
+	this.props.navigation.addListener(
+			'focus',
+			() => {
+				this.getData()
+			}
+		);
+  }
+  
+  getData() {
+	  fetch(`${url}/api/en/teachers`,{
       headers: {
         'Cache-Control': 'no-cache'
       } })
@@ -67,11 +75,8 @@ class Staff extends React.Component {
         this.setState({dataSearch:JSON.parse(json).data});
       })
       .catch((error) => console.error(error))
-      .finally(() => {
-        this.setState({ isLoading: false });
-      });
-      
   }
+  
   updateSearch = (search) => {
     this.setState({ search:search });
 	const searchPool = search.startsWith(this.state.search)?this.state.dataSearch:this.state.data;
@@ -83,7 +88,7 @@ class Staff extends React.Component {
     this.setState({dataSearch:ds})
   }
   render() {
-    const { data , dataSearch, isLoading,search} = this.state;
+    const { data , dataSearch,search} = this.state;
     return (
       <SafeAreaView style={styles.container}>
         <SearchBar

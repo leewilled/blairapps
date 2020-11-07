@@ -143,7 +143,8 @@ class More extends React.Component {
 						component={LunchInfo}
 						options={({route})=>({
 							headerTitleStyle:[styles.headerTitle,{alignSelf:'center'}],
-							title:route.params.name
+							title:route.params.name,
+							headerRight:()=>(<></>)
 						})}
 					/>
 					<Stack.Screen 
@@ -151,7 +152,8 @@ class More extends React.Component {
 						component={SSLInfo}
 						options={({route})=>({
 							headerTitleStyle:[styles.headerTitle,{alignSelf:'center'}],
-							title:route.params.name
+							title:route.params.name,
+							headerRight:()=>(<></>)
 						})}
 					/>
 				</Stack.Navigator>

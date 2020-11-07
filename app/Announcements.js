@@ -54,7 +54,7 @@ function TeacherButton(props) {
 	const [color, setColor] = useState(props.color?props.color:'lightgrey')
 	return (
 		<View style={[styles.item1,{flexDirection:'row'}]}>
-		  <TouchableOpacity style={{flex:1}} onPress={()=>props.navigation.navigate('TeacherList',{data:props.data,name:props.name})} activeOpacity={0.8}>
+		  <TouchableOpacity style={{flex:1}} onPress={()=>{props.navigation.navigate('TeacherList',{data:props.data,name:props.name})}} activeOpacity={0.8}>
 			<Text style={styles.title}>{props.name}</Text>
 		  </TouchableOpacity>
 		  {props.icon?<Icon.Button color={color} name="star" size={30} style={{alignSelf:'center'}} backgroundColor="white" onPress={()=>{setColor(color=='#dba309'?'lightgrey':'#dba309');props.addFavorite(props.name)}}/>:<></>}
@@ -89,6 +89,15 @@ class Announcements extends React.Component {
 	}
 	
 	componentDidMount() {
+		this.getData()
+		AsyncStorage.getItem(STORAGE_KEY)
+			.then(value=>value==null?[]:JSON.parse(value).map(x=>({name:x})))
+			.then(names=>this.setState({favoriteNames:names}))
+			.catch(console.log)
+			.done()
+	}
+	
+	getData() {
 		fetch(`${url}/api/en/announcements`,{
 			headers: {
 				'Cache-Control': 'no-cache'
@@ -105,12 +114,6 @@ class Announcements extends React.Component {
 			this.setState({data: data, teacherNames: teacherNames.map(x=>({name:x})),isLoading:false});
 		})
 		.catch((error) => console.error(error))
-		
-		AsyncStorage.getItem(STORAGE_KEY)
-			.then(value=>value==null?[]:JSON.parse(value).map(x=>({name:x})))
-			.then(names=>this.setState({favoriteNames:names}))
-			.catch(console.log)
-			.done()
 	}
 	
 	render() {
