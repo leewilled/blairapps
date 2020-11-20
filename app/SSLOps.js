@@ -29,7 +29,7 @@ export const SSLInfo = ({route}) => {
 	const item = route.params;
 	console
 	return (
-		<View style = {{padding: 10}}>
+		<View style = {{padding: 10, backgroundColor: 'white', height: '100%'}}>
 			<View style ={styles.infoContainer}>
 				<Text style = {styles.title1}>Description: </Text>
 				<Text style = {styles.title}>{item.text}</Text>
@@ -53,7 +53,7 @@ function SSLElement (props) {
 			<TouchableOpacity style={styles.item1} onPress={()=>props.navigation.navigate('SSLInfo', {data: props.data, name: item.item.title, text: item.item.text, loc:item.item.loc, teacher: item.item.teacher})} activeOpacity={0.8}>
 				<View style = {{display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
 					<Image source = {require('./assets/sslopps.png')} style = {{height: 40, width: 40, marginRight: 10}}/>
-					<Text style={styles.title}>{item.item.title}</Text>
+					<Text style={styles.title3}>{item.item.title}</Text>
 				</View>
 			</TouchableOpacity>
 		</View>

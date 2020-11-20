@@ -45,13 +45,31 @@ class StudentWeek extends React.Component {
 		} else {
 			const iconURI = this.state.data.icon !== undefined?`data:image/png;charset=utf-8;base64,${this.state.data.icon}`:'';
 			return (
-				<View style={{paddingTop:'5%',paddingLeft:'10%',paddingRight:'10%'}}>
-					<Text style={{fontSize:32,marginBottom:'10%',textAlign:'center'}}>{this.state.data.name}</Text>
-					<Image style = {{height: '50%', width:'100%'}}source={{uri:iconURI}} />
-					<View style = {{paddingTop:'5%'}}>
-						<Text style={{fontSize: 20}}>Grade {this.state.data.year}</Text>
-						<Text style={{fontSize: 20}}>{"\n"}Hobbies: {this.state.data.hobbies}</Text>
-						<Text style={{fontSize: 20}}>{"\n"}Achievements: {this.state.data.achievements}</Text>
+				<View style={{paddingTop:'5%',paddingHorizontal:'10%', backgroundColor: 'white', height: '100%'}}>
+					<View style = {{display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
+						<View>
+							<Text style={{fontSize:28,marginBottom:'10%',textAlign:'center'}}>{this.state.data.name}</Text>	
+							<Text style={{fontSize:20}}>{'\t'}Grade {this.state.data.year}</Text>
+						</View>
+						<View style = {{height: 150, width: 150}}>
+							<Image style = {{height: '100%', width:'100%', borderRadius: 6}}source={{iconURI}} />
+						</View>
+						
+					</View>
+					
+					<View style = {{paddingTop:'10%', height: '55%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between'}}>
+						<View>
+							<Text style={{fontSize: 20, fontWeight: 'bold'}}>{"\n"}Hobbies</Text>
+							<Text style={{fontSize: 20}}>{'\t'}{this.state.data.hobbies}</Text>
+						</View>
+						<View>
+							<Text style={{fontSize: 20, fontWeight: 'bold'}}>{"\n"}Achievements </Text>
+							<Text style={{fontSize: 20}}>{'\t'}{this.state.data.achievements}</Text>
+						</View>
+						<View>
+							<Text style={{fontSize: 20, fontWeight: 'bold'}}>{"\n"}Message</Text>
+							<Text style={{fontSize: 20}}>{'\t'}{this.state.data.messages}</Text>
+						</View>
 					</View>
 					
 				</View>

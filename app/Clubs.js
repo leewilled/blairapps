@@ -34,7 +34,7 @@ const Stack = createStackNavigator();
 export const ClubInfo = ({route}) => {
   const item = route.params;
   return (
-    <View style = {{padding: 10}}>
+    <View style = {{padding: 10, backgroundColor: 'white', height: '100%'}}>
       <View style ={styles.infoContainer}>
         <Text style = {styles.title1}>Meeting Time and Day: </Text>
         <Text style = {{fontSize:20}}>{item.meeting}</Text>
@@ -57,7 +57,7 @@ function ClubElement (props) {
       <TouchableOpacity style={styles.item1} onPress={()=>props.navigation.navigate('ClubInfo', {data:props.data,name:props.name,meeting:item.meeting,link:item.link,sponsor:item.sponsor})} activeOpacity={0.8}>
         <View style = {{display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
           <Image source = {require('./assets/clubs.png')} style = {{height: 40, width: 40, marginRight: 10}}/>
-          <Text style={styles.title}>{props.item.name}</Text>
+          <Text style={styles.title3}>{props.item.name}</Text>
         </View>
         
       </TouchableOpacity>

@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   title: {
-    fontSize: 28,
+    fontSize: 20,
   },
   date: {
 	  fontSize:12,
@@ -40,6 +40,9 @@ const styles = StyleSheet.create({
     textDecorationStyle: "solid",
     textDecorationColor: "red",
   },
+  title3: {
+    fontSize: 28,
+  },
   link: {
     fontSize: 28,
     textDecorationLine: 'underline',
@@ -51,6 +54,13 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     padding: 5,
     marginBottom: 10,
+    shadowColor: "black",
+		shadowOffset: {
+			width: 0,
+			height: 0
+		},
+		shadowOpacity: 0.3,
+		shadowRadius: 3,
   },
   headerTitle: {
     fontSize: 24,

@@ -27,7 +27,7 @@ const Stack = createStackNavigator();
 export const LunchInfo = ({route}) => {
     const item = route.params;
     return (
-      <View style = {{padding: 10}}>
+      <View style = {{padding: 10, backgroundColor: 'white', height: '100%'}}>
         <View style ={styles.infoContainer}>
             <Text style = {styles.title1}>Description: </Text>
             <Text style = {styles.title}>{item.text}</Text>
@@ -47,7 +47,7 @@ function LunchEvent (props) {
             <TouchableOpacity style={styles.item1} onPress={()=>props.navigation.navigate('LunchInfo', {data:props.data,name:item.title,text:item.text,loc:item.loc})} activeOpacity={0.8}>
             <View style = {{display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
                 <Image source = {require('./assets/lunch.png')} style = {{height: 40, width: 40, marginRight: 10}}/>
-                <Text style={styles.title}>{item.title}</Text>
+                <Text style={styles.title3}>{item.title}</Text>
             </View>
             </TouchableOpacity>
         </View>

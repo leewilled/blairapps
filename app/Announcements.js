@@ -55,7 +55,7 @@ function TeacherButton(props) {
 	return (
 		<View style={[styles.item1,{flexDirection:'row'}]}>
 		  <TouchableOpacity style={{flex:1}} onPress={()=>{props.navigation.navigate('TeacherList',{data:props.data,name:props.name})}} activeOpacity={0.8}>
-			<Text style={styles.title}>{props.name}</Text>
+			<Text style={styles.title3}>{props.name}</Text>
 		  </TouchableOpacity>
 		  {props.icon?<Icon.Button color={color} name="star" size={30} style={{alignSelf:'center'}} backgroundColor="white" onPress={()=>{setColor(color=='#dba309'?'lightgrey':'#dba309');props.addFavorite(props.name)}}/>:<></>}
 		</View>
