@@ -38,16 +38,20 @@ const Event = ({item}) => {
 		<>
 			<Text style={{fontSize:20}}>{item.item.text}</Text>
 			<Text style={{fontSize:20}}>Location: {item.item.location}</Text>
-      <Text style={{fontSize:20}}>Date: {`${date[1]}/${date[2]}/${date[0]}`}</Text>
 		</>
   )
   if (itemDate >= today) {
     return (
       <TouchableOpacity style={styles.item1} onPress={()=>setVisible(!visible)} activeOpacity={0.8}>
-        <View style = {{display: 'flex', flexDirection: 'row'}}>
+        <View style = {{display: 'flex', flexDirection: 'row', alignContent: 'center', justifyContent: 'space-between'}}>
+        <View style = {{display: 'flex', flexDirection: 'row', alignContent: 'center', width: '60%'}}>
           <Image source ={require('./assets/calendar.png')}  style = {{height: 40, width: 40, marginRight: 15}}/>
           <Text style={styles.title3}>{item.item.title}</Text>
         </View>
+        <View style = {{display: 'flex', flexDirection: 'row', alignContent: 'center'}}>
+          <Text style = {{fontSize: 16, alignSelf: 'center'}}>{`${date[1]}/${date[2]}/${date[0]}`}</Text>
+        </View>
+      </View>
         {visible?extra:<></>}
 		  </TouchableOpacity>
     )
@@ -55,9 +59,14 @@ const Event = ({item}) => {
   else {
     return (
 		<TouchableOpacity style={{backgroundColor: '#e3e3e3', padding: 15, borderBottomWidth: 1, borderColor: 'black', width: '100%',}} onPress={()=>setVisible(!visible)} activeOpacity={0.8}>
-			<View style = {{display: 'flex', flexDirection: 'row', alignContent: 'center'}}>
-        <Image source ={require('./assets/calendar.png')}  style = {{height: 40, width: 40, marginRight: 15}}/>
-        <Text style={styles.title3}>{item.item.title}</Text>
+			<View style = {{display: 'flex', flexDirection: 'row', alignContent: 'center', justifyContent: 'space-between'}}>
+        <View style = {{display: 'flex', flexDirection: 'row', alignContent: 'center', width: '60%'}}>
+          <Image source ={require('./assets/calendar.png')}  style = {{height: 40, width: 40, marginRight: 15}}/>
+          <Text style={styles.title3}>{item.item.title}</Text>
+        </View>
+        <View style = {{display: 'flex', flexDirection: 'row', alignContent: 'center'}}>
+          <Text style = {{fontSize: 16, alignSelf: 'center'}}>{`${date[1]}/${date[2]}/${date[0]}`}</Text>
+        </View>
       </View>
 			{visible?extra:<></>}
 		</TouchableOpacity>
@@ -109,7 +118,7 @@ class Calendar extends React.Component {
             colors={['#f99', 'white']}
             style = {{height: '100%', borderBottomColor:'black', borderBottomWidth:0.5, display: 'flex', justifyContent: 'flex-end', paddingBottom: '2.5%'}}
           >
-            <Text style = {{fontSize: 24, fontWeight: 'bold', alignSelf: 'center'}}>Calendar</Text>
+            <Text style = {{fontSize: 24, fontWeight: 'bold', alignSelf: 'center'}}>Calendar Events</Text>
           </LinearGradient>
          
         </View>
