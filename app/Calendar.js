@@ -7,47 +7,74 @@ import {
   Text,
   StatusBar,
   FlatList,
-  TouchableOpacity
+  TouchableOpacity,
+  Image,
 } from 'react-native';
 
-import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
+import {	 
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+
+import LinearGradient from 'react-native-linear-gradient';
 
 import styles from './styles/liststyles'
 import { url } from './resources/fetchInfo.json'
 
+const getCurrentDate=()=>{
+  var date = new Date().getDate();
+  var month = new Date().getMonth() + 1;
+  var year = new Date().getFullYear();
+
+  return year + '-' + month + '-' + date;
+}
+
 const Event = ({item}) => {
 	const [visible, setVisible] = useState(false)
-	const date = item.item.date.split('-')
+  const date = item.item.date.split('-')
+  const today = new Date(getCurrentDate())
+  const itemDate = new Date(item.item.date)
+
 	const extra = (
 		<>
 			<Text style={{fontSize:20}}>{item.item.text}</Text>
 			<Text style={{fontSize:20}}>Location: {item.item.location}</Text>
-			<Text style={{fontSize:20}}>Date: {`${date[1]}/${date[2]}/${date[0]}`}</Text>
+      <Text style={{fontSize:20}}>Date: {`${date[1]}/${date[2]}/${date[0]}`}</Text>
 		</>
-	)
-	return (
-		<TouchableOpacity style={styles.item1} onPress={()=>setVisible(!visible)} activeOpacity={0.8}>
-			<Text style={styles.title}>{item.item.title}</Text>
+  )
+  if (itemDate >= today) {
+    return (
+      <TouchableOpacity style={styles.item1} onPress={()=>setVisible(!visible)} activeOpacity={0.8}>
+        <View style = {{display: 'flex', flexDirection: 'row'}}>
+          <Image source ={require('./assets/calendar.png')}  style = {{height: 40, width: 40, marginRight: 15}}/>
+          <Text style={styles.title3}>{item.item.title}</Text>
+        </View>
+        {visible?extra:<></>}
+		  </TouchableOpacity>
+    )
+  }
+  else {
+    return (
+		<TouchableOpacity style={{backgroundColor: '#e3e3e3', padding: 15, borderBottomWidth: 1, borderColor: 'black', width: '100%',}} onPress={()=>setVisible(!visible)} activeOpacity={0.8}>
+			<View style = {{display: 'flex', flexDirection: 'row', alignContent: 'center'}}>
+        <Image source ={require('./assets/calendar.png')}  style = {{height: 40, width: 40, marginRight: 15}}/>
+        <Text style={styles.title3}>{item.item.title}</Text>
+      </View>
 			{visible?extra:<></>}
 		</TouchableOpacity>
-	)
+	  )
+  }
+  
 }
 
 class Calendar extends React.Component {
-	
+
 	constructor(props) {
 		super(props)
 		this.state = {
 			data: []
 		}
 	}
-	
+
 	componentDidMount() {
 		this.getData()
 		this.props.navigation.addListener(
@@ -57,7 +84,7 @@ class Calendar extends React.Component {
 			}
 		);
 	}
-	
+
 	getData() {
 		fetch(`${url}/api/en/events`,{
 		  headers: {
@@ -73,10 +100,19 @@ class Calendar extends React.Component {
 		  })
 		  .catch((error) => console.error(error))
 	}
-	
+
 	render() {
 		return (
-			<View style={styles.container}>
+			<View>
+        <View style = {{height: 90, display: 'flex'}}>
+          <LinearGradient
+            colors={['#f99', 'white']}
+            style = {{height: '100%', borderBottomColor:'black', borderBottomWidth:0.5, display: 'flex', justifyContent: 'flex-end', paddingBottom: '2.5%'}}
+          >
+            <Text style = {{fontSize: 24, fontWeight: 'bold', alignSelf: 'center'}}>Calendar</Text>
+          </LinearGradient>
+         
+        </View>
 				<FlatList
 					data={this.state.data}
 					renderItem={item=><Event item={item}/>}
@@ -84,7 +120,7 @@ class Calendar extends React.Component {
 				/>
 			</View>
 		)
-	}
+  }
 }
 
 export default Calendar;
