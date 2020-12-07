@@ -32,15 +32,22 @@ const Announcement = ({item}) => {
 	const dateInfo = dateStr===item.item.date&&item.item.time!==undefined?item.item.time:item.item.date;
 	return (
 		<View style={styles.item1}>
-			{dateInfo!==undefined?<Text style={styles.date}>{dateInfo}</Text>:<></>}
-			<Text style={{fontSize:20}}>{item.item.message}</Text>
+			<View style = {{display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
+				<View style = {{width: '75%'}}>
+					<Text style={styles.title3}>{item.item.message}</Text>
+				</View>
+				<View style = {{display: 'flex', flexDirection: 'row'}}>
+					{dateInfo!==undefined?<Text style={{fontSize: 16, alignSelf: 'center'}}>{dateInfo}</Text>:<></>}
+				</View>
+			</View>
+			
 		</View>
 	)
 }
 
 export const TeacherList = ({route}) => {
 	return (
-		<View style={styles.container}>
+		<View style={{}}>
 			<FlatList
 				data={route.params.data}
 				renderItem={item=><Announcement item={item}/>}
@@ -54,7 +61,7 @@ function TeacherButton(props) {
 	const [color, setColor] = useState(props.color?props.color:'lightgrey')
 	return (
 		<View style={[styles.item1,{flexDirection:'row'}]}>
-		  <TouchableOpacity style={{flex:1}} onPress={()=>{props.navigation.navigate('TeacherList',{data:props.data,name:props.name})}} activeOpacity={0.8}>
+		  <TouchableOpacity style={{flex:1, justifyContent: 'center'}} onPress={()=>{props.navigation.navigate('TeacherList',{data:props.data,name:props.name})}} activeOpacity={0.8}>
 			<Text style={styles.title3}>{props.name}</Text>
 		  </TouchableOpacity>
 		  {props.icon?<Icon.Button color={color} name="star" size={30} style={{alignSelf:'center'}} backgroundColor="white" onPress={()=>{setColor(color=='#dba309'?'lightgrey':'#dba309');props.addFavorite(props.name)}}/>:<></>}
