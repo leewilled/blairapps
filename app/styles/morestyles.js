@@ -9,13 +9,15 @@ const styles=StyleSheet.create({
 		borderBottomColor:'white',
 		borderBottomWidth:0.5,
 		height: Dimensions.get('window').height*0.075,
-		justifyContent:'center',
 		paddingLeft: '3%',
 		fontSize: 32,
+		display: 'flex', 
+		flexDirection: 'row',
+		alignItems: 'center',
 	},
 	moretext: {
-		color:'#eee',
-		fontSize:20,
+		color:'#e3e3e3',
+		fontSize:22,
 	},
 	headerTitle: {
 		fontWeight: 'bold',

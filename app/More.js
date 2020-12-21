@@ -7,7 +7,8 @@ import {
   Text,
   StatusBar,
   FlatList,
-  TouchableOpacity
+  TouchableOpacity,
+  Image,
 } from 'react-native';
 
 import {
@@ -28,6 +29,8 @@ import StudentWeek from './StudentWeek'
 import SSLOps, {SSLInfo} from './SSLOps'
 import LunchEvents, {LunchInfo} from './LunchEvents'
 import ChallengeWeek from './ChallengeWeek'
+import Settings from './Settings'
+import Images from './Images'
 import LinearGradient from 'react-native-linear-gradient'
 
 const Stack = createStackNavigator()
@@ -43,15 +46,18 @@ class MoreSwitch extends React.Component {
 			<View style={{flex:1,backgroundColor:'red'}}>
 				<FlatList
 					data={[
-						{name:"Announcements",key:"announce"},
-						{name:"Resources",key:"resources"},
-						{name:"Student of the Week",key:"studentweek"},
-						{name:"Lunch Events",key:"lunchevent"},
-						{name:"SSL Opportunities",key:"sslops"},
-						{name:"Challenge of the Week",key:"challengeweek"},
+						{name:"Announcements",key:"announce", img:Images.announcements},
+						{name:"Resources",key:"resources", img:Images.resources},
+						{name:"Student of the Week",key:"studentweek", img:Images.student},
+						{name:"Lunch Events",key:"lunchevent", img:Images.lunch},
+						{name:"SSL Opportunities",key:"sslopps", img:Images.sslopps},
+						{name:"Challenge of the Week",key:"challengeweek", img:Images.challenge},
+						{name:"Settings", key:"settings", img: Images.settings},
 					]}
 					renderItem={({item})=>
+						
 						<TouchableOpacity style={styles.moreitem} onPress={()=>this.props.navigation.navigate(item.key)}>
+							<Image source = {item.img} style = {{height: 40, width: 40, marginRight: 10}}/>
 							<Text style={styles.moretext}>{item.name}</Text>
 						</TouchableOpacity>
 					}
@@ -121,7 +127,7 @@ class More extends React.Component {
 						}}
 					/>
 					<Stack.Screen 
-						name="sslops" 
+						name="sslopps" 
 						component={SSLOps}
 						options={{
 							title:'SSL Opportunities',
@@ -135,6 +141,16 @@ class More extends React.Component {
 						component={ChallengeWeek}
 						options={{
 							title:'Challenge of the Week',
+							headerTitleStyle:[styles.headerTitle,{alignSelf:'center'}],
+							headerLeft:null,
+							headerBackground: ()=>background
+						}}
+					/>
+					<Stack.Screen 
+						name="settings" 
+						component={Settings}
+						options={{
+							title:'Settings',
 							headerTitleStyle:[styles.headerTitle,{alignSelf:'center'}],
 							headerLeft:null,
 							headerBackground: ()=>background
