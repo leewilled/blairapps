@@ -19,7 +19,8 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 import styles from './styles/morestyles'
-
+import { url } from './resources/fetchInfo.json'
+import LinearGradient from 'react-native-linear-gradient';
 function Home1() {
 
 const [modalVisible, setModalVisible] = useState(true);
@@ -35,7 +36,7 @@ const [modalVisible, setModalVisible] = useState(true);
             </View>  
             <View>
               <Image source = {require('./assets/blair_logo.png')} style = {{alignSelf: 'center', marginTop: '5%', height: 325, width: 325}}/>
-              <Text style={styles.modalText}>hgjriwogjewope</Text>
+              <Text style={styles.modalText}>{url}</Text>
             </View>
           </View>
         </Modal>
@@ -51,7 +52,7 @@ class Home extends React.Component {
 		super(props)
 		this.state = {
 			data: [],
-			isLoading:true
+			isLoading:true  
 		}
 	}
 	
@@ -61,7 +62,7 @@ class Home extends React.Component {
 			'Cache-Control': 'no-cache'
 		  }}
 		).then((response) => {
-			return response.text();
+			return response.text();list 
 		}).then((json) => {
 			this.setState({data: JSON.parse(json),isLoading:false});
 		}).catch((error) => console.error(error))
@@ -70,7 +71,47 @@ class Home extends React.Component {
 	render() {
 		return (
       <View>
+        
+        <View style = {{height: 56, display: 'flex'}}>
+          <LinearGradient
+            colors={['#f99', 'white']}
+            style = {{height: '100%', borderBottomColor:'black', borderBottomWidth:0.5, display: 'flex', justifyContent: 'flex-end', paddingBottom: '2.5%'}}
+          >
+            <Text style = {{fontSize: 24, fontWeight: 'bold', alignSelf: 'center'}}>Blair</Text>
+          </LinearGradient>
+         
+        </View>
         <Home1></Home1>
+        <ScrollView>
+        <View style = {{height: 210, display: 'flex'}}>
+          <LinearGradient
+            colors={['#f99', 'white']}
+            style = {{height: '100%', borderBottomColor:'black', borderBottomWidth:0.5, display: 'flex', justifyContent: 'flex-end', paddingBottom: '2.5%'}}
+          >
+            <Text style = {{fontSize: 24, fontWeight: 'bold', alignSelf: 'center'}}>Blair</Text>
+          </LinearGradient>
+         
+        </View>
+        <View style = {{height: 210, display: 'flex'}}>
+          <LinearGradient
+            colors={['#f99', 'white']}
+            style = {{height: '100%', borderBottomColor:'black', borderBottomWidth:0.5, display: 'flex', justifyContent: 'flex-end', paddingBottom: '2.5%'}}
+          >
+            <Text style = {{fontSize: 24, fontWeight: 'bold', alignSelf: 'center'}}>Blair</Text>
+          </LinearGradient>
+         
+        </View>
+        <View style = {{height: 210, display: 'flex'}}>
+          <LinearGradient
+            colors={['#f99', 'white']}
+            style = {{height: '100%', borderBottomColor:'black', borderBottomWidth:0.5, display: 'flex', justifyContent: 'flex-end', paddingBottom: '2.5%'}}
+          >
+            <Text style = {{fontSize: 24, fontWeight: 'bold', alignSelf: 'center'}}>Blair</Text>
+          </LinearGradient>
+         
+        </View>
+
+        </ScrollView>
       </View>
 		)
 	}
