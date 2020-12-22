@@ -32,6 +32,7 @@ const Event = ({item}) => {
 	const [visible, setVisible] = useState(false)
   const date = item.item.date.split('-')
   const today = new Date(getCurrentDate())
+  const week = new Date().setDate(new Date().getDate() - 8)
   const itemDate = new Date(item.item.date)
 
 	const extra = (
@@ -56,7 +57,7 @@ const Event = ({item}) => {
 		  </TouchableOpacity>
     )
   }
-  else {
+  else if (itemDate >= week){
     return (
 		<TouchableOpacity style={{backgroundColor: '#e3e3e3', padding: 15, borderBottomWidth: 1, borderColor: 'black', width: '100%',}} onPress={()=>setVisible(!visible)} activeOpacity={0.8}>
 			<View style = {{display: 'flex', flexDirection: 'row', alignContent: 'center', justifyContent: 'space-between'}}>
@@ -72,7 +73,11 @@ const Event = ({item}) => {
 		</TouchableOpacity>
 	  )
   }
-  
+  else {
+    return (
+      null
+    )
+  }
 }
 
 class Calendar extends React.Component {
