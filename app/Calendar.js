@@ -118,7 +118,7 @@ class Calendar extends React.Component {
 	render() {
 		return (
 			<View>
-        <View style = {{height: 56, display: 'flex'}}>
+        <View style = {{height: 90, display: 'flex'}}>
           <LinearGradient
             colors={['#f99', 'white']}
             style = {{height: '100%', borderBottomColor:'black', borderBottomWidth:0.5, display: 'flex', justifyContent: 'flex-end', paddingBottom: '2.5%'}}

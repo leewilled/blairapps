@@ -40,6 +40,10 @@ const styles = StyleSheet.create({
     textDecorationStyle: "solid",
     textDecorationColor: "red",
   },
+  homeTitle: {
+    fontSize: 20, 
+    fontWeight: 'bold',
+  },
   title3: {
     fontSize: 28,
   },

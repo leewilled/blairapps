@@ -30,6 +30,7 @@ import SSLOps, {SSLInfo} from './SSLOps'
 import LunchEvents, {LunchInfo} from './LunchEvents'
 import ChallengeWeek from './ChallengeWeek'
 import Settings from './Settings'
+import Poll from './Poll'
 import Images from './Images'
 import LinearGradient from 'react-native-linear-gradient'
 
@@ -57,7 +58,7 @@ class MoreSwitch extends React.Component {
 					renderItem={({item})=>
 						
 						<TouchableOpacity style={styles.moreitem} onPress={()=>this.props.navigation.navigate(item.key)}>
-							<Image source = {item.img} style = {{height: 40, width: 40, marginRight: 10}}/>
+							<Image source = {item.img} style = {{height: 40, width: 40, marginRight: 10, tintColor: '#e3e3e3'}}/>
 							<Text style={styles.moretext}>{item.name}</Text>
 						</TouchableOpacity>
 					}

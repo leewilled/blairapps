@@ -6,6 +6,8 @@ import {
   View,
   Text,
   StatusBar,
+  Image,
+  TouchableOpacity,
 } from 'react-native';
 
 import {
@@ -16,19 +18,54 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 import {WebView} from 'react-native-webview';
+import LinearGradient from 'react-native-linear-gradient';
+import { Linking } from 'react-native';
+import { url } from './resources/fetchInfo.json'
+
 class Poll extends React.Component {
+
+  /*constructor(props) {
+    super(props)
+    this.state = {
+        data: []
+    }
+}
+
+componentDidMount() {
+    fetch(`${url}/api/en/lunchEvents`,{
+        headers: {
+            'Cache-Control': 'no-cache'
+        }
+        }
+    )
+    .then((response) => {
+        return response.text();
+    })
+    .then((json) => {
+        this.setState({data: JSON.parse(json)});
+    })
+    .catch((error) => console.error(error))
+}*/
+
 	render() {
 		return (
-			<WebView
-        source = {{uri: 'https://docs.google.com/forms/d/e/1FAIpQLSfR0XP2yo3TV3egz7aMok56wnP9kG4FQt2v3rHrrayf8uC7Vw/viewform?usp=sf_link'}}
-        javaScriptEnabled={true}
-        domStorageEnabled={true}
-        startInLoadingState={true}
-        style={{marginTop: 20}}
-        cacheEnabled={true}
-        
-      />
-      
+      <View style = {{backgroundColor: 'white'}}>
+        <View style = {{height: 90, display: 'flex'}}>
+          <LinearGradient
+            colors={['#f99', 'white']}
+            style = {{height: '100%', borderBottomColor:'black', borderBottomWidth:0.5, display: 'flex', justifyContent: 'flex-end', paddingBottom: '2.5%'}}
+          >
+            <Text style = {{fontSize: 24, fontWeight: 'bold', alignSelf: 'center'}}>Polls</Text>
+          </LinearGradient>
+         
+        </View>
+        <View style={{backgroundColor: 'white', height: '100%', display: 'flex', alignItems: 'center'}}>
+          <TouchableOpacity  onPress={()=>Linking.openURL("https://google.com")}>
+            <Image source={require('./assets/polls.png')} style={{marginTop: 50, height: 300, width: 300, tintColor: 'red'}}/>
+          </TouchableOpacity>
+          <Text style ={{fontSize: 20, marginTop: 30}}>Press the image to take the poll!</Text>
+        </View>
+      </View>
 		)
 	}
 }
