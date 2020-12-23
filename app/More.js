@@ -53,6 +53,7 @@ class MoreSwitch extends React.Component {
 						{name:"Lunch Events",key:"lunchevent", img:Images.lunch},
 						{name:"SSL Opportunities",key:"sslopps", img:Images.sslopps},
 						{name:"Challenge of the Week",key:"challengeweek", img:Images.challenge},
+						{name:"Polls", key:"polls", img: Images.polls},
 						{name:"Settings", key:"settings", img: Images.settings},
 					]}
 					renderItem={({item})=>
@@ -142,6 +143,16 @@ class More extends React.Component {
 						component={ChallengeWeek}
 						options={{
 							title:'Challenge of the Week',
+							headerTitleStyle:[styles.headerTitle,{alignSelf:'center'}],
+							headerLeft:null,
+							headerBackground: ()=>background
+						}}
+					/>
+					<Stack.Screen 
+						name="polls" 
+						component={Poll}
+						options={{
+							title:'Polls',
 							headerTitleStyle:[styles.headerTitle,{alignSelf:'center'}],
 							headerLeft:null,
 							headerBackground: ()=>background

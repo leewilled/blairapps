@@ -28,6 +28,7 @@ const Images = {
     student:require('./assets/student.png'),
     announcements:require('./assets/announcements.png'),
     resources:require('./assets/resources.png'),
+    polls:require('./assets/polls.png'),
 }
 
 export default Images;

@@ -50,15 +50,6 @@ componentDidMount() {
 	render() {
 		return (
       <View style = {{backgroundColor: 'white'}}>
-        <View style = {{height: 90, display: 'flex'}}>
-          <LinearGradient
-            colors={['#f99', 'white']}
-            style = {{height: '100%', borderBottomColor:'black', borderBottomWidth:0.5, display: 'flex', justifyContent: 'flex-end', paddingBottom: '2.5%'}}
-          >
-            <Text style = {{fontSize: 24, fontWeight: 'bold', alignSelf: 'center'}}>Polls</Text>
-          </LinearGradient>
-         
-        </View>
         <View style={{backgroundColor: 'white', height: '100%', display: 'flex', alignItems: 'center'}}>
           <TouchableOpacity  onPress={()=>Linking.openURL("https://google.com")}>
             <Image source={require('./assets/polls.png')} style={{marginTop: 50, height: 300, width: 300, tintColor: 'red'}}/>

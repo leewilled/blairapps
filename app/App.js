@@ -77,7 +77,6 @@ class App extends React.Component {
 				>	
 					<Tab.Screen name="Home" component={Home}/>
 					<Tab.Screen name="Calendar" component={Calendar} />
-					<Tab.Screen name="Polls" component={Poll} />
 					<Tab.Screen name="Clubs" component={Clubs} options ={{title: 'Clubs'}}/>
 					<Tab.Screen name="Staff" component={Staff} />
 					<Tab.Screen name="More" component={More} />
