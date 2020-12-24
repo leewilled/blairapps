@@ -25,23 +25,29 @@ const getCurrentDate=()=>{
   var month = new Date().getMonth() + 1;
   var year = new Date().getFullYear();
 
-  return year + '-' + month + '-' + date;
+  return year + ',' + month + ',' + date;
+}
+const getWeekDate=()=>{
+  var date = new Date().getDate()-8;
+  var month = new Date().getMonth()+1;
+  var year = new Date().getFullYear();
+
+  return year + ',' + month + ',' + date;
 }
 
 const Event = ({item}) => {
 	const [visible, setVisible] = useState(false)
-  const date = item.item.date.split('-')
   const today = new Date(getCurrentDate())
-  const week = new Date().setDate(new Date().getDate() - 8)
   const itemDate = new Date(item.item.date)
-
+  const week = new Date(getWeekDate())
 	const extra = (
 		<>
 			<Text style={{fontSize:20}}>{item.item.text}</Text>
 			<Text style={{fontSize:20}}>Location: {item.item.location}</Text>
 		</>
   )
-  if (itemDate >= today) {
+
+  if (itemDate.getTime() >= today.getTime()) {
     return (
       <TouchableOpacity style={styles.item1} onPress={()=>setVisible(!visible)} activeOpacity={0.8}>
         <View style = {{display: 'flex', flexDirection: 'row', alignContent: 'center', justifyContent: 'space-between'}}>
@@ -50,14 +56,14 @@ const Event = ({item}) => {
           <Text style={styles.title3}>{item.item.title}</Text>
         </View>
         <View style = {{display: 'flex', flexDirection: 'row', alignContent: 'center'}}>
-          <Text style = {{fontSize: 16, alignSelf: 'center'}}>{`${date[1]}/${date[2]}/${date[0]}`}</Text>
+          <Text style = {{fontSize: 16, alignSelf: 'center'}}>{item.item.date}</Text>
         </View>
       </View>
         {visible?extra:<></>}
 		  </TouchableOpacity>
     )
   }
-  else if (itemDate >= week){
+  else if (itemDate.getTime() >= week.getTime()){
     return (
 		<TouchableOpacity style={{backgroundColor: '#e3e3e3', padding: 15, borderBottomWidth: 1, borderColor: 'black', width: '100%',}} onPress={()=>setVisible(!visible)} activeOpacity={0.8}>
 			<View style = {{display: 'flex', flexDirection: 'row', alignContent: 'center', justifyContent: 'space-between'}}>
@@ -66,7 +72,7 @@ const Event = ({item}) => {
           <Text style={styles.title3}>{item.item.title}</Text>
         </View>
         <View style = {{display: 'flex', flexDirection: 'row', alignContent: 'center'}}>
-          <Text style = {{fontSize: 16, alignSelf: 'center'}}>{`${date[1]}/${date[2]}/${date[0]}`}</Text>
+          <Text style = {{fontSize: 16, alignSelf: 'center'}}>{item.item.date}</Text>
         </View>
       </View>
 			{visible?extra:<></>}

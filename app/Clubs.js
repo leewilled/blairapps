@@ -36,15 +36,15 @@ export const ClubInfo = ({route}) => {
   return (
     <View style = {{padding: 10, backgroundColor: 'white', height: '100%'}}>
       <View style ={styles.infoContainer}>
-        <Text style = {styles.title1}>Meeting Time and Day: </Text>
+        <Text style = {[styles.title1, {fontSize: 24}]}>Meeting Time and Day: </Text>
         <Text style = {{fontSize:20}}>{item.meeting}</Text>
       </View>
       <View style ={styles.infoContainer}>
-        <Text style = {styles.title1}>Zoom Link: </Text>
+        <Text style = {[styles.title1, {fontSize: 24}]}>Zoom Link: </Text>
         <Text style = {[styles.linktext,{fontSize:20}]} onPress={() => Linking.openURL(item.link)}>{item.link}</Text>
       </View>
 			<View style ={styles.infoContainer}>
-        <Text style = {styles.title1}>Sponsor: </Text>
+        <Text style = {[styles.title1, {fontSize: 24}]}>Sponsor: </Text>
 			  <Text style = {{fontSize:20}}>{item.sponsor}</Text>
       </View>
     </View>
@@ -65,6 +65,11 @@ function ClubElement (props) {
   )
 }
 
+const background = (<LinearGradient
+  colors={['#f99', 'white']}
+  style = {{flex:1,borderBottomColor:'black',borderBottomWidth:0.5}}
+  />)
+
 function Club () {
   return (
     <NavigationContainer independent={true}>
@@ -81,8 +86,8 @@ function Club () {
           component = {ClubInfo}
           options={({route})=>({
             title:route.params.name,
-			headerTitleStyle:[morestyles.headerTitle,{alignSelf:'center'}],
-			headerRight:()=>(<></>)
+            headerTitleStyle:[morestyles.headerTitle,{alignSelf:'center'}],
+            headerBackground: ()=>background
           })}
         />
       </Stack.Navigator>

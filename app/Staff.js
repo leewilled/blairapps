@@ -26,7 +26,21 @@ import { url } from './resources/fetchInfo.json'
 
 const StaffElement = ({item}) => {
   const [visible, setVisible] = useState(false)
-  const extra = [...item.item.emails.map(email=>(<Text key={email}>{'\n'}Email: <Text style={styles.linktext} onPress={()=>Linking.openURL("mailto:"+email)}>{email}</Text></Text>))]
+  const extra = (
+    [
+      ...item.item.emails.map(email=>(
+      <View style={{display: 'flex', flexDirection: 'row', alignItems: 'center', marginTop: '2%', paddingHorizontal: '1%'}}>
+        <Image source={require('./assets/email.png')}  style={{height: 22, width: 22}}/>
+        <Text key={email}><Text style={styles.linktext} onPress={()=>Linking.openURL("mailto:"+email)}>{'    '}{email}</Text></Text>
+      </View>
+      )),
+      <View style={{display: 'flex', flexDirection: 'row', alignItems: 'center', marginTop: '2%', paddingHorizontal: '1%'}}>
+        <Image source = {require('./assets/dep.png')} style={{height: 22, width: 22}}/>
+        <Text>{'    '}{item.item.department}</Text>
+      </View>
+    ]
+  )
+  //const extra = [...item.item.emails.map(email=>(<Text key={email}>{'\n'}Email: <Text style={styles.linktext} onPress={()=>Linking.openURL("mailto:"+email)}>{email}</Text></Text>))]
   return(
 	<View>
 	  <TouchableOpacity style={styles.item1} onPress={()=>setVisible(!visible)} activeOpacity={0.8}>
