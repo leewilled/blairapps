@@ -28,13 +28,21 @@ export const LunchInfo = ({route}) => {
     const item = route.params;
     return (
       <View style = {{padding: 10, backgroundColor: 'white', height: '100%'}}>
-        <View style ={styles.infoContainer}>
-            <Text style = {styles.title1}>Description: </Text>
-            <Text style = {styles.title}>{item.text}</Text>
+        <View style={[styles.infoContainer, {flexDirection: 'row', alignItems: 'center'}]}>
+            <View style={{width: '15%', display: 'flex', justifyContent: 'center'}}>
+                <Image source={require('./assets/desc.png')} style={{height: 50, width: 50}}/>
+            </View>
+            <View style={{width: '85%'}}>
+                <Text style = {styles.title}>{item.text}</Text>
+            </View>
         </View>
-        <View style ={styles.infoContainer}>
-            <Text style = {styles.title1}>Location: </Text>
-            <Text style = {styles.title}>{item.loc}</Text>
+        <View style={[styles.infoContainer, {flexDirection: 'row', alignItems: 'center'}]}>
+            <View style={{width: '15%', display: 'flex', justifyContent: 'center'}}>
+                <Image source={require('./assets/location.png')} style={{height: 50, width: 50}}/>
+            </View>
+            <View style={{width: '85%'}}>
+                <Text style={{fontSize:20}}>{item.loc}</Text>
+            </View>
         </View>
       </View>
     )

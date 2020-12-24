@@ -35,17 +35,29 @@ export const ClubInfo = ({route}) => {
   const item = route.params;
   return (
     <View style = {{padding: 10, backgroundColor: 'white', height: '100%'}}>
-      <View style ={styles.infoContainer}>
-        <Text style = {[styles.title1, {fontSize: 24}]}>Meeting Time and Day: </Text>
-        <Text style = {{fontSize:20}}>{item.meeting}</Text>
+      <View style ={[styles.infoContainer, {flexDirection: 'row', alignItems: 'center'}]}>
+        <View style={{width: '17%', display: 'flex', justifyContent: 'center'}}>
+          <Image source ={require('./assets/time.png')} style={{width: 50, height: 50}}/>
+        </View>
+        <View style={{width: '83%'}}>
+          <Text style = {{fontSize:20}}>{item.meeting}</Text>
+        </View>
       </View>
-      <View style ={styles.infoContainer}>
-        <Text style = {[styles.title1, {fontSize: 24}]}>Zoom Link: </Text>
-        <Text style = {[styles.linktext,{fontSize:20}]} onPress={() => Linking.openURL(item.link)}>{item.link}</Text>
+      <View style ={[styles.infoContainer, {flexDirection: 'row', alignItems: 'center'}]}>
+        <View style={{width: '17%', display: 'flex', justifyContent: 'center'}}>
+          <Image source ={require('./assets/zoom.png')} style={{width: 50, height: 50}}/>
+        </View>
+        <View style={{width: '83%'}}>
+          <Text style = {[styles.linktext,{fontSize:20}]} onPress={() => Linking.openURL(item.link)}>{item.link}</Text>
+        </View>
       </View>
-			<View style ={styles.infoContainer}>
-        <Text style = {[styles.title1, {fontSize: 24}]}>Sponsor: </Text>
-			  <Text style = {{fontSize:20}}>{item.sponsor}</Text>
+			<View style ={[styles.infoContainer, {flexDirection: 'row', alignItems: 'center'}]}>
+        <View style={{width: '17%', display: 'flex', justifyContent: 'center'}}>
+          <Image source ={require('./assets/sponsor.png')} style={{width: 50, height: 50}}/>
+        </View>
+        <View style={{width: '83%'}}>
+          <Text style = {{fontSize:20}}>{item.sponsor}</Text>
+        </View>
       </View>
     </View>
   )

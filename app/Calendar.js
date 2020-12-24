@@ -42,8 +42,17 @@ const Event = ({item}) => {
   const week = new Date(getWeekDate())
 	const extra = (
 		<>
-			<Text style={{fontSize:20}}>{item.item.text}</Text>
-			<Text style={{fontSize:20}}>Location: {item.item.location}</Text>
+			<Text style={{fontSize:20, paddingHorizontal: '1%'}}>{item.item.text}</Text>
+      <View style={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
+        <View style={{width: '10%', display: 'flex', justifyContent: 'center'}}>
+          <Image source={require('./assets/location.png')} style={{height: 22, width: 22}}/>
+        </View>
+        <View style={{width: '90%'}}>
+          <Text style={{fontSize:20}}>{item.item.location}</Text>
+        </View>
+        
+      </View>
+			
 		</>
   )
 
