@@ -37,15 +37,7 @@ const StaffElement = ({item}) => {
           <Text key={email}><Text style={styles.linktext} onPress={()=>Linking.openURL("mailto:"+email)}><Text></Text>{email}</Text></Text>
         </View>
       </View>
-      )),
-      <View style={{display: 'flex', flexDirection: 'row', alignItems: 'center', marginTop: '2%', paddingHorizontal: '1%'}}>
-        <View style={{width: '10%', display: 'flex', justifyContent: 'center'}}>
-          <Image source = {require('./assets/dep.png')} style={{height: 22, width: 22}}/>
-        </View>
-        <View style={{width: '90%'}}>
-          <Text>{item.item.department}</Text>
-        </View> 
-      </View>
+      ))
     ]
   )
   //const extra = [...item.item.emails.map(email=>(<Text key={email}>{'\n'}Email: <Text style={styles.linktext} onPress={()=>Linking.openURL("mailto:"+email)}>{email}</Text></Text>))]
