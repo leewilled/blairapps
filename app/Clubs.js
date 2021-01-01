@@ -28,6 +28,7 @@ import styles from './styles/liststyles'
 import morestyles from './styles/morestyles'
 import { url } from './resources/fetchInfo.json'
 import LinearGradient from 'react-native-linear-gradient';
+import I18n from './i18n';
 
 const Stack = createStackNavigator();
 
@@ -159,7 +160,7 @@ class Clubs extends React.Component {
       <SafeAreaView style={styles.container}>
         <SearchBar
         lightTheme
-        placeholder="Search Clubs"
+        placeholder={I18n.t('clubs.searchClubs')}
         onChangeText={this.updateSearch}
         onCancel={this.clearSearch}
         onClear={this.clearSearch}

@@ -16,7 +16,7 @@ import {
   DebugInstructions,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
-
+import I18n from './i18n';
 import { url } from './resources/fetchInfo.json'
 
 class StudentWeek extends React.Component {
@@ -49,7 +49,7 @@ class StudentWeek extends React.Component {
 					<View style = {{display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
 						<View>
 							<Text style={{fontSize:28,marginBottom:'10%',textAlign:'center'}}>{this.state.data.name}</Text>	
-							<Text style={{fontSize:20}}>{'\t'}Grade {this.state.data.year}</Text>
+							<Text style={{fontSize:20}}>{'\t'}{I18n.t('student.Grade')} {this.state.data.year}</Text>
 						</View>
 						<View style = {{height: 150, width: 150}}>
 							<Image style = {{height: '100%', width:'100%', borderRadius: 6}}source={{iconURI}} />
@@ -59,15 +59,15 @@ class StudentWeek extends React.Component {
 					
 					<View style = {{paddingTop:'10%', height: '55%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between'}}>
 						<View>
-							<Text style={{fontSize: 20, fontWeight: 'bold'}}>{"\n"}Hobbies</Text>
+							<Text style={{fontSize: 20, fontWeight: 'bold'}}>{"\n"}{I18n.t('student.Hobbies')}</Text>
 							<Text style={{fontSize: 20}}>{'\t'}{this.state.data.hobbies}</Text>
 						</View>
 						<View>
-							<Text style={{fontSize: 20, fontWeight: 'bold'}}>{"\n"}Achievements </Text>
+							<Text style={{fontSize: 20, fontWeight: 'bold'}}>{"\n"}{I18n.t('student.Achievements')} </Text>
 							<Text style={{fontSize: 20}}>{'\t'}{this.state.data.achievements}</Text>
 						</View>
 						<View>
-							<Text style={{fontSize: 20, fontWeight: 'bold'}}>{"\n"}Message</Text>
+							<Text style={{fontSize: 20, fontWeight: 'bold'}}>{"\n"}{I18n.t('student.Messages')}</Text>
 							<Text style={{fontSize: 20}}>{'\t'}{this.state.data.messages}</Text>
 						</View>
 					</View>

@@ -37,7 +37,6 @@ class Resources extends React.Component {
 			<ScrollView style = {{backgroundColor: 'white'}}>
 				<ResourceLink url='https://classroom.mcpsmd.org/' img={require('./assets/canvaslogo.png')} name='MyMCPS Classroom'/>
 				<ResourceLink url='https://md-mcps-psv.edupoint.com/Home_PXP2.aspx' img={require('./assets/studentvue.jpg')} name='StudentVUE'/>
-				<ResourceLink url='https://mbhs.edu/newsevents/Announcements/Montgomery%20Blair%20High%20School%20Final%20Bell%20Schedule%20.pdf' img={require('./assets/schedule.jpg')} name='1st Semester Schedule'/>
 				<ResourceLink url='https://student.naviance.com/mbhs' img={require('./assets/naviance.png')} name='Naviance'/>
 				<ResourceLink url='https://blairblazersathletics.com/' img={require('./assets/athletics.jpg')} name='Blair Athletics'/>
 				<ResourceLink url='https://classroom.google.com/u/0/h' img={require('./assets/googleclassroom.jpg')} name='Google Classroom'/>

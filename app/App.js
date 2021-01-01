@@ -19,20 +19,26 @@ import {
 
 import { NavigationContainer } from '@react-navigation/native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import SplashScreen from 'react-native-splash-screen';
 import Home from './Home'
 import Calendar from './Calendar'
-import Poll from './Poll'
 import Clubs from './Clubs'
 import More from './More'
 import Staff from './Staff'
 import OpeningPage from './OpeningPage';
 import OpenPage from './OpenPage';
-import styles from './styles/morestyles';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import I18n from './i18n';
+import AsyncStorage from '@react-native-community/async-storage'
+
 
 
 const Tab = createBottomTabNavigator();
+
+AsyncStorage.getItem('language')
+  .then((token) => { 
+	console.log("lang: " + token);
+	I18n.locale = token;
+  });
 
 class App extends React.Component {
 	state = {
@@ -52,17 +58,15 @@ class App extends React.Component {
 					tabBarIcon: ({ focused, color, size }) => {
 						let iconName;
 			
-						if (route.name === 'Home') {
+						if (route.name === 'Home' || route.name === 'Casa') {
 							iconName = focused ? 'ios-home' : 'ios-home-outline';
-						} else if (route.name === 'Calendar') {
+						} else if (route.name === 'Calendar' || route.name === 'Calendario') {
 							iconName = focused ? 'ios-calendar' : 'ios-calendar-outline';
-						} else if (route.name === 'Polls') {
-							iconName = focused ? 'ios-pie-chart' : 'ios-pie-chart-outline';
-						} else if (route.name === 'Clubs') {
+						} else if (route.name === 'Clubs' || route.name === 'Clubes') {
 							iconName = focused ? 'ios-people-circle' : 'ios-people-circle-outline';
-						} else if (route.name === 'Staff') {
+						} else if (route.name === 'Staff' || route.name === 'Personal') {
 							iconName = focused ? 'ios-nutrition' : 'ios-nutrition-outline';
-						} else if (route.name === 'More') {
+						} else if (route.name === 'More' || route.name === 'Más') {
 							iconName = focused ? 'ios-ellipsis-horizontal' : 'ios-ellipsis-horizontal-outline';
 						}
 
@@ -75,11 +79,11 @@ class App extends React.Component {
 						fontSize:16
 					}}}
 				>	
-					<Tab.Screen name="Home" component={Home}/>
-					<Tab.Screen name="Calendar" component={Calendar} />
-					<Tab.Screen name="Clubs" component={Clubs} options ={{title: 'Clubs'}}/>
-					<Tab.Screen name="Staff" component={Staff} />
-					<Tab.Screen name="More" component={More} />
+					<Tab.Screen name={I18n.t('app.home')} component={Home}/>
+					<Tab.Screen name={I18n.t('app.calendar')} component={Calendar}/>
+					<Tab.Screen name={I18n.t('app.clubs')} component={Clubs}/>
+					<Tab.Screen name={I18n.t('app.staff')} component={Staff}/>
+					<Tab.Screen name={I18n.t('app.more')} component={More}/>
 				</Tab.Navigator>
 				: <OpenPage />}
 			</NavigationContainer>

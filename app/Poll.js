@@ -21,6 +21,7 @@ import {WebView} from 'react-native-webview';
 import LinearGradient from 'react-native-linear-gradient';
 import { Linking } from 'react-native';
 import { url } from './resources/fetchInfo.json'
+import I18n from './i18n';
 
 class Poll extends React.Component {
 
@@ -54,7 +55,7 @@ componentDidMount() {
           <TouchableOpacity  onPress={()=>Linking.openURL("https://google.com")}>
             <Image source={require('./assets/polls.png')} style={{marginTop: 50, height: 300, width: 300, tintColor: 'red'}}/>
           </TouchableOpacity>
-          <Text style ={{fontSize: 20, marginTop: 30}}>Press the image to take the poll!</Text>
+          <Text style ={{fontSize: 20, marginTop: 30}}>{I18n.t('polls.textInPoll')}</Text>
         </View>
       </View>
 		)

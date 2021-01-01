@@ -16,7 +16,7 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 
 import LinearGradient from 'react-native-linear-gradient';
-
+import I18n from './i18n';
 import styles from './styles/liststyles'
 import { url } from './resources/fetchInfo.json'
 
@@ -138,7 +138,7 @@ class Calendar extends React.Component {
             colors={['#f99', 'white']}
             style = {{height: '100%', borderBottomColor:'black', borderBottomWidth:0.5, display: 'flex', justifyContent: 'flex-end', paddingBottom: '2.5%'}}
           >
-            <Text style = {{fontSize: 24, fontWeight: 'bold', alignSelf: 'center'}}>Calendar Events</Text>
+            <Text style = {{fontSize: 24, fontWeight: 'bold', alignSelf: 'center'}}>{I18n.t('calendar.calendarEvents')}</Text>
           </LinearGradient>
          
         </View>
