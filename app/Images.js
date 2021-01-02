@@ -29,6 +29,8 @@ const Images = {
     announcements:require('./assets/announcements.png'),
     resources:require('./assets/resources.png'),
     polls:require('./assets/polls.png'),
+    notifs:require('./assets/notifs.png'),
+    lang:require('./assets/lang.png'),
 }
 
 export default Images;

@@ -47,12 +47,17 @@ export default {
     },
     settings: {
         settings: "Settings",
-        language: "Language"
+        language: "Language",
+        notifications: "Notifications",
     },
     language: {
         SelectLanguage: "Select Language",
         English: "English",
         Spanish: "Spanish",
         note: "*App will reload on language change"
+    },
+    notifications: {
+        announcements: "Announcements",
+        events: "Calendar Events"
     }
 }

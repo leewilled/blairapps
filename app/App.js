@@ -30,8 +30,6 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import I18n from './i18n';
 import AsyncStorage from '@react-native-community/async-storage'
 
-
-
 const Tab = createBottomTabNavigator();
 
 AsyncStorage.getItem('language')
@@ -39,6 +37,15 @@ AsyncStorage.getItem('language')
 	console.log("lang: " + token);
 	I18n.locale = token;
   });
+
+AsyncStorage.getItem('announcementNotifs')
+	.then((token) => { 
+	console.log("announcementNotifs: " + token);
+	});
+AsyncStorage.getItem('eventNotifs')
+	.then((token) => { 
+	console.log("eventNotifs: " + token);
+	});
 
 class App extends React.Component {
 	state = {

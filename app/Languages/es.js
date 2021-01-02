@@ -47,12 +47,17 @@ export default {
     },
     settings: {
         settings: "Configuraciones",
-        language: "Idioma"
+        language: "Idioma",
+        notifications: "ESNotifications"
     },
     language: {
         SelectLanguage: "Seleccione el idioma",
         English: "Inglés",
         Spanish: "Español",
         note: "*La aplicación se recargará al cambiar de idioma"
+    },
+    notifications: {
+        announcements: "ESAnnouncements",
+        events: "ESCalendar Events"
     }
 }
