@@ -160,7 +160,7 @@ class Clubs extends React.Component {
       <SafeAreaView style={styles.container}>
         <SearchBar
         lightTheme
-        placeholder={I18n.t('clubs.searchClubs')}
+        placeholder={'Search Clubs'}
         onChangeText={this.updateSearch}
         onCancel={this.clearSearch}
         onClear={this.clearSearch}

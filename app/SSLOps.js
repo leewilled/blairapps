@@ -22,7 +22,7 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import styles from './styles/liststyles';
 import { url } from './resources/fetchInfo.json';
-import I18n from './i18n';
+//import I18n from './i18n';
 
 const Stack = createStackNavigator();
 

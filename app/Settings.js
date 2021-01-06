@@ -26,13 +26,31 @@ import LinearGradient from 'react-native-linear-gradient'
 import Images from './Images'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
-import I18n from './i18n';
-import Language from './Language'
-import Notifications from './Notifications'
+//import I18n from './i18n';
+//import Language from './Language'
+//import Notifications from './Notifications'
 
 const Stack = createStackNavigator()
 
-class SettingSwitch extends React.Component {
+
+
+
+class placeHoldingForNow extends React.Component{
+	constructor(props) {
+		super(props)
+		this.props = props
+	}
+	render() {
+		return (
+			<View style={{flex:1,backgroundColor:'red'}}>
+				<Text>
+					Coming Soon...
+				</Text>
+			</View>
+		)
+	}
+}
+/*class SettingSwitch extends React.Component {
 	constructor(props) {
 		super(props)
 		this.props = props
@@ -43,8 +61,8 @@ class SettingSwitch extends React.Component {
 			<View style={{flex:1,backgroundColor:'red'}}>
 				<FlatList
 					data={[
-						{name:"Language",key:"language", img:Images.lang},
-						{name:"Notifications",key:"notifications", img:Images.notifs},
+						//{name:"Language",key:"language", img:Images.lang}
+						//{name:"Notifications",key:"notifications", img:Images.notifs},
 					]}
 					renderItem={({item})=>
 						<TouchableOpacity style={styles.moreitem} onPress={()=>this.props.navigation.navigate(item.key)}>
@@ -57,7 +75,7 @@ class SettingSwitch extends React.Component {
 		)
 	}
 }
-
+*/
 const background = (<LinearGradient
                     colors={['#f99', 'white']}
                     style = {{flex:1,borderBottomColor:'black',borderBottomWidth:0.5}}
@@ -70,14 +88,14 @@ class Settings extends React.Component {
 				<Stack.Navigator>
 					<Stack.Screen 
 						name="Chooser" 
-						component={SettingSwitch}
+						component={placeHoldingForNow}
 						options={{
 							title:'Settings',
 							headerTitleStyle:styles.headerTitle,
 							headerBackground: ()=>background
 						}}
 					/>
-					<Stack.Screen 
+					{/*<Stack.Screen 
 						name="language" 
 						component={Language}
 						options={{
@@ -86,8 +104,8 @@ class Settings extends React.Component {
 							headerLeft:null,
 							headerBackground: ()=>background
 						}}
-					/>
-					<Stack.Screen 
+					/>*/}
+					{/*<Stack.Screen 
 						name="notifications" 
 						component={Notifications}
 						options={{
@@ -96,7 +114,7 @@ class Settings extends React.Component {
 							headerLeft:null,
 							headerBackground: ()=>background
 						}}
-					/>
+					/>*/}
 				</Stack.Navigator>
 			</NavigationContainer>
 		)

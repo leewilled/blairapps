@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+/*import React, { Component, useState } from 'react';
 import { 
     Platform, 
     StyleSheet, 
@@ -119,4 +119,4 @@ class Notifications extends Component {
   }
 }
 
-export default Notifications
+export default Notifications*/
