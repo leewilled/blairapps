@@ -84,7 +84,12 @@ const background = (<LinearGradient
 class Settings extends React.Component {
 	render() {
 		return (
-			<NavigationContainer independent={true}>
+			<View style={{flex:1,backgroundColor:'red'}}>
+				<Text>
+					Coming Soon...
+				</Text>
+			</View>
+			/*<NavigationContainer independent={true}>
 				<Stack.Navigator>
 					<Stack.Screen 
 						name="Chooser" 
@@ -104,8 +109,8 @@ class Settings extends React.Component {
 							headerLeft:null,
 							headerBackground: ()=>background
 						}}
-					/>*/}
-					{/*<Stack.Screen 
+					/>}*/
+					/*{<Stack.Screen 
 						name="notifications" 
 						component={Notifications}
 						options={{
@@ -114,9 +119,9 @@ class Settings extends React.Component {
 							headerLeft:null,
 							headerBackground: ()=>background
 						}}
-					/>*/}
+					/>}
 				</Stack.Navigator>
-			</NavigationContainer>
+			</NavigationContainer>*/
 		)
 	}
 }

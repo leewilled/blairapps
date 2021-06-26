@@ -199,6 +199,7 @@ const Event = ({item}) => {
 		</>
   )
   if (itemDate >= today) {
+    
     return (
       <TouchableOpacity style={styles.item1} onPress={()=>setVisible(!visible)} activeOpacity={0.8}>
         <View style = {{display: 'flex', flexDirection: 'row', alignContent: 'center', justifyContent: 'space-between'}}>
@@ -276,7 +277,7 @@ class Calendar extends React.Component {
 	render() {
 		return (
 			<View>
-        <View style = {{height: 56, display: 'flex'}}>
+        <View style = {{height: global.headerHeight, display: 'flex'}}>
           <LinearGradient
             colors={['#f99', 'white']}
             style = {{height: '100%', borderBottomColor:'black', borderBottomWidth:0.5, display: 'flex', justifyContent: 'flex-end', paddingBottom: '2.5%'}}

@@ -89,7 +89,7 @@ class Poll extends React.Component {
         javaScriptEnabled={true}
         domStorageEnabled={true}
         startInLoadingState={true}
-        style={{marginTop: 20}}
+        style={{marginTop: 0}}
         cacheEnabled={true}
         
       />
