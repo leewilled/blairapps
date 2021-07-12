@@ -23,7 +23,7 @@ import {
 import { SearchBar } from 'react-native-elements';
 import styles from './styles/liststyles'
 import { url } from './resources/fetchInfo.json'
-//import I18n from './i18n';
+import I18n from './i18n';
 
 const StaffElement = ({item}) => {
   const [visible, setVisible] = useState(false)
@@ -108,7 +108,7 @@ class Staff extends React.Component {
       <SafeAreaView style={styles.container}>
         <SearchBar
         lightTheme
-        placeholder="Staff Search"
+        placeholder={I18n.t('staff.searchStaff')}
         onChangeText={this.updateSearch}
         onCancel={this.clearSearch}
         onClear={this.clearSearch}

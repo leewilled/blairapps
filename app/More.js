@@ -33,7 +33,7 @@ import Settings from './Settings'
 import Poll from './Poll'
 import Images from './Images'
 import LinearGradient from 'react-native-linear-gradient'
-//import I18n from './i18n';
+import I18n from './i18n';
 
 const Stack = createStackNavigator()
 
@@ -51,8 +51,8 @@ class MoreSwitch extends React.Component {
 						{name:'Announcements',key:"announce", img:Images.announcements},
 						{name:"Resources",key:"resources", img:Images.resources},
 						{name:"SOTW",key:"studentweek", img:Images.student},
-						{name:"Lunch",key:"lunchevent", img:Images.lunch},
-						{name:"SSL",key:"sslopps", img:Images.sslopps},
+						{name:"lunch",key:"lunchevent", img:Images.lunch},
+						{name:"ssl",key:"sslopps", img:Images.sslopps},
 						{name:"COTW",key:"challengeweek", img:Images.challenge},
 						{name:"Polls", key:"polls", img: Images.polls},
 						{name:"Settings", key:"settings", img: Images.settings},
@@ -61,7 +61,7 @@ class MoreSwitch extends React.Component {
 						
 						<TouchableOpacity style={styles.moreitem} onPress={()=>this.props.navigation.navigate(item.key)}>
 							<Image source = {item.img} style = {{height: 40, width: 40, marginRight: 10, tintColor: '#e3e3e3'}}/>
-							<Text style={styles.moretext}>{item.name}</Text>
+							<Text style={styles.moretext}>{I18n.t('more.'+item.name)}</Text>
 						</TouchableOpacity>
 					}
 				/>
@@ -84,7 +84,7 @@ class More extends React.Component {
 						name="Chooser" 
 						component={MoreSwitch}
 						options={{
-							title:"More",
+							title:I18n.t('more.More'),
 							headerTitleStyle:styles.headerTitle,
 							headerBackground: ()=>background
 						}}
@@ -93,7 +93,7 @@ class More extends React.Component {
 						name="announce" 
 						component={Announcements}
 						options={{
-							title:"Announcements",
+							title:I18n.t('more.Announcements'),
 							headerTitleStyle:[styles.headerTitle,{alignSelf:'center'}],
 							headerLeft:null,
 							headerBackground: ()=>background
@@ -103,7 +103,7 @@ class More extends React.Component {
 						name="resources" 
 						component={Resources}
 						options={{
-							title:"Resources",
+							title:I18n.t('more.Resources'),
 							headerTitleStyle:[styles.headerTitle,{alignSelf:'center'}],
 							headerLeft:null,
 							headerBackground: ()=>background
@@ -113,7 +113,7 @@ class More extends React.Component {
 						name="studentweek" 
 						component={StudentWeek}
 						options={{
-							title:"Student of the Week",
+							title:I18n.t('more.SOTW'),
 							headerTitleStyle:[styles.headerTitle,{alignSelf:'center'}],
 							headerLeft:null,
 							headerBackground: ()=>background
@@ -123,7 +123,7 @@ class More extends React.Component {
 						name="lunchevent" 
 						component={LunchEvents}
 						options={{
-							title:"Lunch",
+							title:I18n.t('more.lunch'),
 							headerTitleStyle:[styles.headerTitle,{alignSelf:'center'}],
 							headerLeft:null,
 							headerBackground: ()=>background
@@ -133,7 +133,7 @@ class More extends React.Component {
 						name="sslopps" 
 						component={SSLOps}
 						options={{
-							title:"SSL Ops",
+							title:I18n.t('more.ssl'),
 							headerTitleStyle:[styles.headerTitle,{alignSelf:'center'}],
 							headerLeft:null,
 							headerBackground: ()=>background
@@ -143,7 +143,7 @@ class More extends React.Component {
 						name="challengeweek" 
 						component={ChallengeWeek}
 						options={{
-							title:"Challenge of the Week",
+							title:I18n.t('more.COTW'),
 							headerTitleStyle:[styles.headerTitle,{alignSelf:'center'}],
 							headerLeft:null,
 							headerBackground: ()=>background
@@ -153,7 +153,7 @@ class More extends React.Component {
 						name="polls" 
 						component={Poll}
 						options={{
-							title:"Polls",
+							title:I18n.t('more.Polls'),
 							headerTitleStyle:[styles.headerTitle,{alignSelf:'center'}],
 							headerLeft:null,
 							headerBackground: ()=>background
@@ -163,10 +163,11 @@ class More extends React.Component {
 						name="settings" 
 						component={Settings}
 						options={{
-							title:"Settings",
+							title:I18n.t('more.Settings'),
 							headerTitleStyle:[styles.headerTitle,{alignSelf:'center'}],
 							headerLeft:null,
-							headerBackground: ()=>background
+							headerBackground: ()=>background,
+							headerShown:false
 						}}
 					/>
 					<Stack.Screen 

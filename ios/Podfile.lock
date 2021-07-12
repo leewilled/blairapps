@@ -319,6 +319,10 @@ PODS:
     - React
   - RNGestureHandler (1.10.3):
     - React-Core
+  - RNI18n (2.0.15):
+    - React
+  - RNLocalize (2.1.1):
+    - React-Core
   - RNScreens (3.4.0):
     - React-Core
     - React-RCTImage
@@ -382,6 +386,8 @@ DEPENDENCIES:
   - "RNCAsyncStorage (from `../node_modules/@react-native-community/async-storage`)"
   - "RNCMaskedView (from `../node_modules/@react-native-community/masked-view`)"
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
+  - RNI18n (from `../node_modules/react-native-i18n`)
+  - RNLocalize (from `../node_modules/react-native-localize`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
@@ -466,6 +472,10 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-community/masked-view"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
+  RNI18n:
+    :path: "../node_modules/react-native-i18n"
+  RNLocalize:
+    :path: "../node_modules/react-native-localize"
   RNScreens:
     :path: "../node_modules/react-native-screens"
   RNVectorIcons:
@@ -517,6 +527,8 @@ SPEC CHECKSUMS:
   RNCAsyncStorage: dfcd17ecff5403061bc649ee33ee751718870c8a
   RNCMaskedView: 0e1bc4bfa8365eba5fbbb71e07fbdc0555249489
   RNGestureHandler: a479ebd5ed4221a810967000735517df0d2db211
+  RNI18n: e2f7e76389fcc6e84f2c8733ea89b92502351fd8
+  RNLocalize: 82a569022724d35461e2dc5b5d015a13c3ca995b
   RNScreens: 21b73c94c9117e1110a79ee0ee80c93ccefed8ce
   RNVectorIcons: bc69e6a278b14842063605de32bec61f0b251a59
   Yoga: 4bd86afe9883422a7c4028c00e34790f560923d6

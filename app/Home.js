@@ -31,7 +31,7 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import Announcements from './Announcements'
 import AsyncStorage from '@react-native-community/async-storage'
-//import I18n from './i18n';
+import I18n from './i18n';
 
 
 const getCurrentDate=()=>{
@@ -261,7 +261,7 @@ const New = ({item}) => {
 }
 
 function Home1() {
-  const [modalVisible, setModalVisible] = useState(false);
+  const [modalVisible, setModalVisible] = useState(true);
 
   return (
     <View>
@@ -350,9 +350,9 @@ function HomeScreen (props) {
     <ScrollView style={{height: '100%', backgroundColor: 'white'}}>
       <View style={{height: 275, backgroundColor: 'white', padding: '2%'}}>
         <View style={{display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: '2%'}}>
-          <Text style={liststyles.homeTitle}>Whats New</Text>
+          <Text style={liststyles.homeTitle}>{I18n.t('home.whatsNew')}</Text>
           <TouchableOpacity onPress={()=>props.navigation.navigate('new', {data:props.data})}>
-            <Text style={{color: 'blue', textDecorationLine: 'underline'}}>View All</Text>
+            <Text style={{color: 'blue', textDecorationLine: 'underline'}}>{I18n.t('home.viewAll')}</Text>
           </TouchableOpacity>
         </View>
         <ScrollView horizontal='true' style={{display: 'flex', flexDirection: 'row', paddingHorizontal: '2%'}}></ScrollView>
@@ -368,7 +368,7 @@ function HomeScreen (props) {
       </View>
 
       <View style={{height: 275, backgroundColor: 'white', padding: '2%'}}>
-        <Text style={liststyles.homeTitle}>Student of the Week</Text>
+        <Text style={liststyles.homeTitle}>{I18n.t('home.SOTW')}</Text>
         <View style={{display: 'flex', flexDirection: 'row', paddingTop: '5%', paddingHorizontal: '2%', justifyContent: 'space-between'}}>
           <View style={{display: 'flex', borderWidth: 1, borderColor: 'black', borderRadius: 8, width: '32%', height: '100%'}}>
             <View style={{height:'70%'}}>
@@ -376,22 +376,22 @@ function HomeScreen (props) {
             </View>
             <View style ={{paddingHorizontal: '2%', height: '15%', borderTopWidth: 1}}>
               <Text style={{fontWeight: 'bold', fontSize: 18}}>{props.studentData.name}</Text>
-              <Text>Grade {props.studentData.year}</Text>
+              <Text>{I18n.t('home.Grade')} {props.studentData.year}</Text>
             </View>
           </View>
           <View style={{borderWidth: 1, borderColor: 'black', borderRadius: 8, width: '64%', height: '100%', padding: '2%'}}>
-            <Text style={{fontSize: 16}}><Text style={{fontWeight: 'bold'}}>Hobbies: </Text>{props.studentData.hobbies}</Text>
-            <Text style={{fontSize: 16}}><Text style={{fontWeight: 'bold'}}>Achievements: </Text>{props.studentData.achievements}</Text>
-            <Text style={{fontSize: 16}}><Text style={{fontWeight: 'bold'}}>Messages: </Text>{props.studentData.messages}</Text>
+            <Text style={{fontSize: 16}}><Text style={{fontWeight: 'bold'}}>{I18n.t('home.Hobbies')} </Text>{props.studentData.hobbies}</Text>
+            <Text style={{fontSize: 16}}><Text style={{fontWeight: 'bold'}}>{I18n.t('home.Achievements')} </Text>{props.studentData.achievements}</Text>
+            <Text style={{fontSize: 16}}><Text style={{fontWeight: 'bold'}}>{I18n.t('home.Messages')} </Text>{props.studentData.messages}</Text>
           </View>
         </View>
       </View>
 
       <View style={{padding: '2%'}}>
         <View style ={{display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: '2%'}}>
-          <Text style={liststyles.homeTitle}>Announcements</Text>
+          <Text style={liststyles.homeTitle}>{I18n.t('home.Announcements')}</Text>
           <TouchableOpacity onPress={()=>props.navigation.navigate(Announcements)}>
-            <Text style={{color: 'blue', textDecorationLine: 'underline'}}>View All</Text>
+            <Text style={{color: 'blue', textDecorationLine: 'underline'}}>{I18n.t('home.viewAll')}</Text>
           </TouchableOpacity>
         </View>
         <FlatList
