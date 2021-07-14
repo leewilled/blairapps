@@ -26,9 +26,9 @@ import LinearGradient from 'react-native-linear-gradient'
 import Images from './Images'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
-import I18n from './i18n';
-import Language from './Language'
-import Notifications from './Notifications'
+//import I18n from './i18n';
+//import Language from './Language'
+//import Notifications from './Notifications'
 
 const Stack = createStackNavigator()
 
@@ -50,7 +50,7 @@ class placeHoldingForNow extends React.Component{
 		)
 	}
 }
-class SettingSwitch extends React.Component {
+/*class SettingSwitch extends React.Component {
 	constructor(props) {
 		super(props)
 		this.props = props
@@ -61,15 +61,12 @@ class SettingSwitch extends React.Component {
 			<View style={{flex:1,backgroundColor:'red'}}>
 				<FlatList
 					data={[
-						{name:"Language",key:"language", img:Images.lang},
-						//{name:"Notifications",key:"notifications", img:Images.notifs},
 						//{name:"Language",key:"language", img:Images.lang}
-						//{name:"Notifications",key:"notifications", img:Images.notifs},\
+						//{name:"Notifications",key:"notifications", img:Images.notifs},
 					]}
 					renderItem={({item})=>
 						<TouchableOpacity style={styles.moreitem} onPress={()=>this.props.navigation.navigate(item.key)}>
 							<Image source = {item.img} style = {{height: 40, width: 40, marginRight: 10, tintColor: '#e3e3e3'}}/>
-							
 							<Text style={styles.moretext}>{I18n.t('settings.' + item.key)}</Text>
 						</TouchableOpacity>
 					}
@@ -78,7 +75,7 @@ class SettingSwitch extends React.Component {
 		)
 	}
 }
-
+*/
 const background = (<LinearGradient
                     colors={['#f99', 'white']}
                     style = {{flex:1,borderBottomColor:'black',borderBottomWidth:0.5}}
@@ -87,35 +84,44 @@ const background = (<LinearGradient
 class Settings extends React.Component {
 	render() {
 		return (
-			/*<View style={{flex:1,backgroundColor:'red'}}>
+			<View style={{flex:1,backgroundColor:'red'}}>
 				<Text>
 					Coming Soon...
 				</Text>
-			</View>*/
-			<NavigationContainer independent={true}>
+			</View>
+			/*<NavigationContainer independent={true}>
 				<Stack.Navigator>
 					<Stack.Screen 
 						name="Chooser" 
-						component={SettingSwitch}
+						component={placeHoldingForNow}
 						options={{
-							title:I18n.t('more.Settings'),
+							title:'Settings',
 							headerTitleStyle:styles.headerTitle,
-							headerLeft:null,
 							headerBackground: ()=>background
 						}}
 					/>
-					{<Stack.Screen 
+					{/*<Stack.Screen 
 						name="language" 
 						component={Language}
 						options={{
-							title:I18n.t('settings.language'),
+							title:'Language',
+							headerTitleStyle:[styles.headerTitle,{alignSelf:'center'}],
+							headerLeft:null,
+							headerBackground: ()=>background
+						}}
+					/>}*/
+					/*{<Stack.Screen 
+						name="notifications" 
+						component={Notifications}
+						options={{
+							title:'Notifications',
 							headerTitleStyle:[styles.headerTitle,{alignSelf:'center'}],
 							headerLeft:null,
 							headerBackground: ()=>background
 						}}
 					/>}
 				</Stack.Navigator>
-			</NavigationContainer>
+			</NavigationContainer>*/
 		)
 	}
 }

@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+/*import React, { Component, useState } from 'react';
 import { 
     Platform, 
     StyleSheet, 
@@ -110,17 +110,13 @@ class Notifications extends Component {
   render() {
 
     return (
-        <View>
-            <Text>
-                Notifs
-            </Text>
-        </View>
-        /*<View style = {{flex: 1, backgroundColor: 'white', padding: 20}}>
+
+        <View style = {{flex: 1, backgroundColor: 'white', padding: 20}}>
             <AnnouncementNotifs />
             <EventNotifs />
-        </View>*/
+        </View>
    );
   }
 }
 
-export default Notifications
+export default Notifications*/

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+/*import React, { Component } from 'react';
 import { DevSettings } from 'react-native';
 import { Platform, StyleSheet, TouchableOpacity, Text, ScrollView, View } from 'react-native';
 import I18n from './i18n';
@@ -55,7 +55,6 @@ export default class extends Component {
 
   render() {
     return (
-      
       <View style={{flex: 1, backgroundColor: 'white', padding: 24}}>
         <Text style ={{marginBottom: 5}}>{I18n.t('language.note')}</Text>
         <View>
@@ -72,4 +71,4 @@ export default class extends Component {
      </View>
    );
   }
-}
+}*/
