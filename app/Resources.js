@@ -21,7 +21,7 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 import styles from './styles/morestyles';
 
-const windowWidth = Dimensions.get('window').width*.80/2;
+const windowWidth = Dimensions.get('window').width*.80/3.5;
 
 function ResourceLink(props) { 
 	return (

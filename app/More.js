@@ -9,6 +9,7 @@ import {
   FlatList,
   TouchableOpacity,
   Image,
+  Dimensions
 } from 'react-native';
 
 import {
@@ -45,23 +46,27 @@ class MoreSwitch extends React.Component {
 	
 	render() {
 		return (
-			<View style={{flex:1,backgroundColor:'red'}}>
+			<View style={{flex:1,backgroundColor:'white', paddingHorizontal: '5%'}}>
 				<FlatList
 					data={[
 						{name:'Announcements',key:"announce", img:Images.announcements},
 						{name:"Resources",key:"resources", img:Images.resources},
-						{name:"SOTW",key:"studentweek", img:Images.student},
-						{name:"Lunch",key:"lunchevent", img:Images.lunch},
-						{name:"SSL",key:"sslopps", img:Images.sslopps},
-						{name:"COTW",key:"challengeweek", img:Images.challenge},
+						{name:"Student of the Week",key:"studentweek", img:Images.student},
+						{name:"Lunch Events",key:"lunchevent", img:Images.lunch},
+						{name:"SSL Opportunities",key:"sslopps", img:Images.sslopps},
+						{name:"Challenge of the Week",key:"challengeweek", img:Images.challenge},
 						{name:"Polls", key:"polls", img: Images.polls},
 						{name:"Settings", key:"settings", img: Images.settings},
 					]}
 					renderItem={({item})=>
 						
 						<TouchableOpacity style={styles.moreitem} onPress={()=>this.props.navigation.navigate(item.key)}>
-							<Image source = {item.img} style = {{height: 40, width: 40, marginRight: 10, tintColor: '#e3e3e3'}}/>
-							<Text style={styles.moretext}>{item.name}</Text>
+							<Image source = {item.img} style = {{height: 40, width: 40, marginRight: 10, tintColor: '#323232'}}/>
+							<View style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '85%'}}>
+								<Text style={styles.moretext}>{item.name}</Text>
+								<Image source = {require('./assets/forward.png')} style={{tintColor: '#b2b2b2'}}/>
+							</View>
+							
 						</TouchableOpacity>
 					}
 				/>
@@ -123,7 +128,7 @@ class More extends React.Component {
 						name="lunchevent" 
 						component={LunchEvents}
 						options={{
-							title:"Lunch",
+							title:"Lunch Events",
 							headerTitleStyle:[styles.headerTitle,{alignSelf:'center'}],
 							headerLeft:null,
 							headerBackground: ()=>background
@@ -133,7 +138,7 @@ class More extends React.Component {
 						name="sslopps" 
 						component={SSLOps}
 						options={{
-							title:"SSL Ops",
+							title:"SSL Opportunities",
 							headerTitleStyle:[styles.headerTitle,{alignSelf:'center'}],
 							headerLeft:null,
 							headerBackground: ()=>background
@@ -166,7 +171,8 @@ class More extends React.Component {
 							title:"Settings",
 							headerTitleStyle:[styles.headerTitle,{alignSelf:'center'}],
 							headerLeft:null,
-							headerBackground: ()=>background
+							headerBackground: ()=>background,
+							headerShown:false
 						}}
 					/>
 					<Stack.Screen 

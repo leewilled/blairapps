@@ -1,4 +1,4 @@
-import {StyleSheet, StatusBar} from 'react-native';
+import {StyleSheet, StatusBar, Dimensions} from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
@@ -10,6 +10,43 @@ const styles = StyleSheet.create({
     padding: 20,
     borderBottomWidth: 1.5,
     borderColor: 'black'
+  },
+  moreDefault: {
+    flex: 1,
+    backgroundColor:'white', 
+    paddingHorizontal: '5%'
+  },
+  listItem: {
+    display: 'flex', 
+    borderBottomColor:'#D5D5D5',
+    borderBottomWidth:.5
+  },
+  container2: {
+    display: 'flex', 
+    flexDirection: 'row', 
+    height: Dimensions.get('window').height*0.075,
+    alignItems: 'center'
+  },
+  sideImage: {
+    height: 40,
+    width: 40, 
+    marginRight: 10,
+    tintColor: '#323232'
+  },
+  accordian: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '85%'
+  },
+	accordianHeader: {
+		paddingBottom: '2%',
+		fontSize:16
+	},
+  accordianText: {
+    paddingBottom: '2%',
+		fontSize:16,
+    fontWeight: '200',
   },
   item1: {
     backgroundColor: 'white',

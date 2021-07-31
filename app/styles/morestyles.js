@@ -5,9 +5,9 @@ console.log(Dimensions.get('window'))
 
 const styles=StyleSheet.create({
 	moreitem: {
-		backgroundColor:'red',
-		borderBottomColor:'white',
-		borderBottomWidth:0.5,
+		backgroundColor:'white',
+		borderBottomColor:'#D5D5D5',
+		borderBottomWidth:.5,
 		height: Dimensions.get('window').height*0.075,
 		paddingLeft: '3%',
 		fontSize: 32,
@@ -16,8 +16,7 @@ const styles=StyleSheet.create({
 		alignItems: 'center',
 	},
 	moretext: {
-		color:'#e3e3e3',
-		fontSize:22,
+		fontSize:20,
 	},
 	headerTitle: {
 		fontWeight: 'bold',
@@ -26,24 +25,6 @@ const styles=StyleSheet.create({
 	resourceContainer: {
 		alignItems: 'center',
     	marginTop: '3%',
-	},
-	image: {
-		height: 100,
-		width: 400,
-		borderTopRightRadius: 16,
-		borderTopLeftRadius: 16,
-	},
-	textContainer: {
-		backgroundColor: 'black',
-		width: 400,
-		borderBottomLeftRadius: 16,
-		borderBottomRightRadius: 16,
-	},
-	resourceText: {
-		fontWeight: 'bold',
-		color: 'white',
-		fontSize:32,
-		textAlign:'center',
 	},
 	openPage: {
 		display: 'flex',

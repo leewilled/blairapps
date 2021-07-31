@@ -9,6 +9,7 @@ import {
   FlatList,
   TouchableOpacity,
   Image,
+  Dimensions
 } from 'react-native';
 
 import {
@@ -22,6 +23,7 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import styles from './styles/liststyles';
 import { url } from './resources/fetchInfo.json';
+import LinearGradient from 'react-native-linear-gradient';
 //import I18n from './i18n';
 
 const Stack = createStackNavigator();
@@ -61,13 +63,18 @@ export const SSLInfo = ({route}) => {
 
 function SSLElement (props) {
 	const item = props.item;
+	const [expand, setExpand] = useState(false);
 	return(
 		<View>
-			<TouchableOpacity style={styles.item1} onPress={()=>props.navigation.navigate('SSLInfo', {data: props.data, name: item.item.title, text: item.item.text, loc:item.item.loc, teacher: item.item.teacher})} activeOpacity={0.8}>
-				<View style = {{display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
-					<Image source = {require('./assets/sslopps.png')} style = {{height: 40, width: 40, marginRight: 10}}/>
-					<Text style={styles.title3}>{item.item.title}</Text>
+			<TouchableOpacity style={styles.listItem} onPress={()=>setExpand(!expand)}>
+				<View style = {styles.container2}>
+					<Image source = {require('./assets/sslopps.png')} style = {styles.sideImage}/>
+					<View style = {styles.accordian}>
+                        <Text style={styles.title}>{item.item.title}</Text>
+                        {expand?<LinearGradient start={{x: 0, y: 0.25}} end={{x: .5, y: 1}} colors={['red', '#FF7373']} style={{borderRadius: 24, alignSelf: 'center'}}><Image source = {require('./assets/collapse.png')} style={{tintColor: 'white'}}/></LinearGradient>:<Image source = {require('./assets/expand.png')} style={{tintColor: '#b2b2b2', alignSelf: 'center'}}/>}
+                    </View>
 				</View>
+				{expand?<View style={{marginLeft: 50}}><Text style={styles.accordianHeader}>Information</Text><Text style={styles.accordianText}>{item.item.text}</Text><Text style={styles.accordianHeader}>{'\n'}Sponsor</Text><Text style={styles.accordianText}>{item.item.teacher}</Text><Text style={styles.accordianHeader}>{'\n'}Location</Text><Text style={[styles.accordianText, {paddingBottom: '4%'}]}>{item.item.loc}</Text></View>:<></>}
 			</TouchableOpacity>
 		</View>
     )
@@ -100,13 +107,14 @@ class SSLOps extends React.Component {
 	
 	render() {
 		return (
-			<View style={styles.container}>
+			<ScrollView style={styles.moreDefault}>
 				<FlatList
 					data={this.state.data}
 					renderItem={item=><SSLElement item={item} name={item.title} navigation={this.props.navigation}/>}
 					keyExtractor={item=>JSON.stringify(item)}
 				/>
-			</View>
+			</ScrollView>
+			
 		)
 	}
 }

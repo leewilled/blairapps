@@ -20,6 +20,8 @@ import {
 //import I18n from './i18n';
 import { url } from './resources/fetchInfo.json'
 
+import LinearGradient from 'react-native-linear-gradient';
+
 class StudentWeek extends React.Component {
 	constructor(props) {
 		super(props)
@@ -82,7 +84,7 @@ class StudentWeek extends React.Component {
 									<Image source = {require('./assets/hobbies.png')} />
 									<View style = {{display: 'flex', flexDirection: 'row', width: '85%', justifyContent: 'space-between', paddingHorizontal:'2%',}}>
 										<Text style={{fontSize: 20,  alignSelf: 'center'}}>Hobbies</Text>
-										<Image source = {this.state.hobbyArrow} style={{alignSelf:'center'}}/>
+										{this.state.hobbyExpanded?<LinearGradient start={{x: 0, y: 0.25}} end={{x: .5, y: 1}} colors={['red', '#FF7373']} style={{borderRadius: 24, alignSelf: 'center'}}><Image source = {require('./assets/collapse.png')} style={{tintColor: 'white'}}/></LinearGradient>:<Image source = {require('./assets/expand.png')} style={{tintColor: '#b2b2b2', alignSelf: 'center'}}/>}
 									</View>
 								</View>
 								{this.state.hobbyExpanded?hobbyText:<></>}
@@ -92,7 +94,7 @@ class StudentWeek extends React.Component {
 									<Image source = {require('./assets/achievements.png')} />
 									<View style = {{display: 'flex', flexDirection: 'row', width: '85%', justifyContent: 'space-between', paddingHorizontal:'2%',}}>
 										<Text style={{fontSize: 20, alignSelf: 'center'}}>Achievements</Text>
-										<Image source = {this.state.achievementArrow} style={{alignSelf:'center'}}/>
+										{this.state.achievementExpanded?<LinearGradient start={{x: 0, y: 0.25}} end={{x: .5, y: 1}} colors={['red', '#FF7373']} style={{borderRadius: 24, alignSelf: 'center'}}><Image source = {require('./assets/collapse.png')} style={{tintColor: 'white'}}/></LinearGradient>:<Image source = {require('./assets/expand.png')} style={{tintColor: '#b2b2b2', alignSelf: 'center'}}/>}
 									</View>
 								</View>
 								{this.state.achievementExpanded?achievementText:<></>}
@@ -102,7 +104,7 @@ class StudentWeek extends React.Component {
 									<Image source = {require('./assets/message.png')} />
 									<View style = {{display: 'flex', flexDirection: 'row', width: '85%', justifyContent: 'space-between', paddingHorizontal:'2%',}}>
 										<Text style={{fontSize: 20, alignSelf: 'center'}}>Messages</Text>
-										<Image source = {this.state.messageArrow} style={{alignSelf:'center'}}/>
+										{this.state.messageExpanded?<LinearGradient start={{x: 0, y: 0.25}} end={{x: .5, y: 1}} colors={['red', '#FF7373']} style={{borderRadius: 24, alignSelf: 'center'}}><Image source = {require('./assets/collapse.png')} style={{tintColor: 'white'}}/></LinearGradient>:<Image source = {require('./assets/expand.png')} style={{tintColor: '#b2b2b2', alignSelf: 'center'}}/>}
 									</View>
 								</View>
 								{this.state.messageExpanded?messageText:<></>}

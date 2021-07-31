@@ -9,6 +9,7 @@ import {
   FlatList,
   TouchableOpacity,
   Image,
+  Dimensions
 } from 'react-native';
 
 import {
@@ -22,6 +23,7 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import styles from './styles/liststyles'
 import { url } from './resources/fetchInfo.json'
+import LinearGradient from 'react-native-linear-gradient';
 const Stack = createStackNavigator();
 
 export const LunchInfo = ({route}) => {
@@ -50,17 +52,29 @@ export const LunchInfo = ({route}) => {
 
 function LunchEvent (props) {
     const item = props.item
+    const [expand, setExpand] = useState(false);
     return(
         <View>
-            <TouchableOpacity style={styles.item1} onPress={()=>props.navigation.navigate('LunchInfo', {data:props.data,name:item.title,text:item.text,loc:item.loc})} activeOpacity={0.8}>
-            <View style = {{display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
-                <Image source = {require('./assets/lunch.png')} style = {{height: 40, width: 40, marginRight: 10}}/>
-                <Text style={styles.title3}>{item.title}</Text>
-            </View>
+            <TouchableOpacity style={styles.listItem} onPress={()=>setExpand(!expand)}>
+                <View style={styles.container2}>
+                    <Image source = {require('./assets/lunch.png')} style = {styles.sideImage}/>
+                    <View style = {styles.accordian}>
+                        <Text style={styles.title}>{item.title}</Text>
+                        {expand?<LinearGradient start={{x: 0, y: 0.25}} end={{x: .5, y: 1}} colors={['red', '#FF7373']} style={{borderRadius: 24, alignSelf: 'center'}}><Image source = {require('./assets/collapse.png')} style={{tintColor: 'white'}}/></LinearGradient>:<Image source = {require('./assets/expand.png')} style={{tintColor: '#b2b2b2', alignSelf: 'center'}}/>}
+                    </View>
+                </View>
+                {expand?<View style={{marginLeft: 50}}><Text style={styles.accordianHeader}>Information</Text><Text style={styles.accordianText}>{item.text}</Text><Text style={styles.accordianHeader}>{'\n'}Location</Text><Text style={[styles.accordianText, {paddingBottom: '4%'}]}>{item.loc}</Text></View>:<></>}
             </TouchableOpacity>
         </View>
     )
 }
+/*<TouchableOpacity style={styles2.moreitem} onPress={()=>props.navigation.navigate('LunchInfo', {data:props.data,name:item.title,text:item.text,loc:item.loc})} activeOpacity={0.8}>
+    <Image source = {require('./assets/lunch.png')} style = {{height: 40, width: 40, marginRight: 10, tintColor: '#323232'}}/>
+    <View style = {{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '85%'}}>
+        <Text style={{fontSize: 20}}>{item.title}</Text>
+        <Image source = {require('./assets/expand.png')} style={{tintColor: '#b2b2b2'}}/>
+    </View>
+</TouchableOpacity>*/
 
 class LunchEvents extends React.Component {
     
@@ -89,13 +103,13 @@ class LunchEvents extends React.Component {
     
     render() {
         return (
-            <View style={styles.container}>
+            <ScrollView style={styles.moreDefault}>
                 <FlatList
                     data={this.state.data}
                     renderItem={({item}) => <LunchEvent item={item} name={this.props.title} navigation={this.props.navigation}/>}
                     keyExtractor={item=>JSON.stringify(item)}
                 />
-            </View>
+            </ScrollView>
         )
     }
 }
