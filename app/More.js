@@ -34,6 +34,7 @@ import Settings from './Settings'
 import Poll from './Poll'
 import Images from './Images'
 import LinearGradient from 'react-native-linear-gradient'
+import Ionicons from 'react-native-vector-icons/Ionicons';
 //import I18n from './i18n';
 
 const Stack = createStackNavigator()
@@ -49,19 +50,19 @@ class MoreSwitch extends React.Component {
 			<View style={{flex:1,backgroundColor:'white', paddingHorizontal: '5%'}}>
 				<FlatList
 					data={[
-						{name:'Announcements',key:"announce", img:Images.announcements},
-						{name:"Resources",key:"resources", img:Images.resources},
-						{name:"Student of the Week",key:"studentweek", img:Images.student},
-						{name:"Lunch Events",key:"lunchevent", img:Images.lunch},
-						{name:"SSL Opportunities",key:"sslopps", img:Images.sslopps},
-						{name:"Challenge of the Week",key:"challengeweek", img:Images.challenge},
-						{name:"Polls", key:"polls", img: Images.polls},
-						{name:"Settings", key:"settings", img: Images.settings},
+						{name:'Announcements',key:"announce", img:"megaphone-outline"},
+						{name:"Resources",key:"resources", img:"newspaper-outline"},
+						{name:"Student of the Week",key:"studentweek", img:"ribbon-outline"},
+						{name:"Lunch Events",key:"lunchevent", img:"fast-food-outline"},
+						{name:"SSL Opportunities",key:"sslopps", img:"school-outline"},
+						{name:"Challenge of the Week",key:"challengeweek", img:"golf-outline"},
+						{name:"Polls", key:"polls", img: "stats-chart-outline"},
+						{name:"Settings", key:"settings", img: "settings-outline"},
 					]}
 					renderItem={({item})=>
 						
 						<TouchableOpacity style={styles.moreitem} onPress={()=>this.props.navigation.navigate(item.key)}>
-							<Image source = {item.img} style = {{height: 40, width: 40, marginRight: 10, tintColor: '#323232'}}/>
+							<Ionicons name={item.img} size={36} color={'#323232'}style={{marginRight: 15}}/>
 							<View style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '85%'}}>
 								<Text style={styles.moretext}>{item.name}</Text>
 								<Image source = {require('./assets/forward.png')} style={{tintColor: '#b2b2b2'}}/>

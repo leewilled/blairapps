@@ -101,8 +101,11 @@ class ChallengeWeek extends React.Component {
 			return <View/>
 		} else {
 			return (
-				<View style={{alignItems:'center',paddingiorizontal:'10%', height: '100%', backgroundColor: 'white', justifyContent: 'center'}}>
-					<TouchableOpacity onPress={()=>this.flipCard()} style={{height: '70%', width: '80%', borderRadius: 20, shadowColor: 'red', shadowOffset: {width: 0, height: 2}, shadowOpacity: 0.5, shadowRadius: 7, alignSelf: 'center'}}>
+				<View style={{alignItems:'center',paddingiorizontal:'10%', height: '100%', backgroundColor: 'white', justifyContent: 'center', padding: '2%'}}>
+					<Text style={{fontSize: 32, fontWeight: 'bold', marginBottom: '10%', color: 'red', textAlign: 'center'}}>{this.state.data.title}</Text>
+					<Text style={{textAlign:'center', fontSize: 24, marginBottom: '5%', textAlign: 'center', fontWeight: '200'}}>{this.state.data.text}</Text>
+					<Text style={{textAlign:'center', fontSize: 20, textDecorationLine: 'underline', textDecorationStyle: "solid", textDecorationColor: "#000"}} onPress={() => Linking.openURL(this.state.data.link)}>Link</Text>
+					{/*<TouchableOpacity onPress={()=>this.flipCard()} style={{height: '70%', width: '80%', borderRadius: 20, shadowColor: 'red', shadowOffset: {width: 0, height: 2}, shadowOpacity: 0.5, shadowRadius: 7, alignSelf: 'center'}}>
 						<Animated.View style={{backfaceVisibility: 'hidden'}, frontAnimatedStyle}>
 							<View style={styling}>
 								<View>{this.state.flip?<Text style={{textAlign: 'center', fontSize: 28}}>{this.state.data.title}</Text>:<></>}</View>
@@ -117,8 +120,7 @@ class ChallengeWeek extends React.Component {
 							</View>
 							
 						</Animated.View>
-					</TouchableOpacity>
-					
+					</TouchableOpacity>*/}
 				</View>
 			)
 		}

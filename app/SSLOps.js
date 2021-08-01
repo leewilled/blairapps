@@ -24,6 +24,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 import styles from './styles/liststyles';
 import { url } from './resources/fetchInfo.json';
 import LinearGradient from 'react-native-linear-gradient';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 //import I18n from './i18n';
 
 const Stack = createStackNavigator();
@@ -68,7 +69,7 @@ function SSLElement (props) {
 		<View>
 			<TouchableOpacity style={styles.listItem} onPress={()=>setExpand(!expand)}>
 				<View style = {styles.container2}>
-					<Image source = {require('./assets/sslopps.png')} style = {styles.sideImage}/>
+					<Ionicons name="school-outline" size={36} color={'#323232'} style={{marginRight: 15}} />
 					<View style = {styles.accordian}>
                         <Text style={styles.title}>{item.item.title}</Text>
                         {expand?<LinearGradient start={{x: 0, y: 0.25}} end={{x: .5, y: 1}} colors={['red', '#FF7373']} style={{borderRadius: 24, alignSelf: 'center'}}><Image source = {require('./assets/collapse.png')} style={{tintColor: 'white'}}/></LinearGradient>:<Image source = {require('./assets/expand.png')} style={{tintColor: '#b2b2b2', alignSelf: 'center'}}/>}

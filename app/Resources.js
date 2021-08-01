@@ -30,7 +30,7 @@ function ResourceLink(props) {
         <View style={{aspectRatio: 1}}>
           <Image source={props.img} style={{width: '100%', height: '100%', borderRadius: 30}}/>
         </View>
-        <Text style={{fontColor: 'black', alignSelf: 'center', marginTop: '2%', fontSize: 16}}>{props.name}</Text>
+        <Text style={{fontColor: 'black', alignSelf: 'center', textAlign: 'center', marginTop: '2%', fontSize: 16}}>{props.name}</Text>
       </View>
     </TouchableOpacity>
 	)

@@ -21,6 +21,10 @@ import {
 import styles from './styles/morestyles'
 
 const Images = {
+}
+
+export default Images;
+/*const Images = {
     sslopps: require('./assets/sslopps.png'),
     lunch: require('./assets/lunch.png'),
     settings:require('./assets/settings.png'),
@@ -31,6 +35,4 @@ const Images = {
     polls:require('./assets/polls.png'),
     notifs:require('./assets/notifs.png'),
     lang:require('./assets/lang.png'),
-}
-
-export default Images;
+}*/

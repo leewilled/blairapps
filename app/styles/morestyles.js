@@ -21,6 +21,7 @@ const styles=StyleSheet.create({
 	headerTitle: {
 		fontWeight: 'bold',
 		fontSize:24,
+		alignSelf: 'center'
 	},
 	resourceContainer: {
 		alignItems: 'center',
