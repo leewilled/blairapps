@@ -43,11 +43,10 @@ const Announcement = ({item}) => {
 	return (
 		<View style={{borderWidth: 1, borderColor: '#323232', padding: '2%', marginHorizontal: '2%', marginBottom: '2%', borderRadius: 12}}>
 			<View style = {{display: 'flex', flexDirection: 'column', justifyContent: 'space-between'}}>
-				{dateInfo!==undefined?<Text style={{fontSize: 12, fontWeight: '200'}}>{dateInfo}</Text>:<></>}
-				<View style = {{width: '75%'}}>
+				<View style = {{width: '100%'}}>
 					<Text style={styles.title}>{item.item.message}</Text>
 				</View>
-				
+				{dateInfo!==undefined?<Text style={{fontSize: 12, fontWeight: '200'}}>{dateInfo}</Text>:<></>}
 			</View>
 		</View>
 	)
@@ -76,8 +75,8 @@ export const TeacherList = ({route}) => {
 		else if (itemDate > todayDate && itemDate <= weekFutureDate) {
 			future.push(route.params.data[i])
 		}
-		else if (itemDate >= weekPastDate && itemDate < todayDate) {
-		//else if (itemDate < todayDate) {
+		//else if (itemDate >= weekPastDate && itemDate < todayDate) {
+		else if (itemDate < todayDate) {
 			past.push(route.params.data[i])
 		}
 	}

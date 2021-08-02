@@ -92,7 +92,8 @@ class More extends React.Component {
 						options={{
 							title:"More",
 							headerTitleStyle:styles.headerTitle,
-							headerBackground: ()=>background
+							headerBackground: ()=>background,
+							headerTitleAlign: 'center'
 						}}
 					/>
 					<Stack.Screen 
@@ -102,7 +103,8 @@ class More extends React.Component {
 							title:"Announcements",
 							headerTitleStyle:[styles.headerTitle,{alignSelf:'center'}],
 							headerLeft:null,
-							headerBackground: ()=>background
+							headerBackground: ()=>background,
+							headerTitleAlign: 'center'
 						}}
 					/>
 					<Stack.Screen 
@@ -110,9 +112,10 @@ class More extends React.Component {
 						component={Resources}
 						options={{
 							title:"Resources",
-							headerTitleStyle:[styles.headerTitle,{alignSelf:'center'}],
+							headerTitleStyle:styles.headerTitle,
 							headerLeft:null,
-							headerBackground: ()=>background
+							headerBackground: ()=>background,
+							headerTitleAlign: 'center'
 						}}
 					/>
 					<Stack.Screen 
@@ -120,9 +123,10 @@ class More extends React.Component {
 						component={StudentWeek}
 						options={{
 							title:"Student of the Week",
-							headerTitleStyle:[styles.headerTitle,{alignSelf:'center'}],
+							headerTitleStyle:styles.headerTitle,
 							headerLeft:null,
-							headerBackground: ()=>background
+							headerBackground: ()=>background,
+							headerTitleAlign: 'center'
 						}}
 					/>
 					<Stack.Screen 
@@ -130,9 +134,10 @@ class More extends React.Component {
 						component={LunchEvents}
 						options={{
 							title:"Lunch Events",
-							headerTitleStyle:[styles.headerTitle,{alignSelf:'center'}],
+							headerTitleStyle:styles.headerTitle,
 							headerLeft:null,
-							headerBackground: ()=>background
+							headerBackground: ()=>background,
+							headerTitleAlign: 'center'
 						}}
 					/>
 					<Stack.Screen 
@@ -140,9 +145,10 @@ class More extends React.Component {
 						component={SSLOps}
 						options={{
 							title:"SSL Opportunities",
-							headerTitleStyle:[styles.headerTitle,{alignSelf:'center'}],
+							headerTitleStyle:styles.headerTitle,
 							headerLeft:null,
-							headerBackground: ()=>background
+							headerBackground: ()=>background,
+							headerTitleAlign: 'center'
 						}}
 					/>
 					<Stack.Screen 
@@ -150,9 +156,10 @@ class More extends React.Component {
 						component={ChallengeWeek}
 						options={{
 							title:"Challenge of the Week",
-							headerTitleStyle:[styles.headerTitle,{alignSelf:'center'}],
+							headerTitleStyle:styles.headerTitle,
 							headerLeft:null,
-							headerBackground: ()=>background
+							headerBackground: ()=>background,
+							headerTitleAlign: 'center'
 						}}
 					/>
 					<Stack.Screen 
@@ -160,9 +167,10 @@ class More extends React.Component {
 						component={Poll}
 						options={{
 							title:"Polls",
-							headerTitleStyle:[styles.headerTitle,{alignSelf:'center'}],
+							headerTitleStyle:styles.headerTitle,
 							headerLeft:null,
-							headerBackground: ()=>background
+							headerBackground: ()=>background,
+							headerTitleAlign: 'center'
 						}}
 					/>
 					<Stack.Screen 
@@ -173,7 +181,7 @@ class More extends React.Component {
 							headerTitleStyle:[styles.headerTitle,{alignSelf:'center'}],
 							headerLeft:null,
 							headerBackground: ()=>background,
-							headerShown:false
+							headerShown:false,
 						}}
 					/>
 					<Stack.Screen 
