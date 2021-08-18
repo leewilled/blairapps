@@ -7,7 +7,20 @@ export default {
         Hobbies: "Hobbies",
         Achievements: "Achievements",
         Messages: "Messages",
-        Announcements: "Announcements"
+        Announcements: "Announcements",
+        noAnnouncements: "No Announcements",
+        lunch: "Lunch Events",
+        news: "News",
+        shortcut: "Shortcut: ",
+        seeLunch: "See Lunch Events",
+        noNews: "No news for today",
+        noAnnouncements: "No announcements for today",
+        moreOn: "More on"
+    },
+    dates: {
+        today: "Today",
+        past: "Past",
+        future: "Future"
     },
     app: {
         home: "Home",
@@ -17,7 +30,12 @@ export default {
         more: "More"
     },
     calendar: {
-        calendarEvents: "Calendar Events"
+        calendar: "Calendar",
+        info: "Info",
+        location: "Location",
+        date: "Date",
+        organizer: "Organizer",
+        noEvents: "No Events"
     },
     clubs: {
         searchClubs: "Search Clubs"
@@ -25,11 +43,26 @@ export default {
     staff: {
         searchStaff: "Search Staff"
     },
+    announcements: {
+        noAnnouncements: "No Announcements"
+    },
     student: {
         Grade: "Grade",
         Hobbies: "Hobbies",
         Achievements: "Achievements",
         Messages: "Messages",
+    },
+    lunch: {
+        information: "Information",
+        location: "Location"
+    },
+    ssl: {
+        information: "Information",
+        sponsor: "Sponsor",
+        location: "Location"
+    },
+    challenge: {
+        link: "Link"
     },
     polls: {
         textInPoll: "Press the image to take the poll!"
@@ -38,7 +71,7 @@ export default {
         Announcements: "Announcements",
         Resources: "Resources",
         SOTW: "Student of the Week",
-        lunch: "LunchEvents",
+        lunch: "Lunch Events",
         ssl: "SSL Opportunities",
         COTW: "Challenge of the Week",
         Polls: "Polls",

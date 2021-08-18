@@ -1,14 +1,14 @@
-/*import React, { Component } from 'react';
+import React, { Component } from 'react';
 import { DevSettings } from 'react-native';
 import { Platform, StyleSheet, TouchableOpacity, Text, ScrollView, View } from 'react-native';
 import I18n from './i18n';
-import AsyncStorage from '@react-native-community/async-storage'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const STORAGE_KEY = "language"
 
 const language = [
-      {lang: <Text>{I18n.t('language.English')}</Text>, code: "en"},
-      {lang: <Text>{I18n.t('language.Spanish')}</Text>, code: "es"},
+      {lang: <Text>English</Text>, code: "en-US"},
+      {lang: <Text>Spanish</Text>, code: "es-US"},
     ]
 
 export default class extends Component {
@@ -71,4 +71,4 @@ export default class extends Component {
      </View>
    );
   }
-}*/
+}

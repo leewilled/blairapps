@@ -25,21 +25,22 @@ import Icon from 'react-native-vector-icons/AntDesign'
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import LinearGradient from 'react-native-linear-gradient';
+import I18n from './i18n';
 
 const STORAGE_KEY = "teacherAnnouncements"
 
 const getCurrentDate=()=>{
 	var date = new Date().getDate();
-	var month = new Date().getMonth() + 1;
+	var month = new Date().getMonth();
 	var year = new Date().getFullYear();
 
 	return new Date(year, month, date);
 }
 
 const Announcement = ({item}) => {
-	const date = new Date
-	const dateStr = `${date.getMonth()+1}/${date.getDate()}/${date.getFullYear()}`
-	const dateInfo = dateStr===item.item.date&&item.item.time!==undefined?item.item.time:item.item.date;
+	const todayDate = getCurrentDate()
+	const itemDate = new Date(item.item.date)
+	const dateInfo = todayDate.getTime()===itemDate.getTime()&&item.item.time!==undefined?item.item.time:(item.item.date+", " + item.item.time)
 	return (
 		<View style={{borderWidth: 1, borderColor: '#323232', padding: '2%', marginHorizontal: '2%', marginBottom: '2%', borderRadius: 12}}>
 			<View style = {{display: 'flex', flexDirection: 'column', justifyContent: 'space-between'}}>
@@ -51,6 +52,21 @@ const Announcement = ({item}) => {
 		</View>
 	)
 }
+
+function NewTeacherList(props) {
+	return (
+	  <View>
+		<LinearGradient start={{x: 0.25, y: .5}} end={{x: 1, y: 1}} colors={['#FF8484', '#FF1111']} style={{backgroundColor: 'red', width: '20%', padding: '2%', borderTopRightRadius: 20, borderBottomRightRadius: 20, marginVertical: '2%'}}>
+		  <Text style={[styles.title, {color: 'white', fontWeight: 'bold'}]}>{I18n.t('dates.'+props.name)}</Text>
+		</LinearGradient>
+		<FlatList
+		  data={props.list}
+		  renderItem={item=><Announcement item={item}/>} 
+		  keyExtractor={item=>JSON.stringify(item)}
+		/>
+	  </View>
+	)
+  }
 
 export const TeacherList = ({route}) => {
 	const todayDate = getCurrentDate()
@@ -69,14 +85,14 @@ export const TeacherList = ({route}) => {
 	
 	for (var i = 0; i < route.params.data.length; i++) {
 		const itemDate = new Date(route.params.data[i].date)
-		if (itemDate == todayDate) {
+		if (itemDate.getTime() == todayDate.getTime()) {
 			today.push(route.params.data[i])
 		}
-		else if (itemDate > todayDate && itemDate <= weekFutureDate) {
+		else if (itemDate.getTime() > todayDate.getTime() && itemDate.getTime() <= weekFutureDate.getTime()) {
 			future.push(route.params.data[i])
 		}
 		//else if (itemDate >= weekPastDate && itemDate < todayDate) {
-		else if (itemDate < todayDate) {
+		else if (itemDate.getTime() < todayDate.getTime()) {
 			past.push(route.params.data[i])
 		}
 	}
@@ -87,37 +103,10 @@ export const TeacherList = ({route}) => {
 
 	return (
 		<ScrollView style={{flex:1, backgroundColor: 'white'}}>
-			{todayBoolean?<View>
-				<LinearGradient start={{x: 0.25, y: .5}} end={{x: 1, y: 1}} colors={['#FF8484', '#FF1111']} style={{backgroundColor: 'red', width: '20%', padding: '2%', borderTopRightRadius: 20, borderBottomRightRadius: 20, marginVertical: '2%'}}>
-					<Text style={[styles.title, {color: 'white', fontWeight: 'bold'}]}>Today</Text>
-				</LinearGradient>
-				<FlatList
-					data={today}
-					renderItem={item=><Announcement item={item}/>} 
-					keyExtractor={item=>JSON.stringify(item)}
-				/>
-			</View>: <></>}
-			{pastBoolean?<View>
-				<LinearGradient start={{x: 0.25, y: .5}} end={{x: 1, y: 1}} colors={['#FF8484', '#FF1111']} style={{backgroundColor: 'red', width: '20%', padding: '2%', borderTopRightRadius: 20, borderBottomRightRadius: 20, marginVertical: '2%'}}>
-					<Text style={[styles.title, {color: 'white', fontWeight: 'bold'}]}>Past</Text>
-				</LinearGradient>
-				<FlatList
-					data={past}
-					renderItem={item=><Announcement item={item}/>} 
-					keyExtractor={item=>JSON.stringify(item)}
-				/>
-			</View>:<></>}
-			{futureBoolean?<View>
-				<LinearGradient start={{x: 0.25, y: .5}} end={{x: 1, y: 1}} colors={['#FF8484', '#FF1111']} style={{backgroundColor: 'red', width: '20%', padding: '2%', borderTopRightRadius: 20, borderBottomRightRadius: 20, marginVertical: '2%'}}>
-					<Text style={[styles.title, {color: 'white', fontWeight: 'bold'}]}>Future</Text>
-				</LinearGradient>
-				<FlatList
-					data={future}
-					renderItem={item=><Announcement item={item}/>} 
-					keyExtractor={item=>JSON.stringify(item)}
-				/>
-			</View>:<></>}
-			{!noAnn?<Text style={{textAlign: 'center', fontSize: 20, paddingTop: '2%'}}>No Announcements</Text>:<></>}
+			{todayBoolean?<NewTeacherList name = 'today' list = {today} />:<></>}
+			{pastBoolean?<NewTeacherList name = 'past' list = {past} />:<></>}
+			{futureBoolean?<NewTeacherList name = 'future' list = {future} />:<></>}
+			{!noAnn?<Text style={{textAlign: 'center', fontSize: 20, paddingTop: '2%'}}>{I18n.t('announcements.noAnnouncements')}</Text>:<></>}
 		</ScrollView>
 	)
 }

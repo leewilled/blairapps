@@ -25,9 +25,10 @@ import styles from './styles/liststyles'
 import { url } from './resources/fetchInfo.json'
 import LinearGradient from 'react-native-linear-gradient';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import I18n from 'i18n-js';
 const Stack = createStackNavigator();
 
-export const LunchInfo = ({route}) => {
+{/*export const LunchInfo = ({route}) => {
     const item = route.params;
     return (
       <View style = {{padding: 10, backgroundColor: 'white', height: '100%'}}>
@@ -49,7 +50,7 @@ export const LunchInfo = ({route}) => {
         </View>
       </View>
     )
-}
+}*/}
 
 function LunchEvent (props) {
     const item = props.item
@@ -64,18 +65,11 @@ function LunchEvent (props) {
                         {expand?<LinearGradient start={{x: 0, y: 0.25}} end={{x: .5, y: 1}} colors={['red', '#FF7373']} style={{borderRadius: 24, alignSelf: 'center'}}><Image source = {require('./assets/collapse.png')} style={{tintColor: 'white'}}/></LinearGradient>:<Image source = {require('./assets/expand.png')} style={{tintColor: '#b2b2b2', alignSelf: 'center'}}/>}
                     </View>
                 </View>
-                {expand?<View style={{marginLeft: 50}}><Text style={styles.accordianHeader}>Information</Text><Text style={styles.accordianText}>{item.text}</Text><Text style={styles.accordianHeader}>{'\n'}Location</Text><Text style={[styles.accordianText, {paddingBottom: '4%'}]}>{item.loc}</Text></View>:<></>}
+                {expand?<View style={{marginLeft: 50}}><Text style={styles.accordianHeader}>{I18n.t('lunch.information')}</Text><Text style={styles.accordianText}>{item.text}</Text><Text style={styles.accordianHeader}>{'\n'}{I18n.t('lunch.location')}</Text><Text style={[styles.accordianText, {paddingBottom: '4%'}]}>{item.loc}</Text></View>:<></>}
             </TouchableOpacity>
         </View>
     )
 }
-/*<TouchableOpacity style={styles2.moreitem} onPress={()=>props.navigation.navigate('LunchInfo', {data:props.data,name:item.title,text:item.text,loc:item.loc})} activeOpacity={0.8}>
-    <Image source = {require('./assets/lunch.png')} style = {{height: 40, width: 40, marginRight: 10, tintColor: '#323232'}}/>
-    <View style = {{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '85%'}}>
-        <Text style={{fontSize: 20}}>{item.title}</Text>
-        <Image source = {require('./assets/expand.png')} style={{tintColor: '#b2b2b2'}}/>
-    </View>
-</TouchableOpacity>*/
 
 class LunchEvents extends React.Component {
     

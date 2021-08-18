@@ -21,6 +21,7 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 import styles from './styles/liststyles';
 import { url } from './resources/fetchInfo.json'
+import I18n from 'i18n-js';
 
 class ChallengeWeek extends React.Component {
 	constructor(props) {
@@ -42,7 +43,7 @@ class ChallengeWeek extends React.Component {
 			this.setState({data: JSON.parse(json),isLoading:false});
 		}).catch((error) => console.error(error))
 
-		this.animatedValue=new Animated.Value(0);
+		/*this.animatedValue=new Animated.Value(0);
 		this.value=0;
 		this.animatedValue.addListener(({value}) => {
 			this.value=value;
@@ -54,10 +55,10 @@ class ChallengeWeek extends React.Component {
 		this.backInterpolate = this.animatedValue.interpolate({
 			inputRange:[0,180],
 			outputRange: ['180deg','360deg']
-		})
+		})*/
 	}
 
-	flipCard() {
+	/*flipCard() {
 		if (this.value >= 90) {
 			Animated.spring(this.animatedValue, {
 				toValue:0,
@@ -73,10 +74,10 @@ class ChallengeWeek extends React.Component {
 			}).start();
 		}
 		this.setState({flip:!this.state.flip})
-	}
+	}*/
 	
 	render() {
-		const frontAnimatedStyle = {
+		{/*const frontAnimatedStyle = {
 			transform: [
 				{rotateY:this.frontInterpolate}
 			]
@@ -95,7 +96,7 @@ class ChallengeWeek extends React.Component {
 		else {
 			styling=({display:'none'})
 			styling2=({height: '100%', width: '100%', backgroundColor: 'white', borderRadius: 20, textAlign: 'center', display: 'flex', alignContent: 'center', padding: '5%', paddingTop: '15%', borderColor: 'red', borderWidth: 1})
-		}
+		}*/}
 		
 		if (this.state.isLoading) {
 			return <View/>
@@ -104,23 +105,7 @@ class ChallengeWeek extends React.Component {
 				<View style={{alignItems:'center',paddingiorizontal:'10%', height: '100%', backgroundColor: 'white', justifyContent: 'center', padding: '2%'}}>
 					<Text style={{fontSize: 32, fontWeight: 'bold', marginBottom: '10%', color: 'red', textAlign: 'center'}}>{this.state.data.title}</Text>
 					<Text style={{textAlign:'center', fontSize: 24, marginBottom: '5%', textAlign: 'center', fontWeight: '200'}}>{this.state.data.text}</Text>
-					<Text style={{textAlign:'center', fontSize: 20, textDecorationLine: 'underline', textDecorationStyle: "solid", textDecorationColor: "#000"}} onPress={() => Linking.openURL(this.state.data.link)}>Link</Text>
-					{/*<TouchableOpacity onPress={()=>this.flipCard()} style={{height: '70%', width: '80%', borderRadius: 20, shadowColor: 'red', shadowOffset: {width: 0, height: 2}, shadowOpacity: 0.5, shadowRadius: 7, alignSelf: 'center'}}>
-						<Animated.View style={{backfaceVisibility: 'hidden'}, frontAnimatedStyle}>
-							<View style={styling}>
-								<View>{this.state.flip?<Text style={{textAlign: 'center', fontSize: 28}}>{this.state.data.title}</Text>:<></>}</View>
-								<Image source={require('./assets/blair_logo.png')} style = {{height: 200, width: 200, alignSelf: 'center', position: 'absolute', bottom: '20%'}}/>
-								<Image source={require('./assets/arrow_right.png')} style = {{alignSelf: 'center', position: 'absolute', bottom: '5%'}}/>
-							</View>
-						</Animated.View>
-						<Animated.View style={backAnimatedStyle}>
-							<View style={styling2}>
-								{!this.state.flip?<Text style={{textAlign: 'center', fontSize: 28}}>{this.state.data.text}</Text>:<></>}
-								<Text style={{textAlign:'center', fontSize: 20, textDecorationLine: 'underline', textDecorationStyle: "solid", textDecorationColor: "#000",}} onPress={() => Linking.openURL(this.state.data.link)}>{'\n'}Link</Text>
-							</View>
-							
-						</Animated.View>
-					</TouchableOpacity>*/}
+					<Text style={{textAlign:'center', fontSize: 20, textDecorationLine: 'underline', textDecorationStyle: "solid", textDecorationColor: "#000"}} onPress={() => Linking.openURL(this.state.data.link)}>{I18n.t("challenge.link")}</Text>
 				</View>
 			)
 		}

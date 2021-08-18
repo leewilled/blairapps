@@ -25,11 +25,11 @@ import styles from './styles/liststyles';
 import { url } from './resources/fetchInfo.json';
 import LinearGradient from 'react-native-linear-gradient';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-//import I18n from './i18n';
+import I18n from './i18n';
 
 const Stack = createStackNavigator();
 
-export const SSLInfo = ({route}) => {
+{/*export const SSLInfo = ({route}) => {
 	const item = route.params;
 	console
 	return (
@@ -60,7 +60,7 @@ export const SSLInfo = ({route}) => {
 			</View>
 		</View>
 	)
-  }
+  }*/}
 
 function SSLElement (props) {
 	const item = props.item;
@@ -75,7 +75,7 @@ function SSLElement (props) {
                         {expand?<LinearGradient start={{x: 0, y: 0.25}} end={{x: .5, y: 1}} colors={['red', '#FF7373']} style={{borderRadius: 24, alignSelf: 'center'}}><Image source = {require('./assets/collapse.png')} style={{tintColor: 'white'}}/></LinearGradient>:<Image source = {require('./assets/expand.png')} style={{tintColor: '#b2b2b2', alignSelf: 'center'}}/>}
                     </View>
 				</View>
-				{expand?<View style={{marginLeft: 50}}><Text style={styles.accordianHeader}>Information</Text><Text style={styles.accordianText}>{item.item.text}</Text><Text style={styles.accordianHeader}>{'\n'}Sponsor</Text><Text style={styles.accordianText}>{item.item.teacher}</Text><Text style={styles.accordianHeader}>{'\n'}Location</Text><Text style={[styles.accordianText, {paddingBottom: '4%'}]}>{item.item.loc}</Text></View>:<></>}
+				{expand?<View style={{marginLeft: 50}}><Text style={styles.accordianHeader}>{I18n.t('ssl.information')}</Text><Text style={styles.accordianText}>{item.item.text}</Text><Text style={styles.accordianHeader}>{'\n'}{I18n.t('ssl.sponsor')}</Text><Text style={styles.accordianText}>{item.item.teacher}</Text><Text style={styles.accordianHeader}>{'\n'}{I18n.t('ssl.location')}</Text><Text style={[styles.accordianText, {paddingBottom: '4%'}]}>{item.item.loc}</Text></View>:<></>}
 			</TouchableOpacity>
 		</View>
     )

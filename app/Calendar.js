@@ -22,6 +22,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 import styles from './styles/liststyles'
 import { url } from './resources/fetchInfo.json'
 import morestyles from './styles/morestyles'
+import I18n from './i18n.js'
 
 const Stack = createStackNavigator();
 
@@ -42,38 +43,36 @@ export const EventInfo = ({route}) => {
   const date = itemDate.getDate()
   
   return (
-    <View style = {{backgroundColor: 'white', flex:1}}>
-      <View style={{padding: '5%'}}>
-        <View style={{marginBottom: '7%'}}>
-          <Text style={[styles.title, {fontWeight: 'bold', marginBottom: '2%'}]}>Info</Text>
-          <Text style={[styles.title, {fontWeight: '200'}]}>{item.text}</Text>
-        </View>
+    <ScrollView style = {{backgroundColor: 'white', flex:1, padding: '5%', paddingRight: '10%'}}>
+      <View style={{marginBottom: '7%'}}>
+        <Text style={[styles.title, {fontWeight: 'bold', marginBottom: '2%'}]}>{I18n.t('calendar.info')}</Text>
+        <Text style={[styles.title, {fontWeight: '200'}]}>{item.text}</Text>
+      </View>
+      <View style={{}}>
         <View style={{display: 'flex', flexDirection: 'row', marginBottom: '5%'}}>
           <Ionicons name='location-outline' size={28} color={'#323232'}style={{marginRight: 15, alignSelf: 'center'}}/>
-          <View style={{display: 'flex'}}>
-            <Text style={{fontSize: 16}}>Location</Text>
+          <View style={{display: 'flex', marginLeft: -15, paddingHorizontal: '5%'}}>
+            <Text style={{fontSize: 16}}>{I18n.t('calendar.location')}</Text>
             <Text style={[styles.title, {fontSize: 16, fontWeight: '200'}]}>{item.location}</Text>
           </View>
         </View>
         <View style={{display: 'flex', flexDirection: 'row', marginBottom: '5%'}}>
           <Ionicons name='time-outline' size={28} color={'#323232'}style={{marginRight: 15, alignSelf: 'center'}}/>
-          <View style={{display: 'flex'}}>
-            <Text style={{fontSize: 16}}>Date</Text>
+          <View style={{display: 'flex', marginLeft: -15, paddingHorizontal: '5%'}}>
+            <Text style={{fontSize: 16}}>{I18n.t('calendar.date')}</Text>
             <Text style={[styles.title, {fontSize: 16, fontWeight: '200'}]}>{dayOfWeek}, {month} {date}</Text>
           </View>
         </View>
         <View style={{display: 'flex', flexDirection: 'row'}}>
           <Ionicons name='person-circle-outline' size={28} color={'#323232'}style={{marginRight: 15, alignSelf: 'center'}}/>
-          <View style={{display: 'flex'}}>
-            <Text style={{fontSize: 16}}>Organizer</Text>
+          <View style={{display: 'flex', marginLeft: -15, paddingHorizontal: '5%'}}>
+            <Text style={{fontSize: 16}}>{I18n.t('calendar.organizer')}</Text>
             <Text style={[styles.title, {fontSize: 16, fontWeight: '200'}]}>{item.name}</Text>
             <Text style={[styles.title, {fontSize: 16, fontWeight: '200', textDecorationLine: 'underline'}]}>{item.emails}</Text>
           </View>
         </View>
       </View>
-      
-      
-    </View>
+    </ScrollView>
   )
 }
 const Event = (props) => {
@@ -82,7 +81,7 @@ const Event = (props) => {
 
   return (
     <View>
-      <TouchableOpacity style={[styles.listItem, {padding: '2%'}]} onPress={()=>props.navigation.navigate('EventInfo', {data:props.data,name:props.name, title: item.item.title,text:item.item.text,location:item.item.location,date:item.item.date, name:item.item.name, emails: item.item.emails})} activeOpacity={0.8}>
+      <TouchableOpacity style={[styles.listItem, {padding: '2%'}]} onPress={()=>props.navigation.navigate('EventInfo', {data:props.data, title: item.item.title,text:item.item.text,location:item.item.location,date:item.item.date, name:item.item.name, emails: item.item.emails})} activeOpacity={0.8}>
         <View style = {[styles.container2, {justifyContent: 'space-between'}]}>
           <View style={{display: 'flex', flexDirection: 'row'}}>
             <Ionicons name='calendar' size={32} color={'#323232'} style={{marginRight: 15}}/>
@@ -108,17 +107,18 @@ function CalendarEvents () {
     <NavigationContainer independent={true}>
       <Stack.Navigator>
         <Stack.Screen 
-          name = "Calendar"
+          name = {I18n.t('calendar.calendar')}
           component = {Calendar}
           options={({
             headerShown: true,
             headerTitleStyle:morestyles.headerTitle,
             headerBackground: ()=>background,
-            headerleft: null,
-            headerTitleAlign: 'center'
+            //headerLeft: null,
+            headerTitleAlign: 'center',
+            headerBackTitleVisible:false,
+            headerTintColor: 'black'
           })}
         />
-        
         <Stack.Screen 
           name = "EventInfo"
           component = {EventInfo}
@@ -126,13 +126,30 @@ function CalendarEvents () {
             title:route.params.title,
             headerTitleStyle:morestyles.headerTitle,
             headerBackground: ()=>background,
-            headerleft: null,
-            headerTitleAlign: 'center'
+            //headerLeft: null,
+            headerTitleAlign: 'center',
+            headerBackTitleVisible:false,
+            headerTintColor: 'black'
           })}
         />
       </Stack.Navigator>
     </NavigationContainer>
   ) 
+}
+
+function NewCalendarCategory (props) {
+  return (
+    <View>
+      <LinearGradient start={{x: 0.25, y: .5}} end={{x: 1, y: 1}} colors={['#FF8484', '#FF1111']} style={{backgroundColor: 'red', width: '20%', padding: '2%', borderTopRightRadius: 20, borderBottomRightRadius: 20, marginVertical: '2%'}}>
+        <Text style={[styles.title, {color: 'white', fontWeight: 'bold'}]}>{I18n.t('dates.'+props.name)}</Text>
+      </LinearGradient>
+      <FlatList
+        data={props.list}
+        renderItem={item=><Event item={item} name={props.itemname} navigation={props.navigation}/>} 
+        keyExtractor={item=>JSON.stringify(item)}
+      />
+    </View>
+  )
 }
 
 class Calendar extends React.Component {
@@ -205,37 +222,10 @@ class Calendar extends React.Component {
     var noAnn = (todayBoolean||pastBoolean||futureBoolean)
 		return (
 			<ScrollView style={{flex:1, backgroundColor: 'white'}}>
-        {todayBoolean?<View>
-          <LinearGradient start={{x: 0.25, y: .5}} end={{x: 1, y: 1}} colors={['#FF8484', '#FF1111']} style={{backgroundColor: 'red', width: '20%', padding: '2%', borderTopRightRadius: 20, borderBottomRightRadius: 20, marginVertical: '2%'}}>
-            <Text style={[styles.title, {color: 'white', fontWeight: 'bold'}]}>Today</Text>
-          </LinearGradient>
-          <FlatList
-            data={today}
-            renderItem={item=><Event item={item} name={item.name} navigation={this.props.navigation}/>} 
-            keyExtractor={item=>JSON.stringify(item)}
-          />
-        </View>: <></>}
-        {pastBoolean?<View>
-          <LinearGradient start={{x: 0.25, y: .5}} end={{x: 1, y: 1}} colors={['#FF8484', '#FF1111']} style={{backgroundColor: 'red', width: '20%', padding: '2%', borderTopRightRadius: 20, borderBottomRightRadius: 20, marginVertical: '2%'}}>
-            <Text style={[styles.title, {color: 'white', fontWeight: 'bold'}]}>Past</Text>
-          </LinearGradient>
-          <FlatList
-            data={past}
-            renderItem={item=><Event item={item} name={item.name} navigation={this.props.navigation}/>} 
-            keyExtractor={item=>JSON.stringify(item)}
-          />
-        </View>:<></>}
-        {futureBoolean?<View>
-          <LinearGradient start={{x: 0.25, y: .5}} end={{x: 1, y: 1}} colors={['#FF8484', '#FF1111']} style={{backgroundColor: 'red', width: '20%', padding: '2%', borderTopRightRadius: 20, borderBottomRightRadius: 20, marginVertical: '2%'}}>
-            <Text style={[styles.title, {color: 'white', fontWeight: 'bold'}]}>Future</Text>
-          </LinearGradient>
-          <FlatList
-            data={future}
-            renderItem={item=><Event item={item} name={item.name} navigation={this.props.navigation}/>} 
-            keyExtractor={item=>JSON.stringify(item)}
-          />
-        </View>:<></>}
-        {!noAnn?<Text style={{textAlign: 'center', fontSize: 20, paddingTop: '2%'}}>No Events</Text>:<></>}
+        {todayBoolean?<NewCalendarCategory name = 'today' list = {today} navigation={this.props.navigation} />: <></>}
+        {pastBoolean?<NewCalendarCategory name = 'past' list = {past} navigation={this.props.navigation} />: <></>}
+        {futureBoolean?<NewCalendarCategory name = 'future' list = {future} navigation={this.props.navigation} />: <></>}
+        {!noAnn?<Text style={{textAlign: 'center', fontSize: 20, paddingTop: '2%'}}>{I18n.t('calendar.noEvents')}</Text>:<></>}
       </ScrollView>
 		)
   }

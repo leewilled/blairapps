@@ -21,7 +21,7 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 
 import { NavigationContainer } from '@react-navigation/native'
-import { createStackNavigator } from '@react-navigation/stack'
+import { createStackNavigator, HeaderBackButton } from '@react-navigation/stack'
 
 import styles from './styles/morestyles'
 import Announcements, {TeacherList} from './Announcements'
@@ -30,12 +30,11 @@ import StudentWeek from './StudentWeek'
 import SSLOps, {SSLInfo} from './SSLOps'
 import LunchEvents, {LunchInfo} from './LunchEvents'
 import ChallengeWeek from './ChallengeWeek'
-import Settings from './Settings'
 import Poll from './Poll'
-import Images from './Images'
+import Language from './Language'
 import LinearGradient from 'react-native-linear-gradient'
 import Ionicons from 'react-native-vector-icons/Ionicons';
-//import I18n from './i18n';
+import I18n from './i18n';
 
 const Stack = createStackNavigator()
 
@@ -50,14 +49,14 @@ class MoreSwitch extends React.Component {
 			<View style={{flex:1,backgroundColor:'white', paddingHorizontal: '5%'}}>
 				<FlatList
 					data={[
-						{name:'Announcements',key:"announce", img:"megaphone-outline"},
-						{name:"Resources",key:"resources", img:"newspaper-outline"},
-						{name:"Student of the Week",key:"studentweek", img:"ribbon-outline"},
-						{name:"Lunch Events",key:"lunchevent", img:"fast-food-outline"},
-						{name:"SSL Opportunities",key:"sslopps", img:"school-outline"},
-						{name:"Challenge of the Week",key:"challengeweek", img:"golf-outline"},
-						{name:"Polls", key:"polls", img: "stats-chart-outline"},
-						{name:"Settings", key:"settings", img: "settings-outline"},
+						{name:I18n.t("more.Announcements"),key:"announce", img:"megaphone-outline"},
+						{name:I18n.t("more.Resources"),key:"resources", img:"newspaper-outline"},
+						{name:I18n.t("more.SOTW"),key:"studentweek", img:"ribbon-outline"},
+						{name:I18n.t("more.lunch"),key:"lunchevent", img:"fast-food-outline"},
+						{name:I18n.t("more.ssl"),key:"sslopps", img:"school-outline"},
+						{name:I18n.t("more.COTW"),key:"challengeweek", img:"golf-outline"},
+						{name:I18n.t("more.Polls"), key:"polls", img: "stats-chart-outline"},
+						{name:I18n.t("more.Settings"), key:"settings", img: "settings-outline"},
 					]}
 					renderItem={({item})=>
 						
@@ -76,6 +75,35 @@ class MoreSwitch extends React.Component {
 	}
 }
 
+class SettingSwitch extends React.Component {
+	constructor(props) {
+		super(props)
+		this.props = props
+	}
+	
+	render() {
+		return (
+			<View style={{flex:1,backgroundColor:'white', paddingHorizontal: '5%'}}>
+				<FlatList
+					data={[
+						{name:"Language",key:"language", img:'language-outline'}
+					]}
+					renderItem={({item})=>
+						<TouchableOpacity style={styles.moreitem} onPress={()=>this.props.navigation.navigate(item.key)}>
+							<Ionicons name={item.img} size={36} color={'#323232'}style={{marginRight: 15}}/>
+							<View style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '85%'}}>
+								<Text style={styles.moretext}>{I18n.t('settings.' + item.key)}</Text>
+								<Image source = {require('./assets/forward.png')} style={{tintColor: '#b2b2b2'}}/>
+							</View>
+						</TouchableOpacity>
+					}
+				/>
+			</View>
+		)
+	}
+}
+
+
 const background = (<LinearGradient
                     colors={['#f99', 'white']}
                     style = {{flex:1,borderBottomColor:'black',borderBottomWidth:0.5}}
@@ -90,7 +118,7 @@ class More extends React.Component {
 						name="Chooser" 
 						component={MoreSwitch}
 						options={{
-							title:"More",
+							title:I18n.t("more.More"),
 							headerTitleStyle:styles.headerTitle,
 							headerBackground: ()=>background,
 							headerTitleAlign: 'center'
@@ -100,118 +128,130 @@ class More extends React.Component {
 						name="announce" 
 						component={Announcements}
 						options={{
-							title:"Announcements",
-							headerTitleStyle:[styles.headerTitle,{alignSelf:'center'}],
-							headerLeft:null,
+							title:I18n.t("more.Announcements"),
+							headerTitleStyle:[styles.headerTitle],
 							headerBackground: ()=>background,
-							headerTitleAlign: 'center'
+							headerTitleAlign: 'center',
+							headerBackTitleVisible:false,
+							headerTintColor: 'black'
 						}}
 					/>
 					<Stack.Screen 
 						name="resources" 
 						component={Resources}
 						options={{
-							title:"Resources",
+							title:I18n.t("more.Resources"),
 							headerTitleStyle:styles.headerTitle,
-							headerLeft:null,
+							//headerLeft:null,
 							headerBackground: ()=>background,
-							headerTitleAlign: 'center'
+							headerTitleAlign: 'center',
+							headerBackTitleVisible:false,
+							headerTintColor: 'black'
 						}}
 					/>
 					<Stack.Screen 
 						name="studentweek" 
 						component={StudentWeek}
 						options={{
-							title:"Student of the Week",
+							title:I18n.t("more.SOTW"),
 							headerTitleStyle:styles.headerTitle,
-							headerLeft:null,
+							//headerLeft:null,
 							headerBackground: ()=>background,
-							headerTitleAlign: 'center'
+							headerTitleAlign: 'center',
+							headerBackTitleVisible:false,
+							headerTintColor: 'black'
 						}}
 					/>
 					<Stack.Screen 
 						name="lunchevent" 
 						component={LunchEvents}
 						options={{
-							title:"Lunch Events",
+							title:I18n.t("more.lunch"),
 							headerTitleStyle:styles.headerTitle,
-							headerLeft:null,
+							//headerLeft:null,
 							headerBackground: ()=>background,
-							headerTitleAlign: 'center'
+							headerTitleAlign: 'center',
+							headerBackTitleVisible:false,
+							headerTintColor: 'black'
 						}}
 					/>
 					<Stack.Screen 
 						name="sslopps" 
 						component={SSLOps}
 						options={{
-							title:"SSL Opportunities",
+							title:I18n.t("more.ssl"),
 							headerTitleStyle:styles.headerTitle,
-							headerLeft:null,
+							//headerLeft:null,
 							headerBackground: ()=>background,
-							headerTitleAlign: 'center'
+							headerTitleAlign: 'center',
+							headerBackTitleVisible:false,
+							headerTintColor: 'black'
 						}}
 					/>
 					<Stack.Screen 
 						name="challengeweek" 
 						component={ChallengeWeek}
 						options={{
-							title:"Challenge of the Week",
+							title:I18n.t("more.COTW"),
 							headerTitleStyle:styles.headerTitle,
-							headerLeft:null,
+							//headerLeft:null,
 							headerBackground: ()=>background,
-							headerTitleAlign: 'center'
+							headerTitleAlign: 'center',
+							headerBackTitleVisible:false,
+							headerTintColor: 'black'
 						}}
 					/>
 					<Stack.Screen 
 						name="polls" 
 						component={Poll}
 						options={{
-							title:"Polls",
+							title:I18n.t("more.Polls"),
 							headerTitleStyle:styles.headerTitle,
-							headerLeft:null,
+							//headerLeft:null,
 							headerBackground: ()=>background,
-							headerTitleAlign: 'center'
+							headerTitleAlign: 'center',
+							headerBackTitleVisible:false,
+							headerTintColor: 'black'
 						}}
 					/>
 					<Stack.Screen 
 						name="settings" 
-						component={Settings}
+						component={SettingSwitch}
 						options={{
-							title:"Settings",
-							headerTitleStyle:[styles.headerTitle,{alignSelf:'center'}],
-							headerLeft:null,
+							title:I18n.t("more.Settings"),
+							headerTitleStyle:[styles.headerTitle],
+							//headerLeft:null,
 							headerBackground: ()=>background,
-							headerShown:false,
+							headerBackTitleVisible:false,
+							headerTintColor: 'black',
+							headerTitleAlign: 'center'
+						}}
+					/>
+					<Stack.Screen 
+						name="language" 
+						component={Language}
+						options={{
+							title:I18n.t("settings.language"),
+							headerTitleStyle:[styles.headerTitle,{alignSelf:'center'}],
+							headerBackground: ()=>background,
+							//headerLeft: null,
+							headerBackTitleVisible:false,
+							headerTintColor: 'black',
+							headerTitleAlign: 'center'
 						}}
 					/>
 					<Stack.Screen 
 						name="TeacherList" 
 						component={TeacherList}
 						options={({route})=>({
-							headerTitleStyle:[styles.headerTitle,{alignSelf:'center',fontSize:Math.min(24,24*23/route.params.name.length)}],
+							headerTitleStyle:[styles.headerTitle],
 							title:route.params.name,
 							headerRight:()=>(<></>),
-							headerBackground: ()=>background
-						})}
-					/>
-					<Stack.Screen 
-						name="LunchInfo" 
-						component={LunchInfo}
-						options={({route})=>({
-							headerTitleStyle:[styles.headerTitle,{alignSelf:'center',fontSize:Math.min(24,24*23/route.params.name.length)}],
-							title:route.params.name,
-							headerRight:()=>(<></>),
-							headerBackground: ()=>background
-						})}
-					/>
-					<Stack.Screen 
-						name="SSLInfo" 
-						component={SSLInfo}
-						options={({route})=>({
-							headerTitleStyle:[styles.headerTitle,{alignSelf:'center',fontSize:Math.min(24,24*23/route.params.name.length)}],
-							title:route.params.name,
 							headerBackground: ()=>background,
-							headerRight:()=>(<></>)
+							headerBackTitleVisible:false,
+							headerTintColor: 'black',
+							headerTitleAlign: 'center'
+							//headerLeft: null,
 						})}
 					/>
 				</Stack.Navigator>
