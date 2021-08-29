@@ -35,8 +35,11 @@ const Stack = createStackNavigator();
 
 export const StaffInfo = ({route}) => {
   const item = route.params;
+
+  console.log(item);
+
   return (
-    <View style = {{padding: 10, backgroundColor: 'white', height: '100%'}}>
+    /*<View style = {{padding: 10, backgroundColor: 'white', height: '100%'}}>
       {item.emails.map(email =>
         <View style ={[styles.infoContainer, {flexDirection: 'row', alignItems: 'center'}]}>
           <View style={{display: 'flex', justifyContent: 'center'}}>
@@ -47,7 +50,46 @@ export const StaffInfo = ({route}) => {
           </View>
         </View>
       )}
-    </View>
+    </View>*/
+    <ScrollView style={{paddingTop:'5%',paddingHorizontal:'10%', backgroundColor: 'white', height: '100%'}}>
+      <View style={{backgroundColor: 'white',borderRadius: 150, height: 300, width: 300, alignSelf: 'center', shadowColor: 'red', shadowOffset: {width: 0, height: 2}, shadowOpacity: 0.5, shadowRadius: 7}}>
+        <Image style={{resizeMode: 'cover',borderRadius: 150, height: 300, width: 300, alignSelf: 'center'}} source = {{/* CHANGE */}} /> 
+      </View>
+      <Text style={{fontSize:28,marginTop:'5%',textAlign:'center'}}>{item.name}</Text>
+      <Text style={{fontSize:20,textAlign:'center', fontWeight: '200'}}>{item.position || ""}</Text>
+      
+      {item.emails &&
+        <View style={{display: 'flex', padding:'2%', borderRadius: 8, marginTop:'5%'}}>
+          <View style={{display:'flex', flexDirection: 'row'}}>
+            <Ionicons name='mail-outline' size={28} style={{marginRight: 15}}/>
+            <View style = {{display: 'flex', flexDirection: 'row', width: '85%', justifyContent: 'space-between', paddingHorizontal:'2%',}}>
+              <Text style={{fontSize: 20,  alignSelf: 'center'}}>{"Email"}</Text>
+            </View>
+          </View>
+          <Text style = {{marginLeft: 50, paddingHorizontal: '2%', paddingBottom: '2%'}}>
+            {item.emails.map(email =>
+              <Text key={email}>{email}</Text>
+            )}
+          </Text>
+        </View>
+      }
+      
+      {item.phone &&
+        <View style={{display: 'flex', padding:'2%', borderRadius: 8, marginTop:'5%'}}>
+          <View style={{display:'flex', flexDirection: 'row'}}>
+            <Ionicons name='call-outline' size={28} style={{marginRight: 15}}/>
+            <View style = {{display: 'flex', flexDirection: 'row', width: '85%', justifyContent: 'space-between', paddingHorizontal:'2%',}}>
+              <Text style={{fontSize: 20,  alignSelf: 'center'}}>{"Phone"}</Text>
+            </View>
+          </View>
+          <Text style = {{marginLeft: 50, paddingHorizontal: '2%', paddingBottom: '2%'}}>
+          {item.phone.map(num =>
+            <Text key={num}>{num}</Text>
+          )}
+          </Text>
+        </View>
+      }
+    </ScrollView>
   )
 }
 function StaffElement (props) {

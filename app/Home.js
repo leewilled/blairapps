@@ -394,7 +394,7 @@ function HomeScreen (props) {
   if (dayOfWeek!=0 && dayOfWeek!=6 && ((hourTime>=10 && time[1]=='AM') || (hourTime ==12 && parseInt(time[0].split(':')[1])<=30 && time[1]=='PM'))) {
     showLunch = true
   }
-  if (dayOfWeek!=0 && dayOfWeek!=6 && hourTime>=10 && (hourTime <=12 && parseInt(time[0].split(':')[1])<=30)) {
+  if (time[1]!='PM' && time[1]!='AM' && dayOfWeek!=0 && dayOfWeek!=6 && hourTime>=10 && (hourTime <=12 && parseInt(time[0].split(':')[1])<=30)) {
     showLunch = true
   }
 
@@ -534,6 +534,7 @@ class Home extends React.Component {
 			return response.text();
 		  })
 		  .then((json) => {
+        console.log(json)
 			const data = JSON.parse(json).data
 			data.sort((a,b)=>new Date(b.date).getTime()-new Date(a.date).getTime())
 			this.setState({data: data});
