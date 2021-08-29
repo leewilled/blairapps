@@ -60,6 +60,8 @@ buck-out/
 
 # Rust
 /target/
+/cms/target/
+/cms/cms_macro/target/
 
 # Environment
 *.env

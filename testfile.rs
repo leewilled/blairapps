@@ -1,98 +1,16 @@
-#[macro_use]
-use cms_macro::api_route;
-use rocket::{
-    http::{RawStr, Status},
-    request::FromParam,
-};
-use std::borrow::Cow;
-
-pub struct Lang<'a>(Cow<'a, str>);
-
-fn valid_lang(lang: &str) -> bool {
-    lang.chars().all(|c| (c >= 'a' && c <= 'z')) && lang.chars().count() == 2
-}
-
-impl<'a> FromParam<'a> for Lang<'a> {
-    type Error = Status;
-    fn from_param(param: &'a RawStr) -> Result<Lang<'a>, Status> {
-        match valid_lang(param) {
-            true => Ok(Lang(Cow::Borrowed(param))),
-            false => Err(Status::InternalServerError),
-        }
-    }
-}
-
-pub mod defs {
-    use chrono::naive::NaiveDate;
-    use rocket::{http::RawStr, request::FromFormValue};
-    use std::ops::Deref;
-
-    #[derive(Debug)]
-    pub struct DateForm(NaiveDate);
-
-    impl Deref for DateForm {
-        type Target = NaiveDate;
-
-        fn deref(&self) -> &NaiveDate {
-            &self.0
-        }
-    }
-
-    impl<'v> FromFormValue<'v> for DateForm {
-        type Error = ();
-
-        fn from_form_value(value: &'v RawStr) -> Result<DateForm, ()> {
-            let value_uri = match value.url_decode() {
-                Ok(n) => n,
-                Err(_) => return Err(()),
-            };
-            let naivedate = NaiveDate::parse_from_str(&value_uri[..], "%m/%d/%Y");
-            match naivedate {
-                Ok(n) => Ok(DateForm(n)),
-                Err(_) => Err(()),
-            }
-        }
-    }
-}
-
-api_route! {
-    events {
-        title: (Text, String, String),
-        location: (Text, String, String),
-        text: (Text, String, String),
-        event_date: (Text, NaiveDate, DateForm),
-    }
-}
-
-/*
 pub mod events {
-
-    use crate::data::{defs::*, Lang};
+    use super::{defs::DateForm, Lang};
     use crate::auth::Token;
-    use ::chrono::naive::*;
-    use ::diesel::{prelude::*, Insertable, Queryable};
-    use ::rocket::{http::Status, request::Form, response::Redirect, State};
-    use ::rocket_contrib::{json::Json, templates::Template};
-    use ::serde::Serialize;
-    use ::std::{collections::*, sync::Mutex};
-
+    use chrono::naive::NaiveDate;
+    use diesel::{prelude::*, Insertable, Queryable};
+    use rocket::{http::Status, request::Form, response::Redirect, State};
+    use rocket_contrib::{json::Json, templates::Template};
+    use serde::Serialize;
+    use std::{collections::*, sync::Mutex};
     pub mod schema {
-        table! {
-            use diesel::sql_types::*;
-
-            events (id) {
-                id -> Integer,
-                lang -> Text,
-                title -> Text,
-                location -> Text,
-                text -> Text,
-                event_date -> Date,
-            }
-        }
+        table! { use diesel :: sql_types :: * ; events (id) { id -> Integer , lang -> Text , title -> Text , location -> Text , text -> Text , event_date -> Text , } }
     }
-
     use schema::events;
-
     #[derive(Debug, Clone, Queryable, Serialize)]
     pub struct Get {
         pub id: i32,
@@ -102,7 +20,6 @@ pub mod events {
         pub text: String,
         pub event_date: NaiveDate,
     }
-
     #[derive(Debug, AsChangeset, Insertable)]
     #[table_name = "events"]
     pub struct Create {
@@ -112,16 +29,14 @@ pub mod events {
         pub text: String,
         pub event_date: NaiveDate,
     }
-
     #[derive(Debug, FromForm)]
     pub struct Post {
         pub lang: String,
         pub title: String,
         pub location: String,
         pub text: String,
-        pub event_date: DateForm,
+        pub event_date: FormDate,
     }
-
     #[derive(Debug, FromForm)]
     pub struct Update {
         pub id: i32,
@@ -129,14 +44,12 @@ pub mod events {
         pub title: String,
         pub location: String,
         pub text: String,
-        pub event_date: DateForm,
+        pub event_date: FormDate,
     }
-
     #[derive(Debug, FromForm)]
     pub struct Delete {
         pub id: i32,
     }
-
     impl Post {
         fn convert(self) -> Create {
             Create {
@@ -148,7 +61,6 @@ pub mod events {
             }
         }
     }
-
     impl Update {
         fn convert(self) -> Create {
             Create {
@@ -160,71 +72,72 @@ pub mod events {
             }
         }
     }
-
-    pub fn create(conn: &PgConnection, event: Create) -> Result<Get, diesel::result::Error> {
+    pub fn create(conn: &PgConnection, create: Create) -> Result<Get, diesel::result::Error> {
         diesel::insert_into(events::table)
-            .values(&event)
+            .values(&create)
             .get_result(conn)
     }
-
     pub fn get(conn: &PgConnection, lg: Lang) -> Result<Vec<Get>, diesel::result::Error> {
         use schema::events::dsl::*;
-
         events.filter(lang.eq(lg.0)).load::<Get>(conn)
     }
-
     pub fn get_all(conn: &PgConnection) -> Result<Vec<Get>, diesel::result::Error> {
         use schema::events::dsl::*;
         events.load::<Get>(conn)
     }
-
     pub fn update(
         conn: &PgConnection,
         idn: i32,
-        event: Create,
+        create: Create,
     ) -> Result<Get, diesel::result::Error> {
         use schema::events::dsl::*;
         diesel::update(events.find(idn))
-            .set(&event)
+            .set(&create)
             .get_result::<Get>(conn)
     }
-
     pub fn delete(conn: &PgConnection, idn: i32) -> Result<usize, diesel::result::Error> {
         use schema::events::dsl::*;
         diesel::delete(events.find(idn)).execute(conn)
     }
-
     #[get("/<lang>/events")]
     pub fn api(pg: State<Mutex<PgConnection>>, lang: Lang) -> Result<Json<Vec<Get>>, Status> {
         Ok(Json(
             get(&*(pg.lock().unwrap()), lang).map_err(|_| Status::InternalServerError)?,
         ))
     }
-
     #[post("/events/add", data = "<form>")]
-    pub fn add(pg: State<Mutex<PgConnection>>, form: Form<Post>) -> Result<Redirect, Status> {
+    pub fn add(
+        _token: Token,
+        pg: State<Mutex<PgConnection>>,
+        form: Form<Post>,
+    ) -> Result<Redirect, Status> {
         match create(&*(pg.lock().unwrap()), form.into_inner().convert()) {
             Ok(_) => Ok(Redirect::to("/ui/events")),
             Err(_) => Err(Status::InternalServerError),
         }
     }
-
     #[post("/events/del", data = "<form>")]
-    pub fn del(pg: State<Mutex<PgConnection>>, form: Form<Delete>) -> Result<Redirect, Status> {
+    pub fn del(
+        _token: Token,
+        pg: State<Mutex<PgConnection>>,
+        form: Form<Delete>,
+    ) -> Result<Redirect, Status> {
         match delete(&*(pg.lock().unwrap()), form.id) {
             Ok(_) => Ok(Redirect::to("/ui/events")),
             Err(_) => Err(Status::InternalServerError),
         }
     }
-
     #[post("/events/upd", data = "<form>")]
-    pub fn upd(pg: State<Mutex<PgConnection>>, form: Form<Update>) -> Result<Redirect, Status> {
+    pub fn upd(
+        _token: Token,
+        pg: State<Mutex<PgConnection>>,
+        form: Form<Update>,
+    ) -> Result<Redirect, Status> {
         match update(&*(pg.lock().unwrap()), form.id, form.into_inner().convert()) {
             Ok(_) => Ok(Redirect::to("/ui/events")),
             Err(_) => Err(Status::InternalServerError),
         }
     }
-
     #[get("/events")]
     pub fn ui(_token: Token, pg: State<Mutex<PgConnection>>) -> Result<Template, Status> {
         let ctx = get_all(&*(pg.lock().unwrap()))
@@ -235,4 +148,3 @@ pub mod events {
         Ok(Template::render("events", &ctx))
     }
 }
-*/
