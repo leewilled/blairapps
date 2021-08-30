@@ -1,7 +1,9 @@
 pub mod events {
-    use super::{defs::DateForm, Lang};
-    use crate::auth::Token;
-    use chrono::naive::NaiveDate;
+    use crate::{
+        auth::Token,
+        data::{defs::*, Lang},
+    };
+    use chrono::naive::*;
     use diesel::{prelude::*, Insertable, Queryable};
     use rocket::{http::Status, request::Form, response::Redirect, State};
     use rocket_contrib::{json::Json, templates::Template};
@@ -35,7 +37,7 @@ pub mod events {
         pub title: String,
         pub location: String,
         pub text: String,
-        pub event_date: FormDate,
+        pub event_date: DateForm,
     }
     #[derive(Debug, FromForm)]
     pub struct Update {
@@ -44,7 +46,7 @@ pub mod events {
         pub title: String,
         pub location: String,
         pub text: String,
-        pub event_date: FormDate,
+        pub event_date: DateForm,
     }
     #[derive(Debug, FromForm)]
     pub struct Delete {

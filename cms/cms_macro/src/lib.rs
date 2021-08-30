@@ -309,3 +309,19 @@ fn api_route_inner(item: TokenStream) -> TokenStream {
 pub fn api_route(item: proc_macro::TokenStream) -> proc_macro::TokenStream {
     api_route_inner(TokenStream::from(item)).into()
 }
+
+#[test]
+pub fn test() {
+    let val = quote! {
+        events {
+            title: (Text, String, String),
+            location: (Text, String, String),
+            text: (Text, String, String),
+            event_date: (Text, NaiveDate, DateForm),
+        }
+    };
+
+    let macr = api_route_inner(val);
+
+    println!("{}", macr);
+}

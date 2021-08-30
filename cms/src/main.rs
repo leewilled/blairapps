@@ -1,4 +1,4 @@
-#![feature(proc_macro_hygiene, decl_macro)]
+#![feature(decl_macro)]
 #[macro_use]
 extern crate diesel;
 #[macro_use]
@@ -29,6 +29,7 @@ use std::{
     sync::Mutex,
 };
 use utils::{db_conn, exit_with_error};
+
 
 #[get("/")]
 fn index() -> Template {
