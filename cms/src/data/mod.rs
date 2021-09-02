@@ -1,9 +1,10 @@
-use cms_macro::api_route;
 use rocket::{
     http::{RawStr, Status},
     request::FromParam,
 };
 use std::borrow::Cow;
+
+use cms_macro::api_route;
 
 pub struct Lang<'a>(Cow<'a, str>);
 
@@ -52,6 +53,7 @@ pub mod defs {
             }
         }
     }
+
 }
 
 api_route! {
@@ -62,4 +64,15 @@ api_route! {
         event_date: (Date, NaiveDate, DateForm),
     }
 }
+
+/*
+api_route! {
+    teachers {
+        name: (Text, String, String),
+        emails: (Array<Text>, Vec<String>, Vec<String>),
+    }
+}
+*/
+//TODO: fix value parsing to read a TokenStream until the `,` to allow for containerized types in
+//the macro
 

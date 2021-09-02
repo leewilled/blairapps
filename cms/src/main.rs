@@ -29,13 +29,29 @@ use std::{
     sync::Mutex,
 };
 use utils::{db_conn, exit_with_error};
+use rocket::response::Redirect;
+use auth::Token;
+
 
 
 #[get("/")]
-fn index() -> Template {
-    let context: HashMap<&str, &str> = [("oauth", "/oauth")].iter().cloned().collect();
-    Template::render("index", &context)
+fn home(_token: Token) -> Template {
+    let context: HashMap<&str, &str> = HashMap::new();
+    Template::render("home", &context)
 }
+
+#[get("/", rank=2)]
+fn home_not_logged_in() -> Redirect {
+    Redirect::to(uri!(login))
+}
+
+#[get("/login")]
+fn login() -> Template {
+    let context: HashMap<&str, &str> = [("oauth", "/oauth")].iter().cloned().collect();
+    Template::render("login", &context)
+}
+
+
 
 #[get("/static/<path..>")]
 fn static_files(path: PathBuf) -> Option<rocket::response::NamedFile> {
@@ -57,7 +73,7 @@ fn rocket(port: u16, address: String, env: Environment, pg: PgConnection, sa: Se
         .manage(sa)
         .mount(
             "/",
-            routes![index, auth::callback, auth::oauth, static_files],
+            routes![home, home_not_logged_in, login, auth::callback, auth::oauth, static_files],
         )
         .mount("/api", routes![data::events::api])
         .mount(

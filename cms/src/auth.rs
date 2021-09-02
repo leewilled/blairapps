@@ -61,7 +61,7 @@ impl<'a, 'r> FromRequest<'a, 'r> for Host {
 }
 
 impl<'a, 'r> FromRequest<'a, 'r> for Token {
-    type Error = ();
+    type Error = Redirect;
 
     fn from_request(request: &'a Request<'r>) -> request::Outcome<Self, Self::Error> {
         match request.cookies().get("token") {
@@ -75,10 +75,10 @@ impl<'a, 'r> FromRequest<'a, 'r> for Token {
                     .unwrap();
 
                 if resp["error"] != Value::Null {
-                    return Outcome::Failure((Status::Forbidden, ()));
+                    return Outcome::Forward(());
                 } else {
                     let email = resp["email"].clone();
-                    let pg = request.guard::<State<Mutex<PgConnection>>>()?;
+                    let pg = request.guard::<State<Mutex<PgConnection>>>().unwrap();
                     let diesel_op = get_auth(&*(pg.lock().unwrap()));
                     let auths: Vec<String> = match diesel_op {
                         Ok(n) => n.into_iter().map(|x| x.email).collect::<Vec<String>>(),
@@ -88,11 +88,11 @@ impl<'a, 'r> FromRequest<'a, 'r> for Token {
                     if auths.into_iter().any(|x| x == email.as_str().unwrap_or("")) {
                         return Outcome::Success(Token(String::from(email.as_str().unwrap_or(""))));
                     } else {
-                        return Outcome::Failure((Status::Forbidden, ()));
+                        return Outcome::Forward(());
                     }
                 }
             }
-            None => Outcome::Failure((Status::Unauthorized, ())),
+            None => Outcome::Forward(())
         }
     }
 }
