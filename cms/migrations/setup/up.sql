@@ -3,7 +3,7 @@ CREATE TABLE auth_val (
     email VARCHAR
 );
 
-INSERT INTO auth_val(email) VALUES('hkailadka88@gmail.com');
+INSERT INTO auth_val(email) VALUES('blazercmstest@gmail.com');
 
 CREATE TABLE events (
     id SERIAL PRIMARY KEY,
