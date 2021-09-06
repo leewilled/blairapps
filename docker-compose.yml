@@ -1,0 +1,19 @@
+version: "3.9"
+services:
+
+  postgres:
+    image: "postgres:alpine"
+    environment:
+      POSTGRES_PASSWORD: ${BLAZERCMS_POSTGRES}
+    ports:
+      - "5432:5432"
+  web:
+    build: cms/
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+    environment:
+      BLAZERCMS_DATABASE_URL: ${BLAZERCMS_DATABASE_URL}
+      BLAZERCMS_CLIENT_ID: ${BLAZERCMS_CLIENT_ID}
+      BLAZERCMS_SECRET: ${BLAZERCMS_SECRET}

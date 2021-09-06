@@ -27,10 +27,11 @@ import Staff from './Staff'
 import OpeningPage from './OpeningPage';
 import OpenPage from './OpenPage';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import I18n from './i18n';
-import AsyncStorage from '@react-native-community/async-storage'
+import I18n from './i18n.js'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const Tab = createBottomTabNavigator();
+
 
 AsyncStorage.getItem('language')
   .then((token) => { 
@@ -38,14 +39,6 @@ AsyncStorage.getItem('language')
 	I18n.locale = token;
   });
 
-AsyncStorage.getItem('announcementNotifs')
-	.then((token) => { 
-	console.log("announcementNotifs: " + token);
-	});
-AsyncStorage.getItem('eventNotifs')
-	.then((token) => { 
-	console.log("eventNotifs: " + token);
-	});
 
 class App extends React.Component {
 	state = {
@@ -86,11 +79,11 @@ class App extends React.Component {
 						fontSize:16
 					}}}
 				>	
-					<Tab.Screen name={I18n.t('app.home')} component={Home}/>
-					<Tab.Screen name={I18n.t('app.calendar')} component={Calendar}/>
-					<Tab.Screen name={I18n.t('app.clubs')} component={Clubs}/>
-					<Tab.Screen name={I18n.t('app.staff')} component={Staff}/>
-					<Tab.Screen name={I18n.t('app.more')} component={More}/>
+					<Tab.Screen name={I18n.t("app.home")} component={Home}/>
+					<Tab.Screen name={I18n.t("app.calendar")} component={Calendar}/>
+					<Tab.Screen name={I18n.t("app.clubs")} component={Clubs}/>
+					<Tab.Screen name={I18n.t("app.staff")} component={Staff}/>
+					<Tab.Screen name={I18n.t("app.more")} component={More}/>
 				</Tab.Navigator>
 				: <OpenPage />}
 			</NavigationContainer>

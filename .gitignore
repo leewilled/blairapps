@@ -57,3 +57,11 @@ buck-out/
 
 # CocoaPods
 /ios/Pods/
+
+# Rust
+/target/
+/cms/target/
+/cms/cms_macro/target/
+
+# Environment
+*.env

@@ -7,7 +7,20 @@ export default {
         Hobbies: "El pasatiempo",
         Achievements: "Logros",
         Messages: "Mensajes",
-        Announcements: "Anuncios"
+        Announcements: "Anuncios",
+        noAnnouncements: "ESNo Announcements",
+        lunch: "Eventos de almuerzo",
+        news: "ESNews",
+        shortcut: "ESShortcut: ",
+        seeLunch: "ESSee Lunch Events",
+        noNews: "ESNo news for today",
+        noAnnouncements: "ESNo announcements for today",
+        moreOn: "ESMore on"
+    },
+    dates: {
+        today: "ESToday",
+        past: "ESPast",
+        future: "ESFuture"
     },
     app: {
         home: "Casa",
@@ -17,7 +30,12 @@ export default {
         more: "Más"
     },
     calendar: {
-        calendarEvents: "Eventos del calendario"
+        calendar: "ESCalendar",
+        info: "ESInfo",
+        location: "ESLocation",
+        date: "ESDate",
+        organizer: "ESOrganizer",
+        noEvents: "ESNo Events"
     },
     clubs: {
         searchClubs: "Buscar clubes"
@@ -25,11 +43,26 @@ export default {
     staff: {
         searchStaff: "Personal de búsqueda"
     },
+    announcements: {
+        noAnnouncements: "ESNo Announcements"
+    },
     student: {
         Grade: "El año",
         Hobbies: "El pasatiempo",
         Achievements: "Logros",
         Messages: "Mensajes",
+    },
+    lunch: {
+        information: "ESInformation",
+        location: "ESLocation"
+    },
+    ssl: {
+        information: "ESInformation",
+        sponsor: "ESSponsor",
+        location: "ESLocation"
+    },
+    challenge: {
+        link: "ESLink"
     },
     polls: {
         textInPoll: "¡Pulsa la imagen para realizar la encuesta!'"

@@ -1,0 +1,25 @@
+<!-- vim: set ft=html: -->
+
+<html>
+    <head>
+        <link rel="stylesheet" href="/static/style.css">
+    </head>
+    <body>
+        <p>{{6.title}}</p>
+        <br>
+        <form action="events/add" method="post">
+            <input type="text", id="lang", name="lang">
+            <input type="text", id="title", name="title">
+            <input type="text", id="location", name="location">
+            <input type="text", id="text", name="text">
+            <input type="text", id="event_date", name="event_date">
+            <input type="submit", value="Submit">
+        </form>
+        <form action="events/del" method="post">
+            <input type="number", id="id", name="id">
+            <input type="submit", value="Submit">
+        </form>
+
+    </body>
+    </head>
+</html>
