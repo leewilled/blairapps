@@ -149,6 +149,8 @@ api_route! {
         location: (Text, String, String),
         text: (Text, String, String),
         event_date: (Date, NaiveDate, DateForm),
+        name: (Text, String, String),
+        emails: (Text, String, String)
     }
 }
 

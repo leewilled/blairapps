@@ -81,7 +81,7 @@ class LunchEvents extends React.Component {
     }
     
     componentDidMount() {
-        fetch(`${url}/api/en/lunchEvents`,{
+        fetch(`${url}/api/`+String(I18n.locale).split('-')[0]+`/lunchEvents`,{
             headers: {
                 'Cache-Control': 'no-cache'
             }

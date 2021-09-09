@@ -41,6 +41,8 @@ const Stack = createStackNavigator()
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
+console.log(String(I18n.locale).split('-')[0])
+
 const getCurrentDate=()=>{
 	var date = new Date().getDate();
 	var month = new Date().getMonth();
@@ -196,7 +198,6 @@ export const NewItem = ({route}) => {
       <View style={{backgroundColor: 'white', marginTop: '-5%', padding: '5%', borderTopLeftRadius: 20, borderTopRightRadius: 20}}>
         <Text style={{fontSize: 14, fontWeight: '200', textAlign: 'center'}}>{item.date}</Text>
         <Text style={{fontSize: 20, textAlign: 'center', paddingBottom: '2%', fontWeight: 'bold'}}>{item.name}</Text>
-        <Text style={{}}></Text>
       </View>
     </ScrollView>
   )
@@ -489,7 +490,7 @@ class Home extends React.Component {
 		AsyncStorage.setItem(STORAGE_KEY,JSON.stringify(favoriteNames)).catch(console.log).done()
 	}
 	componentDidMount() {
-		fetch(`${url}/api/en/student`,{
+		fetch(`${url}/api/`+String(I18n.locale).split('-')[0]+`/student`,{
 		  headers: {
 			'Cache-Control': 'no-cache'
 		  }}
@@ -499,7 +500,7 @@ class Home extends React.Component {
 			this.setState({studentData: JSON.parse(json),isLoading:false});
     }).catch((error) => console.error(error))
 
-    fetch(`${url}/api/en/lunchEvents`,{
+    fetch(`${url}/api/`+String(I18n.locale).split('-')[0]+`/lunchEvents`,{
       headers: {
           'Cache-Control': 'no-cache'
       }}
@@ -526,7 +527,7 @@ class Home extends React.Component {
   }
 
   getData() {
-		fetch(`${url}/api/en/new`,{
+		fetch(`${url}/api/`+String(I18n.locale).split('-')[0]+`/new`,{
 		  headers: {
 			'Cache-Control': 'no-cache'
 		  } })
@@ -543,7 +544,7 @@ class Home extends React.Component {
 	}
 
   getData1() {
-		fetch(`${url}/api/en/announcements`,{
+		fetch(`${url}/api/`+String(I18n.locale).split('-')[0]+`/announcements`,{
 			headers: {
 				'Cache-Control': 'no-cache'
 			}})

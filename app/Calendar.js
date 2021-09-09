@@ -28,19 +28,21 @@ const Stack = createStackNavigator();
 
 const getCurrentDate=()=>{
   var date = new Date().getDate();
-  var month = new Date().getMonth() + 1;
+  var month = new Date().getMonth();
   var year = new Date().getFullYear();
 
   return new Date(year, month, date);
 }
 export const EventInfo = ({route}) => {
   const item = route.params;
-  const itemDate = new Date(item.date)
+  const itemDate = new Date(item.event_date)
   const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
   const months = ['January','February','March','April','May','June','July','August','September','October','November','December',]
   const dayOfWeek = days[itemDate.getDay()]
   const month = months[itemDate.getMonth()]
   const date = itemDate.getDate()
+
+  console.log(itemDate.getDate())
   
   return (
     <ScrollView style = {{backgroundColor: 'white', flex:1, padding: '5%', paddingRight: '10%'}}>
@@ -77,11 +79,11 @@ export const EventInfo = ({route}) => {
 }
 const Event = (props) => {
   const item = props.item
-  const date = item.item.date.split('-')
+  const date = item.item.event_date.split('-')
 
   return (
     <View>
-      <TouchableOpacity style={[styles.listItem, {padding: '2%'}]} onPress={()=>props.navigation.navigate('EventInfo', {data:props.data, title: item.item.title,text:item.item.text,location:item.item.location,date:item.item.date, name:item.item.name, emails: item.item.emails})} activeOpacity={0.8}>
+      <TouchableOpacity style={[styles.listItem, {padding: '2%'}]} onPress={()=>props.navigation.navigate('EventInfo', {data:props.data, title: item.item.title,text:item.item.text,location:item.item.location,date:item.item.event_date, name:item.item.name, emails: item.item.emails})} activeOpacity={0.8}>
         <View style = {[styles.container2, {justifyContent: 'space-between'}]}>
           <View style={{display: 'flex', flexDirection: 'row'}}>
             <Ionicons name='calendar' size={32} color={'#323232'} style={{marginRight: 15}}/>
@@ -172,17 +174,18 @@ class Calendar extends React.Component {
 	}
 
 	getData() {
-		fetch(`${url}/api/en/events`,{
+		fetch(`http://127.0.0.1:8080/api/en/events`,{
 		  headers: {
 			'Cache-Control': 'no-cache'
 		  } })
 		  .then((response) => {
 			return response.text();
+
 		  })
 		  .then((json) => {
-			const data = JSON.parse(json).data
-      data.sort((a,b)=>new Date(b.date).getTime()-new Date(a.date).getTime())
-      console.log(data);
+			const data = JSON.parse(json)
+      data.sort((a,b)=>a.id-b.id)
+      data.sort((a,b)=>new Date(b.event_date).getTime()-new Date(a.event_date).getTime())
 			this.setState({data: data});
 		  })
 		  .catch((error) => console.error(error))
@@ -202,20 +205,31 @@ class Calendar extends React.Component {
     var todayBoolean = true
     var pastBoolean = true
     var futureBoolean = true
-    
-    for (var i =0; i < this.state.data.length; i++) {
-      const itemDate = new Date(this.state.data[i].date)
-      if (itemDate == todayDate) {
-        today.push(this.state.data[i])
+
+    if (this.state.data.length >0) {
+      try {
+        for (var i =0; i < this.state.data.length; i++) {
+          console.log(String(this.state.data[i].event_date))
+          const itemDate = new Date(parseInt(String(this.state.data[i].event_date).split('-')[0]), parseInt(String(this.state.data[i].event_date).split('-')[1])-1, parseInt(String(this.state.data[i].event_date).split('-')[2]))
+          console.log(itemDate)
+          console.log('he')
+          if (itemDate.getTime() == todayDate.getTime()) {
+            today.push(this.state.data[i])
+          }
+          else if (itemDate > todayDate && itemDate <= weekFutureDate) {
+            future.push(this.state.data[i])
+          }
+          //else if (itemDate >= weekPastDate && itemDate < todayDate) {
+          else if (itemDate < todayDate) {
+            past.push(this.state.data[i])
+          }
+        }
       }
-      else if (itemDate > todayDate && itemDate <= weekFutureDate) {
-        future.push(this.state.data[i])
-      }
-      //else if (itemDate >= weekPastDate && itemDate < todayDate) {
-      else if (itemDate < todayDate) {
-        past.push(this.state.data[i])
-      }
+      catch {null}
+      
+      
     }
+    
     if (today.length === 0) todayBoolean = false
     if (past.length === 0) pastBoolean = false
     if (future.length === 0) futureBoolean = false
@@ -223,8 +237,8 @@ class Calendar extends React.Component {
 		return (
 			<ScrollView style={{flex:1, backgroundColor: 'white'}}>
         {todayBoolean?<NewCalendarCategory name = 'today' list = {today} navigation={this.props.navigation} />: <></>}
-        {pastBoolean?<NewCalendarCategory name = 'past' list = {past} navigation={this.props.navigation} />: <></>}
         {futureBoolean?<NewCalendarCategory name = 'future' list = {future} navigation={this.props.navigation} />: <></>}
+        {pastBoolean?<NewCalendarCategory name = 'past' list = {past} navigation={this.props.navigation} />: <></>}
         {!noAnn?<Text style={{textAlign: 'center', fontSize: 20, paddingTop: '2%'}}>{I18n.t('calendar.noEvents')}</Text>:<></>}
       </ScrollView>
 		)

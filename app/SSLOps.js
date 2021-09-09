@@ -91,7 +91,8 @@ class SSLOps extends React.Component {
 	}
 	
 	componentDidMount() {
-		fetch(`${url}/api/en/sslOps`,{
+		fetch(`http://localhost:8000/data/en/sslOps.json`,{
+		//fetch(`${url}/api/en/sslOps`,{	
 			headers: {
 				'Cache-Control': 'no-cache'
 			}
@@ -101,7 +102,7 @@ class SSLOps extends React.Component {
 			return response.text();
 		})
 		.then((json) => {
-			this.setState({data: JSON.parse(json).ops});
+			this.setState({data: JSON.parse(json)});
 		})
 		.catch((error) => console.error(error))
 	}

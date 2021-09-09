@@ -50,14 +50,16 @@ class StudentWeek extends React.Component {
 	
 	
 	componentDidMount() {
-		fetch(`${url}/api/en/student`,{
+		fetch(`${url}/api/`+String(I18n.locale).split('-')[0]+`/student`,{
 		  headers: {
 			'Cache-Control': 'no-cache'
 		  }}
 		).then((response) => {
 			return response.text();
 		}).then((json) => {
+
 			this.setState({data: JSON.parse(json),isLoading:false});
+			console.log(this.state.data)
 		}).catch((error) => console.error(error))
 	}
 	

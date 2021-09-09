@@ -140,7 +140,7 @@ class Clubs extends React.Component {
   }
   
   getData() {
-	  fetch(`${url}/api/en/clubs`,{
+	  fetch(`${url}/api/`+String(I18n.locale).split('-')[0]+`/clubs`,{
       headers: {
         'Cache-Control': 'no-cache'
       } })

@@ -33,7 +33,7 @@ class ChallengeWeek extends React.Component {
 	}
 	
 	componentDidMount() {
-		fetch(`${url}/api/en/challenge`,{
+		fetch(`${url}/api/`+String(I18n.locale).split('-')[0]+`/challenge`,{
 		  headers: {
 			'Cache-Control': 'no-cache'
 		  }}

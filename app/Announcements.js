@@ -163,7 +163,7 @@ class Announcements extends React.Component {
 	}
 	
 	getData() {
-		fetch(`${url}/api/en/announcements`,{
+		fetch(`${url}/api/`+String(I18n.locale).split('-')[0]+`/announcements`,{
 			headers: {
 				'Cache-Control': 'no-cache'
 			}
@@ -174,6 +174,7 @@ class Announcements extends React.Component {
 		})
 		.then((txt) => {
 			const data = JSON.parse(txt).data;
+			console.log(data)
 			const teacherNames = [...new Set(data.filter(x=>x.teacher!=null&&x.teacher.trim()!=='').map(x=>x.teacher))];
 			teacherNames.sort()
 			this.setState({data: data, teacherNames: teacherNames.map(x=>({name:x})),isLoading:false});

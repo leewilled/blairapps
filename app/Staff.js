@@ -171,7 +171,7 @@ class Staffs extends React.Component {
   }
   
   getData() {
-	  fetch(`${url}/api/en/teachers`,{
+	  fetch(`${url}/api/`+String(I18n.locale).split('-')[0]+`/teachers`,{
       headers: {
         'Cache-Control': 'no-cache'
       } })
