@@ -75,14 +75,23 @@ fn rocket(port: u16, address: String, env: Environment, pg: PgConnection, sa: Se
             "/",
             routes![home, home_not_logged_in, login, auth::callback, auth::oauth, static_files],
         )
-        .mount("/api", routes![data::events::api])
+        .mount("/api", routes![
+               data::events::api,
+               data::teachers::api,
+               data::announcements::api,
+               data::clubs::api,
+               data::lunch_events::api,
+               data::ssl_ops::api,
+               data::calendar::api,
+               data::polls::api,
+        ])
         .mount(
             "/ui",
             routes![
-                data::events::ui,
-                data::events::add,
-                data::events::del,
-                data::events::upd
+             data::events::eui, data::teachers::eui, data::announcements::eui, data::clubs::eui, data::lunch_events::eui, data::ssl_ops::eui, data::calendar::eui, data::polls::eui, data::new::eui, data::important::eui,
+             data::events::upd, data::teachers::upd, data::announcements::upd, data::clubs::upd, data::lunch_events::upd, data::ssl_ops::upd, data::calendar::upd, data::polls::upd, data::new::upd, data::important::upd,
+             data::events::del, data::teachers::del, data::announcements::del, data::clubs::del, data::lunch_events::del, data::ssl_ops::del, data::calendar::del, data::polls::del, data::new::del, data::important::del,
+             data::events::add, data::teachers::add, data::announcements::add, data::clubs::add, data::lunch_events::add, data::ssl_ops::add, data::calendar::add, data::polls::add, data::new::add, data::important::add,
             ],
         )
 }

@@ -6,7 +6,7 @@ use proc_macro2::*;
 use std::fmt::Debug;
 
 #[derive(Debug)]
-struct Row(Ident, Ident, Ident, Ident);
+struct Row(Ident, TokenStream, TokenStream, TokenStream);
 
 fn api_route_inner(item: TokenStream) -> TokenStream {
     let iterator = item.into_iter().clone().collect::<Vec<TokenTree>>();
@@ -72,11 +72,8 @@ fn api_route_inner(item: TokenStream) -> TokenStream {
                     false
                 }
             })
-            .map(|x| match x.to_vec().get(0).unwrap().clone() {
-                TokenTree::Ident(i) => i,
-                n => panic!("Incorrect syntax at group => {:?}", n),
-            })
-            .collect::<Vec<Ident>>();
+            .map(|x| x.into_iter().map(|x| x.clone()).collect::<TokenStream>())
+            .collect::<Vec<TokenStream>>();
         rows.push(Row(
             name.clone(),
             vals.get(0).unwrap().clone(),
@@ -92,18 +89,18 @@ fn api_route_inner(item: TokenStream) -> TokenStream {
 
     let schema_value = rows
         .iter()
-        .map(|x| TokenTree::Ident(x.1.clone()))
-        .collect::<Vec<TokenTree>>();
+        .map(|x| x.1.clone())
+        .collect::<Vec<TokenStream>>();
 
     let get_value = rows
         .iter()
-        .map(|x| TokenTree::Ident(x.2.clone()))
-        .collect::<Vec<TokenTree>>();
+        .map(|x| x.2.clone())
+        .collect::<Vec<TokenStream>>();
 
     let put_value = rows
         .iter()
-        .map(|x| TokenTree::Ident(x.3.clone()))
-        .collect::<Vec<TokenTree>>();
+        .map(|x| x.3.clone())
+        .collect::<Vec<TokenStream>>();
 
     let impl_value = rows
         .iter()
@@ -116,7 +113,7 @@ fn api_route_inner(item: TokenStream) -> TokenStream {
             } else {
                 let s = x.0.clone();
                 quote! {
-                    #s: *self.#s,
+                    #s: self.#s.clone(),
                 }
             }
         })
@@ -282,13 +279,15 @@ fn api_route_inner(item: TokenStream) -> TokenStream {
         }
 
         #[get(#name_dir)]
-        pub fn ui(_token: Token, pg: State<Mutex<PgConnection>>) -> Result<Template, Status> {
+        pub fn eui(_token: Token, pg: State<Mutex<PgConnection>>) -> Result<Template, Status> {
+            let mut hash: HashMap<&str, HashMap<i32, Get>> = HashMap::new();
             let ctx = get_all(&*(pg.lock().unwrap()))
                 .map_err(|_| Status::InternalServerError)?
                 .iter()
                 .map(|x| (x.id, x.clone()))
                 .collect::<HashMap<i32, Get>>();
-            Ok(Template::render(#name_literal, &ctx))
+            hash.insert("ctx", ctx);
+            Ok(Template::render(#name_literal, &hash))
         }
     };
 

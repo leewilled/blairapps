@@ -23,9 +23,10 @@ impl<'a> FromParam<'a> for Lang<'a> {
 }
 
 pub mod defs {
-    use chrono::naive::NaiveDate;
+    use chrono::naive::{NaiveDate, NaiveTime};
     use rocket::{http::RawStr, request::FromFormValue};
     use std::ops::Deref;
+    use rocket::response::NamedFile;
 
     #[derive(Debug)]
     pub struct DateForm(NaiveDate);
@@ -54,6 +55,92 @@ pub mod defs {
         }
     }
 
+    #[derive(Debug)]
+    pub struct TimeForm(NaiveTime);
+
+    impl Deref for TimeForm {
+        type Target = NaiveTime;
+
+        fn deref(&self) -> &NaiveTime {
+            &self.0
+        }
+    }
+
+    impl<'v> FromFormValue<'v> for TimeForm {
+        type Error = ();
+
+        fn from_form_value(value: &'v RawStr) -> Result<TimeForm, ()> {
+            let value_uri = match value.url_decode() {
+                Ok(n) => n,
+                Err(_) => return Err(()),
+            };
+            let naivedate = NaiveTime::parse_from_str(&value_uri[..], "%I:%M %p");
+            match naivedate {
+                Ok(n) => Ok(TimeForm(n)),
+                Err(_) => Err(()),
+            }
+        }
+    }
+
+
+    #[derive(Debug)]
+    pub struct EmailList(Vec<String>);
+
+    impl Deref for EmailList {
+        type Target = Vec<String>;
+
+        fn deref(&self) -> &Vec<String> {
+            &self.0
+        }
+    }
+
+    impl<'v> FromFormValue<'v> for EmailList {
+        type Error = ();
+        fn from_form_value(value: &'v RawStr) -> Result<EmailList, ()> {
+            let mut value_uri = match value.url_decode() {
+                Ok(n) => n,
+                Err(_) => return Err(()),
+            };
+
+            Ok(EmailList((&mut value_uri[..])
+                .split(|x| x == ' ')
+                .map(String::from)
+                .collect::<Vec<String>>().clone()))
+        }
+    }
+
+    #[derive(Debug)]
+    pub struct Image(String);
+
+    impl Deref for Image {
+        type Target = String;
+
+        fn deref(&self) -> &String {
+            &self.0
+        }
+    }
+
+    impl<'v> FromFormValue<'v> for Image {
+        type Error = ();
+
+        fn from_form_value(value: &'v RawStr) -> Result<Image, ()> {
+            /*
+            println!("{:?}", value);
+            let file = NamedFile::open(value.to_string()); 
+            println!("{:?}", file);
+
+            Ok(Image(String::from("pepega")))
+            */
+
+            let mut value_uri = match value.url_decode() {
+                Ok(n) => n,
+                Err(_) => return Err(()),
+            };
+            Ok(Image(value_uri))
+
+        }
+    }
+
 }
 
 api_route! {
@@ -65,14 +152,73 @@ api_route! {
     }
 }
 
-/*
 api_route! {
     teachers {
         name: (Text, String, String),
-        emails: (Array<Text>, Vec<String>, Vec<String>),
+        emails: (Array<Text>, Vec<String>, EmailList),
     }
 }
-*/
-//TODO: fix value parsing to read a TokenStream until the `,` to allow for containerized types in
-//the macro
 
+api_route! {
+    announcements {
+        message: (Text, String, String),
+        teacher: (Text, String, String),
+        date: (Date, NaiveDate, DateForm),
+        time: (Time, NaiveTime, TimeForm),
+    }
+}
+
+api_route! {
+    clubs {
+        name: (Text, String, String),
+        meeting: (Text, String, String),
+        link: (Text, String, String),
+        sponsor: (Text, String, String),
+    }
+}
+
+api_route! {
+    lunch_events {
+        title: (Text, String, String),
+        text: (Text, String, String),
+        location: (Text, String, String),
+        time: (Time, NaiveTime, TimeForm),
+    }
+}
+
+api_route! {
+    ssl_ops {
+        title: (Text, String, String),
+        text: (Text, String, String),
+        location: (Text, String, String),
+        teacher: (Text, String, String),
+        time: (Time, NaiveTime, TimeForm),
+    }
+}
+
+api_route! {
+    calendar {
+        time: (Time, NaiveTime, TimeForm),
+    }
+}
+
+api_route! {
+    polls {
+        url: (Text, String, String),
+    }
+}
+
+api_route! {
+    new {
+        image: (Text, String, Image),
+        name: (Text, String, String),
+        new_date: (Date, NaiveDate, DateForm),
+    }
+}
+
+api_route! {
+    important {
+        image: (Text, String, Image),
+        text: (Text, String, String),
+    }
+}

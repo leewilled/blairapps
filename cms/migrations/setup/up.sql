@@ -13,3 +13,20 @@ CREATE TABLE events (
     location VARCHAR NOT NULL,
     event_date DATE
 );
+
+
+CREATE TABLE teachers (
+    id SERIAL PRIMARY KEY,
+    lang VARCHAR,
+    name VARCHAR NOT NULL,
+    emails VARCHAR[]
+);
+
+
+CREATE TABLE new (
+    id SERIAL PRIMARY KEY,
+    lang VARCHAR,
+    image VARCHAR,
+    name VARCHAR NOT NULL,
+    new_date DATE
+);
