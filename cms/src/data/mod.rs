@@ -150,7 +150,7 @@ api_route! {
         text: (Text, String, String),
         event_date: (Date, NaiveDate, DateForm),
         name: (Text, String, String),
-        emails: (Text, String, String)
+        emails: (Text, String, String),
     }
 }
 

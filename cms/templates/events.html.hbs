@@ -4,15 +4,15 @@
     <head>
         <link rel="stylesheet" href="/static/style.css">
     </head>
-    <body>
+    <body style =  'padding-right: 2%; padding-left: 2%'>
         <h1 style='text-align: center; color: red'>Calendar Events</h1>
         {{#each ctx}}
-        <div style='display: flex; border-width:3'>
-            <p>ID: {{id}} LANG: {{lang}} EVENT TITLE: {{title}} EVENT LOCATION: {{location}} EVNET INFO: {{text}} EVENT DATE: {{event_date}}</p>
+        <div style='display: flex; border: 5px solid black'>
+            <p>ID: {{id}} &emsp; LANG: {{lang}} &emsp; EVENT TITLE: {{title}} &emsp; EVENT LOCATION: {{location}} &emsp; EVNET INFO: {{text}} &emsp; EVENT DATE: {{event_date}} &emsp; TEACHER/ORGANIZER {{name}} &emsp; EMAIL {{emails}}</p>
         </div>
         {{/each}}
         <br>
-        <div style="display: flex; flex-direction: row; width: 100%; justify-content:space-between; padding-horizontal: 5%">
+        <div style="display: flex; flex-direction: row; width: 100%; justify-content:space-between;">
             <div>
                 <h1>Add Calendar Event</h1>
                 <form action="events/add" method="post">
@@ -30,7 +30,6 @@
                     <input type="text", id="name", name="name">
                     <p>Teacher/Organizer Email</p>
                     <input type="text", id="emails", name="emails">
-                    <p></p>
                     <input type="submit", value="Submit">
                 </form>
             </div>
@@ -49,7 +48,7 @@
                 <form action="events/upd" method="post">
                     <p>ID of Event to be Updated</p>
                     <input type="number", id="id", name="id">
-                    <p>Lang (enter 'en' (for english) or 'es' (for spanish)</p>
+                    <p>Lang (enter 'en' (for english) or 'es' (for spanish))</p>
                     <input type="text", id="lang", name="lang">
                     <p>Title</p>
                     <input type="text", id="title", name="title">
@@ -73,3 +72,9 @@
     </body>
     </head>
 </html>
+
+<!--<p>Teacher/Organizer </p>
+                    <input type="text", id="name", name="name">
+                    <p>Teacher/Organizer Email</p>
+                    <input type="text", id="emails", name="emails">
+                    <p></p>-_!>

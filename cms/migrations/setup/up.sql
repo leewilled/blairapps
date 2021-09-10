@@ -12,7 +12,7 @@ CREATE TABLE events (
     text VARCHAR,
     location VARCHAR NOT NULL,
     event_date DATE,
-    name VARCHAR NOT NULL, 
+    name VARCHAR NOT NULL,
     emails VARCHAR NOT NULL
 );
 
