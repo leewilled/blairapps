@@ -5,14 +5,17 @@
         <link rel="stylesheet" href="/static/style.css">
     </head>
     <body>
-        <p>add</p>
-        <form action="new/add" method="post">
-            <input type="text", id="lang", name="lang">
+        <form onsubmit="forwardForImage('new_f', 'new/add')" id="new_f" name="new_f"> 
+            <select name="lang", id="lang">
+                <option value="en">en</option>
+                <option value="es">es</option>
+            </select>
             <input type="file" name="image", id="image", accept="image/png">
             <input type="text", id="name", name="name">
             <input type="text", id="new_date", name="new_date">
             <input type="submit", value="Submit">
         </form>
     </body>
-    </head>
+    <!-- <script src="/static/jquery.min.js"></script> -->
+    <script src="/static/utils.js"></script>
 </html>

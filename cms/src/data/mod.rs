@@ -26,7 +26,6 @@ pub mod defs {
     use chrono::naive::{NaiveDate, NaiveTime};
     use rocket::{http::RawStr, request::FromFormValue};
     use std::ops::Deref;
-    use rocket::response::NamedFile;
 
     #[derive(Debug)]
     pub struct DateForm(NaiveDate);
@@ -74,6 +73,8 @@ pub mod defs {
                 Ok(n) => n,
                 Err(_) => return Err(()),
             };
+            // 3:15 PM 
+            // 5:18 AM
             let naivedate = NaiveTime::parse_from_str(&value_uri[..], "%I:%M %p");
             match naivedate {
                 Ok(n) => Ok(TimeForm(n)),
@@ -132,7 +133,7 @@ pub mod defs {
             Ok(Image(String::from("pepega")))
             */
 
-            let mut value_uri = match value.url_decode() {
+            let value_uri = match value.url_decode() {
                 Ok(n) => n,
                 Err(_) => return Err(()),
             };
