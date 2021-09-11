@@ -13,15 +13,17 @@ function forwardForImage(id, postloc) {
         }
         if (form_elem[i].type == "file") {
             var file = document.getElementById(form_elem[i].id).files[0];
-            getBase64(file, form_elem, i, data,  (form_elem, i, data, res) => {
-                data.push(form_elem[i].name + "=" + res);
+            getBase64(file, form_elem, i, data,  function(form_elem, i, data, res) {
+                data.push(form_elem[i].name + "=" + encodeURIComponent(res));
             });
         }
     }
     console.log(data);
+    console.log(data[3]);
     var params = data.join("&");
     var xhr = new XMLHttpRequest();
     xhr.open("POST", postloc, true);
+    console.log(params);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhr.send(params);
 }

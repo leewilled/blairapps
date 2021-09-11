@@ -84,6 +84,8 @@ fn rocket(port: u16, address: String, env: Environment, pg: PgConnection, sa: Se
                data::ssl_ops::api,
                data::calendar::api,
                data::polls::api,
+               data::new::api,
+               data::important::api
         ])
         .mount(
             "/ui",
