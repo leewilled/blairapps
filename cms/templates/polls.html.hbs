@@ -16,19 +16,19 @@
             </div>
 
             <div class="container-md d-flex gap-4" style="">
-            <!-- clubs list -->
+            <!-- polls list -->
             <div class="p-3" style="flex: 1;">
-                <h1 style="font-size: 28px;">Clubs</h1>
+                <h1 style="font-size: 28px;">Polls</h1>
                 
                 <div class="vstack gap-3 mt-4">
                 {{#each ctx}}
                 <div class="bg-light border rounded-3 p-2">
                     <small>ID: {{id}} | LANG: {{lang}}</small>
-                    <h3 class="my-2" style="font-size: 18px;">{{name}}</h3>
+                    <h3 class="my-2" style="font-size: 18px;">{{url}}</h3>
                     <p class="mb-2">{{meeting}}</p>
                     <p class="mb-2">{{link}}</p>
                     <p class="mt-2 mb-0">Sponsor: {{sponsor}}</p>
-                    <form action="clubs/del" method="post">
+                    <form action="polls/del" method="post">
                         <div class="d-flex mt-3">
                         <input type="number" class="form-control form-control-sm" id="id" name="id" value = {{id}} style="display: none">
                         </div>
@@ -39,15 +39,15 @@
                 </div>
             </div>
 
-            <!-- clubs actions -->
+            <!-- polls actions -->
             <div class="p-3" style="flex: 1;">
-                <h1 style="font-size: 28px;">Clubs Actions</h1>
+                <h1 style="font-size: 28px;">Polls Actions</h1>
 
                 <hr/>
 
                 <div class="my-4">
                 <h2 style="font-size: 20px;">Add Club</h2>
-                <form action="clubs/add" method="post">
+                <form action="polls/add" method="post">
                     <div class="d-flex mt-3">
                     <div style="flex: 1; justify-content: center;">
                         <p class="my-0">Lang</p> 
