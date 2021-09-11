@@ -3,74 +3,215 @@
 <html>
     <head>
         <link rel="stylesheet" href="/static/style.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600;700&display=swap" rel="stylesheet">
     </head>
-    <body style =  'padding-right: 2%; padding-left: 2%'>
-        <h1 style='text-align: center; color: red'>Calendar Events</h1>
-        {{#each ctx}}
-        <div style='display: flex; border: 5px solid black'>
-            <p>ID: {{id}} &emsp; LANG: {{lang}} &emsp; EVENT TITLE: {{title}} &emsp; EVENT LOCATION: {{location}} &emsp; EVNET INFO: {{text}} &emsp; EVENT DATE: {{event_date}} &emsp; TEACHER/ORGANIZER {{name}} &emsp; EMAIL {{emails}}</p>
-        </div>
-        {{/each}}
-        <br>
-        <div style="display: flex; flex-direction: row; width: 100%; justify-content:space-between;">
-            <div>
-                <h1>Add Calendar Event</h1>
+    <body>
+        <div class="container-md p-3" style="">
+            <h2 style="font-size: 24px; font-weight: bold">
+                Admin Panel
+            </h2>
+            </div>
+
+            <div class="container-md d-flex gap-4" style="">
+            <!-- event list -->
+            <div class="p-3" style="flex: 1;">
+                <h1 style="font-size: 28px;">Calendar Events</h1>
+                
+                <div class="vstack gap-3 mt-4">
+                {{#each ctx}}
+                <div class="bg-light border rounded-3 p-2">
+                    <small>ID: {{id}} | LANG: {{lang}}</small>
+                    <h3 class="my-2" style="font-size: 18px;">{{title}}</h3>
+                    <p class="mb-2">{{text}}</p>
+                    <small><b>{{event_date}}</b> at <b>{{location}}</b></small>
+                    <p class="mt-2 mb-0">Organizer: {{name}} | Organizer Email: {{emails}}</p>
+                </div>
+                {{/each}}
+                </div>
+            </div>
+
+            <!-- event actions -->
+            <div class="p-3" style="flex: 1;">
+                <h1 style="font-size: 28px;">Event Actions</h1>
+
+                <hr/>
+
+                <div class="my-4">
+                <h2 style="font-size: 20px;">Add Event</h2>
                 <form action="events/add" method="post">
-                    <p>Lang (enter 'en' (for english) or 'es' (for spanish))</p>
-                    <input type="text", id="lang", name="lang">
-                    <p>Title</p>
-                    <input type="text", id="title", name="title">
-                    <p>Location</p>
-                    <input type="text", id="location", name="location">
-                    <p>Information</p>
-                    <input type="text", id="text", name="text">
-                    <p>Date</p>
-                    <input type="text", id="event_date", name="event_date">
-                    <p>Teacher/Organizer </p>
-                    <input type="text", id="name", name="name">
-                    <p>Teacher/Organizer Email</p>
-                    <input type="text", id="emails", name="emails">
-                    <input type="submit", value="Submit">
-                </form>
-            </div>
-            
-            <div>
-                <h1>Delete Calendar Event</h1>
-                <form action="events/del" method="post">
-                    <p>Enter the ID of event to delete: </p>
-                    <input type="number", id="id", name="id">
-                    <input type="submit", value="Submit">
-                </form>
-            </div>
+                    <div class="d-flex mt-3">
+                    <div style="flex: 1; justify-content: center;">
+                        <p class="my-0">Lang</p> 
+                        <label for="lang" class="form-label"><small>'en' for English, 'es' for Spanish</small></label>
+                    </div>
+                    <div style="flex: 1; align: center;">
+                        <input type="text" class="form-control form-control-sm" id="lang" name="lang">
+                    </div>
+                    </div>
 
-            <div>
-                <h1>Update Calendar Event</h1>
+                    <div class="d-flex mt-3">
+                    <div style="flex: 1; justify-content: center;">
+                        <p class="my-0">Title</p> 
+                    </div>
+                    <div style="flex: 1; align: center;">
+                        <input type="text" class="form-control form-control-sm" id="title" name="title">
+                    </div>
+                    </div>
+
+                    <div class="d-flex mt-3">
+                    <div style="flex: 1; justify-content: center;">
+                        <p class="my-0">Location</p> 
+                    </div>
+                    <div style="flex: 1; align: center;">
+                        <input type="text" class="form-control form-control-sm" id="location" name="location">
+                    </div>
+                    </div>
+
+                    <div class="d-flex mt-3">
+                    <div style="flex: 1; justify-content: center;">
+                        <p class="my-0">Information</p> 
+                    </div>
+                    <div style="flex: 1; align: center;">
+                        <input type="text" class="form-control form-control-sm" id="text" name="text">
+                    </div>
+                    </div>
+
+                    <div class="d-flex mt-3">
+                    <div style="flex: 1; justify-content: center;">
+                        <p class="my-0">Date</p> 
+                    </div>
+                    <div style="flex: 1; align: center;">
+                        <input type="text" class="form-control form-control-sm" id="event_date" name="event_date">
+                    </div>
+                    </div>
+
+                    <div class="d-flex mt-3">
+                    <div style="flex: 1; justify-content: center;">
+                        <p class="my-0">Teacher/Organizer</p> 
+                    </div>
+                    <div style="flex: 1; align: center;">
+                        <input type="text" class="form-control form-control-sm" id="name" name="name">
+                    </div>
+                    </div>
+
+                    <div class="d-flex mt-3">
+                    <div style="flex: 1; justify-content: center;">
+                        <p class="my-0">Teacher/Organizer Email</p> 
+                    </div>
+                    <div style="flex: 1; align: center;">
+                        <input type="text" class="form-control form-control-sm" id="emails" name="emails">
+                    </div>
+                    </div>
+                    
+                    <input type="submit" value="Submit">
+                </form>
+                </div>
+
+                <hr/>
+                
+                <div class="my-4">
+                <h2 style="font-size: 20px;">Delete Event</h2>
+                <form action="events/del" method="post">
+                    <div class="d-flex mt-3">
+                    <div style="flex: 1; justify-content: center;">
+                        <p class="my-0">ID of event to delete</p> 
+                    </div>
+                    <div style="flex: 1; align: center;">
+                        <input type="number" class="form-control form-control-sm" id="id" name="id">
+                    </div>
+                    </div>
+                    <input type="submit" value="Submit">
+                </form>
+                </div>
+
+                <hr/>
+
+                <div class="my-4">
+                <h2 style="font-size: 20px;">Update Event</h2>
                 <form action="events/upd" method="post">
-                    <p>ID of Event to be Updated</p>
-                    <input type="number", id="id", name="id">
-                    <p>Lang (enter 'en' (for english) or 'es' (for spanish))</p>
-                    <input type="text", id="lang", name="lang">
-                    <p>Title</p>
-                    <input type="text", id="title", name="title">
-                    <p>Location</p>
-                    <input type="text", id="location", name="location">
-                    <p>Information</p>
-                    <input type="text", id="text", name="text">
-                    <p>Date</p>
-                    <input type="text", id="event_date", name="event_date">
-                    <p>Teacher/Organizer </p>
-                    <input type="text", id="name", name="name">
-                    <p>Teacher/Organizer Email</p>
-                    <input type="text", id="emails", name="emails">
-                    <p></p>
+                    <div class="d-flex mt-3">
+                    <div style="flex: 1; justify-content: center;">
+                        <p class="my-0">ID of event to update</p> 
+                    </div>
+                    <div style="flex: 1; align: center;">
+                        <input type="number" class="form-control form-control-sm" id="id" name="id">
+                    </div>
+                    </div>
+
+                    <div class="d-flex mt-3">
+                    <div style="flex: 1; justify-content: center;">
+                        <p class="my-0">Lang</p> 
+                        <label for="lang" class="form-label"><small>'en' for English, 'es' for Spanish</small></label>
+                    </div>
+                    <div style="flex: 1; align: center;">
+                        <input type="text" class="form-control form-control-sm" id="lang" name="lang">
+                    </div>
+                    </div>
+
+                    <div class="d-flex mt-3">
+                    <div style="flex: 1; justify-content: center;">
+                        <p class="my-0">Title</p> 
+                    </div>
+                    <div style="flex: 1; align: center;">
+                        <input type="text" class="form-control form-control-sm" id="title" name="title">
+                    </div>
+                    </div>
+
+                    <div class="d-flex mt-3">
+                    <div style="flex: 1; justify-content: center;">
+                        <p class="my-0">Location</p> 
+                    </div>
+                    <div style="flex: 1; align: center;">
+                        <input type="text" class="form-control form-control-sm" id="location" name="location">
+                    </div>
+                    </div>
+
+                    <div class="d-flex mt-3">
+                    <div style="flex: 1; justify-content: center;">
+                        <p class="my-0">Information</p> 
+                    </div>
+                    <div style="flex: 1; align: center;">
+                        <input type="text" class="form-control form-control-sm" id="text" name="text">
+                    </div>
+                    </div>
+
+                    <div class="d-flex mt-3">
+                    <div style="flex: 1; justify-content: center;">
+                        <p class="my-0">Date</p> 
+                    </div>
+                    <div style="flex: 1; align: center;">
+                        <input type="text" class="form-control form-control-sm" id="event_date" name="event_date">
+                    </div>
+                    </div>
+
+                    <div class="d-flex mt-3">
+                    <div style="flex: 1; justify-content: center;">
+                        <p class="my-0">Teacher/Organizer</p> 
+                    </div>
+                    <div style="flex: 1; align: center;">
+                        <input type="text" class="form-control form-control-sm" id="name" name="name">
+                    </div>
+                    </div>
+
+                    <div class="d-flex mt-3">
+                    <div style="flex: 1; justify-content: center;">
+                        <p class="my-0">Teacher/Organizer Email</p> 
+                    </div>
+                    <div style="flex: 1; align: center;">
+                        <input type="text" class="form-control form-control-sm" id="emails" name="emails">
+                    </div>
+                    </div>
                     <input type="submit", value="Submit">
                 </form>
+                </div>
+
+                <hr/>
             </div>
         </div>
-        
-
     </body>
-    </head>
 </html>
 
 <!--<p>Teacher/Organizer </p>
