@@ -16,19 +16,18 @@
             </div>
 
             <div class="container-md d-flex gap-4" style="">
-            <!-- event list -->
+            <!-- announcements list -->
             <div class="p-3" style="flex: 1;">
-                <h1 style="font-size: 28px;">Calendar Events</h1>
+                <h1 style="font-size: 28px;">Announcements</h1>
                 
                 <div class="vstack gap-3 mt-4">
                 {{#each ctx}}
                 <div class="bg-light border rounded-3 p-2">
                     <small>ID: {{id}} | LANG: {{lang}}</small>
-                    <h3 class="my-2" style="font-size: 18px;">{{title}}</h3>
-                    <p class="mb-2">{{text}}</p>
-                    <small><b>{{event_date}}</b> at <b>{{location}}</b></small>
-                    <p class="mt-2 mb-0">Organizer: {{name}} | Organizer Email: {{emails}}</p>
-                    <form action="events/del" method="post">
+                    <h3 class="my-2" style="font-size: 18px;">{{teacher}}</h3>
+                    <p class="mb-2">{{message}}</p>
+                    <small><b>{{date}}</b> at time <b>{{time}}</b></small>
+                    <form action="announcements/del" method="post">
                         <div class="d-flex mt-3">
                         <input type="number" class="form-control form-control-sm" id="id" name="id" value = {{id}} style="display: none">
                         </div>
@@ -39,15 +38,15 @@
                 </div>
             </div>
 
-            <!-- event actions -->
+            <!-- announcements actions -->
             <div class="p-3" style="flex: 1;">
-                <h1 style="font-size: 28px;">Event Actions</h1>
+                <h1 style="font-size: 28px;">Announcements Actions</h1>
 
                 <hr/>
 
                 <div class="my-4">
                 <h2 style="font-size: 20px;">Add Event</h2>
-                <form action="events/add" method="post">
+                <form action="announcements/add" method="post">
                     <div class="d-flex mt-3">
                     <div style="flex: 1; justify-content: center;">
                         <p class="my-0">Lang</p> 
@@ -60,28 +59,19 @@
 
                     <div class="d-flex mt-3">
                     <div style="flex: 1; justify-content: center;">
-                        <p class="my-0">Title</p> 
+                        <p class="my-0">Teacher</p> 
                     </div>
                     <div style="flex: 1; align: center;">
-                        <input type="text" class="form-control form-control-sm" id="title" name="title">
+                        <input type="text" class="form-control form-control-sm" id="teacher" name="teacher">
                     </div>
                     </div>
 
                     <div class="d-flex mt-3">
                     <div style="flex: 1; justify-content: center;">
-                        <p class="my-0">Location</p> 
+                        <p class="my-0">Message</p> 
                     </div>
                     <div style="flex: 1; align: center;">
-                        <input type="text" class="form-control form-control-sm" id="location" name="location">
-                    </div>
-                    </div>
-
-                    <div class="d-flex mt-3">
-                    <div style="flex: 1; justify-content: center;">
-                        <p class="my-0">Information</p> 
-                    </div>
-                    <div style="flex: 1; align: center;">
-                        <input type="text" class="form-control form-control-sm" id="text" name="text">
+                        <input type="text" class="form-control form-control-sm" id="message" name="message">
                     </div>
                     </div>
 
@@ -90,25 +80,16 @@
                         <p class="my-0">Date</p> 
                     </div>
                     <div style="flex: 1; align: center;">
-                        <input type="text" class="form-control form-control-sm" id="event_date" name="event_date">
+                        <input type="text" class="form-control form-control-sm" id="date" name="date">
                     </div>
                     </div>
 
                     <div class="d-flex mt-3">
                     <div style="flex: 1; justify-content: center;">
-                        <p class="my-0">Teacher/Organizer</p> 
+                        <p class="my-0">Time of Submission</p> 
                     </div>
                     <div style="flex: 1; align: center;">
-                        <input type="text" class="form-control form-control-sm" id="name" name="name">
-                    </div>
-                    </div>
-
-                    <div class="d-flex mt-3">
-                    <div style="flex: 1; justify-content: center;">
-                        <p class="my-0">Teacher/Organizer Email</p> 
-                    </div>
-                    <div style="flex: 1; align: center;">
-                        <input type="text" class="form-control form-control-sm" id="emails" name="emails">
+                        <input type="text" class="form-control form-control-sm" id="time" name="time">
                     </div>
                     </div>
                     
@@ -118,7 +99,7 @@
 
                 <div class="my-4">
                 <h2 style="font-size: 20px;">Update Event</h2>
-                <form action="events/upd" method="post">
+                <form action="anouncements/upd" method="post">
                     <div class="d-flex mt-3">
                     <div style="flex: 1; justify-content: center;">
                         <p class="my-0">ID of event to update</p> 
@@ -140,28 +121,19 @@
 
                     <div class="d-flex mt-3">
                     <div style="flex: 1; justify-content: center;">
-                        <p class="my-0">Title</p> 
+                        <p class="my-0">Teacher</p> 
                     </div>
                     <div style="flex: 1; align: center;">
-                        <input type="text" class="form-control form-control-sm" id="title" name="title">
+                        <input type="text" class="form-control form-control-sm" id="teacher" name="teacher">
                     </div>
                     </div>
 
                     <div class="d-flex mt-3">
                     <div style="flex: 1; justify-content: center;">
-                        <p class="my-0">Location</p> 
+                        <p class="my-0">Message</p> 
                     </div>
                     <div style="flex: 1; align: center;">
-                        <input type="text" class="form-control form-control-sm" id="location" name="location">
-                    </div>
-                    </div>
-
-                    <div class="d-flex mt-3">
-                    <div style="flex: 1; justify-content: center;">
-                        <p class="my-0">Information</p> 
-                    </div>
-                    <div style="flex: 1; align: center;">
-                        <input type="text" class="form-control form-control-sm" id="text" name="text">
+                        <input type="text" class="form-control form-control-sm" id="message" name="message">
                     </div>
                     </div>
 
@@ -170,16 +142,16 @@
                         <p class="my-0">Date</p> 
                     </div>
                     <div style="flex: 1; align: center;">
-                        <input type="text" class="form-control form-control-sm" id="event_date" name="event_date">
+                        <input type="text" class="form-control form-control-sm" id="date" name="date">
                     </div>
                     </div>
 
                     <div class="d-flex mt-3">
                     <div style="flex: 1; justify-content: center;">
-                        <p class="my-0">Teacher/Organizer</p> 
+                        <p class="my-0">Time of Submission</p> 
                     </div>
                     <div style="flex: 1; align: center;">
-                        <input type="text" class="form-control form-control-sm" id="name" name="name">
+                        <input type="text" class="form-control form-control-sm" id="time" name="time">
                     </div>
                     </div>
 

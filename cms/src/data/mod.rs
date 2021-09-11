@@ -158,7 +158,7 @@ api_route! {
 api_route! {
     teachers {
         name: (Text, String, String),
-        emails: (Array<Text>, Vec<String>, EmailList),
+        emails: (Text, String, String),
     }
 }
 
@@ -168,6 +168,15 @@ api_route! {
         teacher: (Text, String, String),
         date: (Date, NaiveDate, DateForm),
         time: (Time, NaiveTime, TimeForm),
+    }
+}
+
+api_route! {
+    student {
+        name: (Text, String, String),
+        meeting: (Text, String, String),
+        link: (Text, String, String),
+        sponsor: (Text, String, String),
     }
 }
 

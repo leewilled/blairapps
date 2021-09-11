@@ -21,9 +21,51 @@ CREATE TABLE teachers (
     id SERIAL PRIMARY KEY,
     lang VARCHAR,
     name VARCHAR NOT NULL,
-    emails VARCHAR[]
+    emails VARCHAR NOT NULL
 );
 
+CREATE TABLE announcements (
+    id SERIAL PRIMARY KEY,
+    lang VARCHAR,
+    message VARCHAR NOT NULL,
+    teacher VARCHAR NOT NULL,
+    date DATE,
+    time TIME
+);
+
+CREATE TABLE clubs (
+    id SERIAL PRIMARY KEY,
+    lang VARCHAR,
+    name VARCHAR NOT NULL,
+    meeting VARCHAR NOT NULL,
+    link VARCHAR NOT NULL,
+    sponsor VARCHAR NOT NULL
+);
+
+CREATE TABLE lunch_events (
+    id SERIAL PRIMARY KEY,
+    lang VARCHAR,
+    title VARCHAR NOT NULL,
+    text VARCHAR NOT NULL,
+    location VARCHAR NOT NULL,
+    time TIME
+);
+
+CREATE TABLE ssl_opps (
+    id SERIAL PRIMARY KEY,
+    lang VARCHAR,
+    title VARCHAR NOT NULL,
+    text VARCHAR NOT NULL,
+    location VARCHAR NOT NULL,
+    teacher VARCHAR NOT NULL,
+    time TIME
+);
+
+CREATE TABLE polls (
+    id SERIAL PRIMARY KEY,
+    lang VARCHAR,
+    url VARCHAR NOT NULL
+);
 
 CREATE TABLE new (
     id SERIAL PRIMARY KEY,
@@ -32,3 +74,10 @@ CREATE TABLE new (
     name VARCHAR NOT NULL,
     new_date DATE
 );
+
+CREATE TABLE important (
+    id SERIAL PRIMARY KEY,
+    lang VARCHAR,
+    image VARCHAR,
+    text VARCHAR NOT NULL
+)

@@ -38,9 +38,9 @@ export const EventInfo = ({route}) => {
   const itemDate = new Date(item.event_date)
   const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
   const months = ['January','February','March','April','May','June','July','August','September','October','November','December',]
-  const dayOfWeek = days[itemDate.getDay()]
+  const dayOfWeek = days[itemDate.getDay()+1]
   const month = months[itemDate.getMonth()]
-  const date = itemDate.getDate()
+  const date = itemDate.getDate()+1
 
   console.log(itemDate.getDate())
   
@@ -83,7 +83,7 @@ const Event = (props) => {
 
   return (
     <View>
-      <TouchableOpacity style={[styles.listItem, {padding: '2%'}]} onPress={()=>props.navigation.navigate('EventInfo', {data:props.data, title: item.item.title,text:item.item.text,location:item.item.location,date:item.item.event_date, name:item.item.name, emails: item.item.emails})} activeOpacity={0.8}>
+      <TouchableOpacity style={[styles.listItem, {padding: '2%'}]} onPress={()=>props.navigation.navigate('EventInfo', {data:props.data, title: item.item.title,text:item.item.text,location:item.item.location,event_date:item.item.event_date, name:item.item.name, emails: item.item.emails})} activeOpacity={0.8}>
         <View style = {[styles.container2, {justifyContent: 'space-between'}]}>
           <View style={{display: 'flex', flexDirection: 'row'}}>
             <Ionicons name='calendar' size={32} color={'#323232'} style={{marginRight: 15}}/>
@@ -209,10 +209,7 @@ class Calendar extends React.Component {
     if (this.state.data.length >0) {
       try {
         for (var i =0; i < this.state.data.length; i++) {
-          console.log(String(this.state.data[i].event_date))
           const itemDate = new Date(parseInt(String(this.state.data[i].event_date).split('-')[0]), parseInt(String(this.state.data[i].event_date).split('-')[1])-1, parseInt(String(this.state.data[i].event_date).split('-')[2]))
-          console.log(itemDate)
-          console.log('he')
           if (itemDate.getTime() == todayDate.getTime()) {
             today.push(this.state.data[i])
           }
@@ -226,8 +223,6 @@ class Calendar extends React.Component {
         }
       }
       catch {null}
-      
-      
     }
     
     if (today.length === 0) todayBoolean = false
