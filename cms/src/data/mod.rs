@@ -162,9 +162,9 @@ api_route! {
     teachers {
         name: (Text, String, String),
         email: (Text, String, String),
-        phone: (Text, String, String)
+        phone: (Text, String, String),
         position: (Text, String, String),
-        image: (Text, String, Image)
+        image: (Text, String, Image),
     }
 }
 
