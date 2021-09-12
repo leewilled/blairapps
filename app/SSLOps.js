@@ -64,6 +64,7 @@ const Stack = createStackNavigator();
 
 function SSLElement (props) {
 	const item = props.item;
+	const date = item.item.date.split('-')
 	const [expand, setExpand] = useState(false);
 	return(
 		<View>
@@ -71,11 +72,22 @@ function SSLElement (props) {
 				<View style = {styles.container2}>
 					<Ionicons name="school-outline" size={36} color={'#323232'} style={{marginRight: 15}} />
 					<View style = {styles.accordian}>
-                        <Text style={styles.title}>{item.item.title}</Text>
+					<View style = {{display: 'flex', alignContent: 'center', width: '80%'}}>
+						<Text style={styles.title}>{item.item.title}</Text>
+						<View style={{paddingBottom: '2%'}}><Text style = {{fontSize: 12, fontWeight: '200'}}>{`${date[1]}/${date[2]}/${date[0]}`}</Text></View>
+					</View>
                         {expand?<LinearGradient start={{x: 0, y: 0.25}} end={{x: .5, y: 1}} colors={['red', '#FF7373']} style={{borderRadius: 24, alignSelf: 'center'}}><Image source = {require('./assets/collapse.png')} style={{tintColor: 'white'}}/></LinearGradient>:<Image source = {require('./assets/expand.png')} style={{tintColor: '#b2b2b2', alignSelf: 'center'}}/>}
                     </View>
 				</View>
-				{expand?<View style={{marginLeft: 50}}><Text style={styles.accordianHeader}>{I18n.t('ssl.information')}</Text><Text style={styles.accordianText}>{item.item.text}</Text><Text style={styles.accordianHeader}>{'\n'}{I18n.t('ssl.sponsor')}</Text><Text style={styles.accordianText}>{item.item.teacher}</Text><Text style={styles.accordianHeader}>{'\n'}{I18n.t('ssl.location')}</Text><Text style={[styles.accordianText, {paddingBottom: '4%'}]}>{item.item.loc}</Text></View>:<></>}
+				{expand?
+				<View style={{marginLeft: 50}}>
+					<Text style={styles.accordianHeader}>{I18n.t('ssl.information')}</Text>
+					<Text style={styles.accordianText}>{item.item.text}</Text>
+					<Text style={styles.accordianHeader}>{'\n'}{I18n.t('ssl.sponsor')}</Text>
+					<Text style={styles.accordianText}>{item.item.teacher}</Text>
+					<Text style={styles.accordianHeader}>{'\n'}{I18n.t('ssl.location')}</Text>
+					<Text style={[styles.accordianText, {paddingBottom: '4%'}]}>{item.item.location}</Text>
+				</View>:<></>}
 			</TouchableOpacity>
 		</View>
     )
@@ -91,7 +103,7 @@ class SSLOps extends React.Component {
 	}
 	
 	componentDidMount() {
-		fetch(`http://localhost:8000/data/en/sslOps.json`,{
+		fetch(`${url}/api/`+String(I18n.locale).split('-')[0]+`/ssl_ops`,{
 		//fetch(`${url}/api/en/sslOps`,{	
 			headers: {
 				'Cache-Control': 'no-cache'
