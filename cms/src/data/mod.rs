@@ -145,6 +145,17 @@ pub mod defs {
 }
 
 api_route! {
+    student {
+        name: (Text, String, String),
+        image: (Text, String, Image),
+        grade: (Text, String, String),
+        messages: (Text, String, String),
+        hobbies: (Text, String, String),
+        achievements: (Text, String, String),
+    }
+}
+
+api_route! {
     events {
         title: (Text, String, String),
         location: (Text, String, String),
@@ -158,7 +169,10 @@ api_route! {
 api_route! {
     teachers {
         name: (Text, String, String),
-        emails: (Text, String, String),
+        email: (Text, String, String),
+        phone: (Text, String, String)
+        position: (Text, String, String),
+        image: (Text, String, Image)
     }
 }
 
@@ -168,15 +182,6 @@ api_route! {
         teacher: (Text, String, String),
         date: (Date, NaiveDate, DateForm),
         time: (Time, NaiveTime, TimeForm),
-    }
-}
-
-api_route! {
-    student {
-        name: (Text, String, String),
-        meeting: (Text, String, String),
-        link: (Text, String, String),
-        sponsor: (Text, String, String),
     }
 }
 
@@ -229,8 +234,17 @@ api_route! {
 }
 
 api_route! {
+    challenge {
+        title: (Text, String, String),
+        text: (Text, String, String),
+        link: (Text, String, String),
+    }
+}
+
+api_route! {
     important {
         image: (Text, String, Image),
         text: (Text, String, String),
     }
 }
+

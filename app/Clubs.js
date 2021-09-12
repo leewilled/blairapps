@@ -148,8 +148,12 @@ class Clubs extends React.Component {
         return response.text();
       })
       .then((json) => {
-        this.setState({data: JSON.parse(json).clubs,dataSearch:JSON.parse(json).clubs });
+        const data = JSON.parse(json)
+        data.sort((a,b)=>a.id-b.id)
+        this.setState({data: data,dataSearch:data });
+        console.log(this.state.data)
       })
+      
       .catch((error) => console.error(error))
   }
   

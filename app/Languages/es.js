@@ -54,7 +54,8 @@ export default {
     },
     lunch: {
         information: "ESInformation",
-        location: "ESLocation"
+        location: "ESLocation",
+        time:"ES TIME OF EVENT"
     },
     ssl: {
         information: "ESInformation",

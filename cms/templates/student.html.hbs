@@ -18,15 +18,17 @@
             <div class="container-md d-flex gap-4" style="">
             <!-- announcements list -->
             <div class="p-3" style="flex: 1;">
-                <h1 style="font-size: 28px;">Announcements</h1>
+                <h1 style="font-size: 28px;">Student of the Week</h1>
                 
                 <div class="vstack gap-3 mt-4">
                 {{#each ctx}}
                 <div class="bg-light border rounded-3 p-2">
                     <small>ID: {{id}} | LANG: {{lang}}</small>
-                    <h3 class="my-2" style="font-size: 18px;">{{teacher}}</h3>
-                    <p class="mb-2">{{message}}</p>
-                    <small><b>{{date}}</b> at time <b>{{time}}</b></small>
+                    <h3 class="my-2" style="font-size: 18px;">{{name}} | Grade {{grade}}</h3>
+                    <p class="mb-2">{{image}}</p>
+                    <p class="mb-2">Message: {{messages}}</p>
+                    <p class="mb-2">Hobbies: {{hobbies}}</p>
+                    <p class="mb-2">Achievements: {{achievements}}</p>
                     <form action="announcements/del" method="post">
                         <div class="d-flex mt-3">
                         <input type="number" class="form-control form-control-sm" id="id" name="id" value = {{id}} style="display: none">
@@ -40,13 +42,13 @@
 
             <!-- announcements actions -->
             <div class="p-3" style="flex: 1;">
-                <h1 style="font-size: 28px;">Announcements Actions</h1>
+                <h1 style="font-size: 28px;">SOTW Actions</h1>
 
                 <hr/>
 
                 <div class="my-4">
-                <h2 style="font-size: 20px;">Add Announcement</h2>
-                <form action="announcements/add" method="post">
+                <h2 style="font-size: 20px;">Add SOTW</h2>
+                <form action="student/add" method="post">
                     <div class="d-flex mt-3">
                     <div style="flex: 1; justify-content: center;">
                         <select name="lang", id="lang">
@@ -59,10 +61,28 @@
 
                     <div class="d-flex mt-3">
                     <div style="flex: 1; justify-content: center;">
-                        <p class="my-0">Teacher</p> 
+                        <p class="my-0">Student Name</p> 
                     </div>
                     <div style="flex: 1; align: center;">
-                        <input type="text" class="form-control form-control-sm" id="teacher" name="teacher">
+                        <input type="text" class="form-control form-control-sm" id="name" name="name">
+                    </div>
+                    </div>
+
+                    <div class="d-flex mt-3">
+                    <div style="flex: 1; justify-content: center;">
+                        <p class="my-0">Student Picture</p> 
+                    </div>
+                    <div style="flex: 1; align: center;">
+                        <input type="file" name="image", id="image", accept="image/png">
+                    </div>
+                    </div>
+
+                    <div class="d-flex mt-3">
+                    <div style="flex: 1; justify-content: center;">
+                        <p class="my-0">Grade</p> 
+                    </div>
+                    <div style="flex: 1; align: center;">
+                        <input type="text" class="form-control form-control-sm" id="grade" name="grade">
                     </div>
                     </div>
 
@@ -71,25 +91,25 @@
                         <p class="my-0">Message</p> 
                     </div>
                     <div style="flex: 1; align: center;">
-                        <input type="text" class="form-control form-control-sm" id="message" name="message">
+                        <input type="text" class="form-control form-control-sm" id="messages" name="messages">
                     </div>
                     </div>
 
                     <div class="d-flex mt-3">
                     <div style="flex: 1; justify-content: center;">
-                        <p class="my-0">Date of Submission</p> 
+                        <p class="my-0">Hobbies</p> 
                     </div>
                     <div style="flex: 1; align: center;">
-                        <input type="text" class="form-control form-control-sm" id="date" name="date">
+                        <input type="text" class="form-control form-control-sm" id="hobbies" name="hobbies">
                     </div>
                     </div>
 
                     <div class="d-flex mt-3">
                     <div style="flex: 1; justify-content: center;">
-                        <p class="my-0">Time of Submission</p> 
+                        <p class="my-0">Achievements</p> 
                     </div>
                     <div style="flex: 1; align: center;">
-                        <input type="text" class="form-control form-control-sm" id="time" name="time">
+                        <input type="text" class="form-control form-control-sm" id="achievements" name="achievements">
                     </div>
                     </div>
                     
@@ -98,11 +118,11 @@
                 </div>
 
                 <div class="my-4">
-                <h2 style="font-size: 20px;">Update Announcement</h2>
-                <form action="announcements/upd" method="post">
+                <h2 style="font-size: 20px;">Update SOTW</h2>
+                <form action="student/upd" method="post">
                     <div class="d-flex mt-3">
                     <div style="flex: 1; justify-content: center;">
-                        <p class="my-0">ID of announcement to update</p> 
+                        <p class="my-0">ID of SOTW to update</p> 
                     </div>
                     <div style="flex: 1; align: center;">
                         <input type="number" class="form-control form-control-sm" id="id" name="id">
@@ -121,10 +141,28 @@
 
                     <div class="d-flex mt-3">
                     <div style="flex: 1; justify-content: center;">
-                        <p class="my-0">Teacher</p> 
+                        <p class="my-0">Student Name</p> 
                     </div>
                     <div style="flex: 1; align: center;">
-                        <input type="text" class="form-control form-control-sm" id="teacher" name="teacher">
+                        <input type="text" class="form-control form-control-sm" id="name" name="name">
+                    </div>
+                    </div>
+
+                    <div class="d-flex mt-3">
+                    <div style="flex: 1; justify-content: center;">
+                        <p class="my-0">Student Picture</p> 
+                    </div>
+                    <div style="flex: 1; align: center;">
+                        <input type="file" name="image", id="image", accept="image/png">
+                    </div>
+                    </div>
+
+                    <div class="d-flex mt-3">
+                    <div style="flex: 1; justify-content: center;">
+                        <p class="my-0">Grade</p> 
+                    </div>
+                    <div style="flex: 1; align: center;">
+                        <input type="text" class="form-control form-control-sm" id="grade" name="grade">
                     </div>
                     </div>
 
@@ -133,27 +171,28 @@
                         <p class="my-0">Message</p> 
                     </div>
                     <div style="flex: 1; align: center;">
-                        <input type="text" class="form-control form-control-sm" id="message" name="message">
+                        <input type="text" class="form-control form-control-sm" id="messages" name="messages">
                     </div>
                     </div>
 
                     <div class="d-flex mt-3">
                     <div style="flex: 1; justify-content: center;">
-                        <p class="my-0">Date of Submission</p> 
+                        <p class="my-0">Hobbies</p> 
                     </div>
                     <div style="flex: 1; align: center;">
-                        <input type="text" class="form-control form-control-sm" id="date" name="date">
+                        <input type="text" class="form-control form-control-sm" id="hobbies" name="hobbies">
                     </div>
                     </div>
 
                     <div class="d-flex mt-3">
                     <div style="flex: 1; justify-content: center;">
-                        <p class="my-0">Time of Submission</p> 
+                        <p class="my-0">Achievements</p> 
                     </div>
                     <div style="flex: 1; align: center;">
-                        <input type="text" class="form-control form-control-sm" id="time" name="time">
+                        <input type="text" class="form-control form-control-sm" id="achievements" name="achievements">
                     </div>
                     </div>
+
                     <input type="submit", value="Submit">
                 </form>
                 </div>

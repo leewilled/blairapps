@@ -55,6 +55,14 @@ const Stack = createStackNavigator();
 function LunchEvent (props) {
     const item = props.item
     const [expand, setExpand] = useState(false);
+
+    var time_array = item.time.split(':')
+    if (time_array[0]>12) {
+        var time = String(parseInt(time_array[0])-12) + ':' + String(time_array[1]) + ' PM'
+    }
+    else {
+        var time = String(time_array[0])+':'+String(time_array[1]) + ' AM'
+    }
     return(
         <View>
             <TouchableOpacity style={styles.listItem} onPress={()=>setExpand(!expand)}>
@@ -65,7 +73,15 @@ function LunchEvent (props) {
                         {expand?<LinearGradient start={{x: 0, y: 0.25}} end={{x: .5, y: 1}} colors={['red', '#FF7373']} style={{borderRadius: 24, alignSelf: 'center'}}><Image source = {require('./assets/collapse.png')} style={{tintColor: 'white'}}/></LinearGradient>:<Image source = {require('./assets/expand.png')} style={{tintColor: '#b2b2b2', alignSelf: 'center'}}/>}
                     </View>
                 </View>
-                {expand?<View style={{marginLeft: 50}}><Text style={styles.accordianHeader}>{I18n.t('lunch.information')}</Text><Text style={styles.accordianText}>{item.text}</Text><Text style={styles.accordianHeader}>{'\n'}{I18n.t('lunch.location')}</Text><Text style={[styles.accordianText, {paddingBottom: '4%'}]}>{item.loc}</Text></View>:<></>}
+                {expand?
+                <View style={{marginLeft: 50}}>
+                    <Text style={styles.accordianHeader}>{I18n.t('lunch.information')}</Text>
+                    <Text style={styles.accordianText}>{item.text}</Text>
+                    <Text style={styles.accordianHeader}>{'\n'}{I18n.t('lunch.location')}</Text>
+                    <Text style={[styles.accordianText, {paddingBottom: '4%'}]}>{item.location}</Text>
+                    <Text syle={styles.accordianHeader}>{'\n'}{I18n.t('lunch.time')}</Text>
+                    <Text style={[styles.accordianText, {paddingBottom: '4%'}]}>{time}</Text>
+                </View>:<></>}
             </TouchableOpacity>
         </View>
     )
@@ -81,7 +97,7 @@ class LunchEvents extends React.Component {
     }
     
     componentDidMount() {
-        fetch(`${url}/api/`+String(I18n.locale).split('-')[0]+`/lunchEvents`,{
+        fetch(`${url}/api/`+String(I18n.locale).split('-')[0]+`/lunch_events`,{
             headers: {
                 'Cache-Control': 'no-cache'
             }
@@ -91,7 +107,9 @@ class LunchEvents extends React.Component {
             return response.text();
         })
         .then((json) => {
-            this.setState({data: JSON.parse(json)});
+            const data = JSON.parse(json)
+            data.sort((a,b)=>a.id-b.id)
+            this.setState({data: data});
         })
         .catch((error) => console.error(error))
     }

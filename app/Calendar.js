@@ -174,7 +174,7 @@ class Calendar extends React.Component {
 	}
 
 	getData() {
-		fetch(`http://127.0.0.1:8080/api/en/events`,{
+		fetch(`${url}/api/`+String(I18n.locale).split('-')[0]+`/events`,{
 		  headers: {
 			'Cache-Control': 'no-cache'
 		  } })

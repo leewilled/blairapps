@@ -40,14 +40,22 @@ const getCurrentDate=()=>{
 const Announcement = ({item}) => {
 	const todayDate = getCurrentDate()
 	const itemDate = new Date(item.item.date)
-	const dateInfo = todayDate.getTime()===itemDate.getTime()&&item.item.time!==undefined?item.item.time:(item.item.date+", " + item.item.time)
+
+	var time_array = item.item.time.split(':')
+    if (time_array[0]>12) {
+        var time = String(parseInt(time_array[0])-12) + ':' + String(time_array[1]) + ' PM'
+    }
+    else {
+        var time = String(time_array[0])+':'+String(time_array[1]) + ' AM'
+    }
+	const dateInfo = todayDate.getTime()===itemDate.getTime()&&item.item.time!==undefined?item.item.time:(item.item.date+", " + time)
 	return (
 		<View style={{borderWidth: 1, borderColor: '#323232', padding: '2%', marginHorizontal: '2%', marginBottom: '2%', borderRadius: 12}}>
 			<View style = {{display: 'flex', flexDirection: 'column', justifyContent: 'space-between'}}>
 				<View style = {{width: '100%'}}>
 					<Text style={styles.title}>{item.item.message}</Text>
 				</View>
-				{dateInfo!==undefined?<Text style={{fontSize: 12, fontWeight: '200'}}>{dateInfo}</Text>:<></>}
+				{dateInfo!==undefined?<Text style={{fontSize: 12, fontWeight: '200'}}>Posted {dateInfo}</Text>:<></>}
 			</View>
 		</View>
 	)
@@ -84,7 +92,7 @@ export const TeacherList = ({route}) => {
 	var futureBoolean = true
 	
 	for (var i = 0; i < route.params.data.length; i++) {
-		const itemDate = new Date(route.params.data[i].date)
+		const itemDate = new Date(parseInt(String(route.params.data[i].date).split('-')[0]), parseInt(String(route.params.data[i].date).split('-')[1])-1, parseInt(String(route.params.data[i].date).split('-')[2]))
 		if (itemDate.getTime() == todayDate.getTime()) {
 			today.push(route.params.data[i])
 		}
@@ -173,8 +181,8 @@ class Announcements extends React.Component {
 			return response.text()
 		})
 		.then((txt) => {
-			const data = JSON.parse(txt).data;
-			console.log(data)
+			const data = JSON.parse(txt);
+			data.sort((a,b)=>a.id-b.id)
 			const teacherNames = [...new Set(data.filter(x=>x.teacher!=null&&x.teacher.trim()!=='').map(x=>x.teacher))];
 			teacherNames.sort()
 			this.setState({data: data, teacherNames: teacherNames.map(x=>({name:x})),isLoading:false});
@@ -185,7 +193,6 @@ class Announcements extends React.Component {
 	render() {
 		return (
 			<ScrollView style={styles.moreDefault}>
-				<TeacherButton data={this.state.data.filter(x=>x.teacher==null||x.teacher.trim()==='')} name="No Teacher" navigation={this.props.navigation} />
 				<FlatList
 					data={this.state.favoriteNames.concat(this.state.teacherNames.filter(x=>this.state.favoriteNames.map(({name})=>name).indexOf(x.name) < 0))}
 					renderItem={({item})=><TeacherButton color={this.state.favoriteNames.indexOf(item) >= 0?'red':'lightgrey'} item={item} data={this.state.data.filter(x=>x.teacher===item.name)} name={item.name} navigation={this.props.navigation} icon={true} addFavorite={this.addFavorite}/>}

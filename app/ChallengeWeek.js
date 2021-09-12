@@ -28,7 +28,8 @@ class ChallengeWeek extends React.Component {
 		super(props)
 		this.state = {
 			isLoading: true,
-			flip: true
+			flip: true,
+			data:[]
 		}
 	}
 	
@@ -40,74 +41,31 @@ class ChallengeWeek extends React.Component {
 		).then((response) => {
 			return response.text();
 		}).then((json) => {
-			this.setState({data: JSON.parse(json),isLoading:false});
+			const data = JSON.parse(json)
+			data.sort((a,b)=>a.id-b.id)
+			this.setState({data: data,isLoading:false});
 		}).catch((error) => console.error(error))
-
-		/*this.animatedValue=new Animated.Value(0);
-		this.value=0;
-		this.animatedValue.addListener(({value}) => {
-			this.value=value;
-		})
-		this.frontInterpolate = this.animatedValue.interpolate({
-			inputRange:[0,180],
-			outputRange:['0deg', '180deg'],
-		})
-		this.backInterpolate = this.animatedValue.interpolate({
-			inputRange:[0,180],
-			outputRange: ['180deg','360deg']
-		})*/
 	}
-
-	/*flipCard() {
-		if (this.value >= 90) {
-			Animated.spring(this.animatedValue, {
-				toValue:0,
-				friction:8,
-				tension: 10
-			}).start();
-		}
-		else {
-			Animated.spring(this.animatedValue, {
-				toValue:180,
-				friction: 8,
-				tension: 10
-			}).start();
-		}
-		this.setState({flip:!this.state.flip})
-	}*/
 	
 	render() {
-		{/*const frontAnimatedStyle = {
-			transform: [
-				{rotateY:this.frontInterpolate}
-			]
-		}
-		const backAnimatedStyle = {
-			transform: [
-				{rotateY:this.backInterpolate}
-			]
-		}
-		var styling={}
-		var styling2={}
-		if (this.state.flip) {
-			styling=({height: '100%', width: '100%', backgroundColor: 'white', borderRadius: 20, textAlign: 'center', display: 'flex', alignContent: 'center', padding: '5%', paddingTop: '15%', borderColor: 'red', borderWidth: 1})
-			styling2=({display:'none'})
-		}
-		else {
-			styling=({display:'none'})
-			styling2=({height: '100%', width: '100%', backgroundColor: 'white', borderRadius: 20, textAlign: 'center', display: 'flex', alignContent: 'center', padding: '5%', paddingTop: '15%', borderColor: 'red', borderWidth: 1})
-		}*/}
-		
 		if (this.state.isLoading) {
 			return <View/>
 		} else {
-			return (
-				<View style={{alignItems:'center',paddingiorizontal:'10%', height: '100%', backgroundColor: 'white', justifyContent: 'center', padding: '2%'}}>
-					<Text style={{fontSize: 32, fontWeight: 'bold', marginBottom: '10%', color: 'red', textAlign: 'center'}}>{this.state.data.title}</Text>
-					<Text style={{textAlign:'center', fontSize: 24, marginBottom: '5%', textAlign: 'center', fontWeight: '200'}}>{this.state.data.text}</Text>
-					<Text style={{textAlign:'center', fontSize: 20, textDecorationLine: 'underline', textDecorationStyle: "solid", textDecorationColor: "#000"}} onPress={() => Linking.openURL(this.state.data.link)}>{I18n.t("challenge.link")}</Text>
-				</View>
-			)
+			if (this.state.data[this.state.data.length-1]==undefined) {	
+				return (
+					<View style={{alignItems:'center',paddingiorizontal:'10%', height: '100%', backgroundColor: 'white', justifyContent: 'center', padding: '2%'}}>
+						<Text style={{fontSize: 32, fontWeight: 'bold', marginBottom: '10%', color: 'red', textAlign: 'center'}}>No challenge</Text>
+					</View>
+				)
+			} else {
+				return (
+					<View style={{alignItems:'center',paddingiorizontal:'10%', height: '100%', backgroundColor: 'white', justifyContent: 'center', padding: '2%'}}>
+						<Text style={{fontSize: 32, fontWeight: 'bold', marginBottom: '10%', color: 'red', textAlign: 'center'}}>{this.state.data[this.state.data.length-1].title}</Text>
+						<Text style={{textAlign:'center', fontSize: 24, marginBottom: '5%', textAlign: 'center', fontWeight: '200'}}>{this.state.data[this.state.data.length-1].text}</Text>
+						<Text style={{textAlign:'center', fontSize: 20, textDecorationLine: 'underline', textDecorationStyle: "solid", textDecorationColor: "#000"}} onPress={() => Linking.openURL(this.state.data[this.state.data.length-1].link)}>{I18n.t("challenge.link")}</Text>
+					</View>
+				)
+			}
 		}
 	}
 }

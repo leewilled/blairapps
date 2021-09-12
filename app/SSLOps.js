@@ -102,6 +102,8 @@ class SSLOps extends React.Component {
 			return response.text();
 		})
 		.then((json) => {
+			const data = JSON.parse(json)
+			data.sort((a,b)=>a.id-b.id)
 			this.setState({data: JSON.parse(json)});
 		})
 		.catch((error) => console.error(error))

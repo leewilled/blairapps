@@ -57,8 +57,9 @@ class StudentWeek extends React.Component {
 		).then((response) => {
 			return response.text();
 		}).then((json) => {
-
-			this.setState({data: JSON.parse(json),isLoading:false});
+			const data = JSON.parse(json)
+			data.sort((a,b)=>a.id-b.id)
+			this.setState({data: data,isLoading:false});
 			console.log(this.state.data)
 		}).catch((error) => console.error(error))
 	}
@@ -67,17 +68,18 @@ class StudentWeek extends React.Component {
 		if (this.state.isLoading) {
 			return <View/>
 		} else {
-			const iconURI = this.state.data.icon !== undefined?`data:image/png;charset=utf-8;base64,${this.state.data.icon}`:'';
-			const hobbyText = (<Text style = {{marginLeft: 50, paddingHorizontal: '2%', paddingBottom: '2%'}}>{this.state.data.hobbies}</Text>)
-			const achievementText = (<Text style = {{marginLeft: 50, paddingHorizontal: '2%', paddingBottom: '2%'}}>{this.state.data.achievements}</Text>)
-			const messageText = (<Text style = {{marginLeft: 50, paddingHorizontal: '2%', paddingBottom: '2%'}}>{this.state.data.messages}</Text>)
+			console.log(this.state.data[this.state.data.length-1].image)
+			const iconURI = this.state.data[this.state.data.length-1].image !== undefined?`data:image/png;charset=utf-8;base64,${this.state.data[this.state.data.length-1].image}`:'';
+			const hobbyText = (<Text style = {{marginLeft: 50, paddingHorizontal: '2%', paddingBottom: '2%'}}>{this.state.data[this.state.data.length-1].hobbies}</Text>)
+			const achievementText = (<Text style = {{marginLeft: 50, paddingHorizontal: '2%', paddingBottom: '2%'}}>{this.state.data[this.state.data.length-1].achievements}</Text>)
+			const messageText = (<Text style = {{marginLeft: 50, paddingHorizontal: '2%', paddingBottom: '2%'}}>{this.state.data[this.state.data.length-1].messages}</Text>)
 			return (
 				<ScrollView style={{paddingTop:'5%',paddingHorizontal:'10%', backgroundColor: 'white', height: '100%'}}>
 					<View style={{backgroundColor: 'white',borderRadius: 150, height: 300, width: 300, alignSelf: 'center', shadowColor: 'red', shadowOffset: {width: 0, height: 2}, shadowOpacity: 0.5, shadowRadius: 7}}>
 						<Image style={{resizeMode: 'cover',borderRadius: 150, height: 300, width: 300, alignSelf: 'center'}} source = {{iconURI}} /> 
 					</View>
-					<Text style={{fontSize:28,marginTop:'5%',textAlign:'center'}}>{this.state.data.name}</Text>
-					<Text style={{fontSize:20,textAlign:'center', fontWeight: '200'}}>{I18n.t('student.Grade')} {this.state.data.year}</Text>
+					<Text style={{fontSize:28,marginTop:'5%',textAlign:'center'}}>{this.state.data[this.state.data.length-1].name}</Text>
+					<Text style={{fontSize:20,textAlign:'center', fontWeight: '200'}}>{I18n.t('student.Grade')} {this.state.data[this.state.data.length-1].grade}</Text>
 					<View>
 						<View style={{display: 'flex', padding:'2%', borderRadius: 8, marginTop:'5%'}}>
 							<TouchableOpacity onPress = {this.clickHobby.bind(this)}>

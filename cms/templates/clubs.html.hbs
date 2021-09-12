@@ -50,11 +50,11 @@
                 <form action="clubs/add" method="post">
                     <div class="d-flex mt-3">
                     <div style="flex: 1; justify-content: center;">
-                        <p class="my-0">Lang</p> 
-                        <label for="lang" class="form-label"><small>'en' for English, 'es' for Spanish</small></label>
-                    </div>
-                    <div style="flex: 1; align: center;">
-                        <input type="text" class="form-control form-control-sm" id="lang" name="lang">
+                        <select name="lang", id="lang">
+                            <option value="" disabled selected>Select Language</option>
+                            <option value="en">English</option>
+                            <option value="es">Spanish</option>
+                        </select>
                     </div>
                     </div>
 
@@ -69,7 +69,7 @@
 
                     <div class="d-flex mt-3">
                     <div style="flex: 1; justify-content: center;">
-                        <p class="my-0">Meeting</p> 
+                        <p class="my-0">Meeting Date and Time</p> 
                     </div>
                     <div style="flex: 1; align: center;">
                         <input type="text" class="form-control form-control-sm" id="meeting" name="meeting">
@@ -78,7 +78,7 @@
 
                     <div class="d-flex mt-3">
                     <div style="flex: 1; justify-content: center;">
-                        <p class="my-0">Link</p> 
+                        <p class="my-0">Meeting Location</p> 
                     </div>
                     <div style="flex: 1; align: center;">
                         <input type="text" class="form-control form-control-sm" id="link" name="link">
@@ -100,7 +100,7 @@
 
                 <div class="my-4">
                 <h2 style="font-size: 20px;">Update Club</h2>
-                <form action="anouncements/upd" method="post">
+                <form action="clubs/upd" method="post">
                     <div class="d-flex mt-3">
                     <div style="flex: 1; justify-content: center;">
                         <p class="my-0">ID of club to update</p> 
@@ -112,11 +112,11 @@
 
                     <div class="d-flex mt-3">
                     <div style="flex: 1; justify-content: center;">
-                        <p class="my-0">Lang</p> 
-                        <label for="lang" class="form-label"><small>'en' for English, 'es' for Spanish</small></label>
-                    </div>
-                    <div style="flex: 1; align: center;">
-                        <input type="text" class="form-control form-control-sm" id="lang" name="lang">
+                        <select name="lang", id="lang">
+                            <option value="" disabled selected>Select Language</option>
+                            <option value="en">English</option>
+                            <option value="es">Spanish</option>
+                        </select>
                     </div>
                     </div>
 
@@ -131,7 +131,7 @@
 
                     <div class="d-flex mt-3">
                     <div style="flex: 1; justify-content: center;">
-                        <p class="my-0">Meeting</p> 
+                        <p class="my-0">Meeting Date and Time</p> 
                     </div>
                     <div style="flex: 1; align: center;">
                         <input type="text" class="form-control form-control-sm" id="meeting" name="meeting">
@@ -140,7 +140,7 @@
 
                     <div class="d-flex mt-3">
                     <div style="flex: 1; justify-content: center;">
-                        <p class="my-0">Link</p> 
+                        <p class="my-0">Meeting Location</p> 
                     </div>
                     <div style="flex: 1; align: center;">
                         <input type="text" class="form-control form-control-sm" id="link" name="link">

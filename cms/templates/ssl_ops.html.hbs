@@ -16,18 +16,19 @@
             </div>
 
             <div class="container-md d-flex gap-4" style="">
-            <!-- announcements list -->
+            <!-- clubs list -->
             <div class="p-3" style="flex: 1;">
-                <h1 style="font-size: 28px;">Announcements</h1>
+                <h1 style="font-size: 28px;">SSL Opportunities</h1>
                 
                 <div class="vstack gap-3 mt-4">
                 {{#each ctx}}
                 <div class="bg-light border rounded-3 p-2">
                     <small>ID: {{id}} | LANG: {{lang}}</small>
-                    <h3 class="my-2" style="font-size: 18px;">{{teacher}}</h3>
-                    <p class="mb-2">{{message}}</p>
-                    <small><b>{{date}}</b> at time <b>{{time}}</b></small>
-                    <form action="announcements/del" method="post">
+                    <h3 class="my-2" style="font-size: 18px;">{{name}}</h3>
+                    <p class="mb-2">{{meeting}}</p>
+                    <p class="mb-2">{{link}}</p>
+                    <p class="mt-2 mb-0">Sponsor: {{sponsor}}</p>
+                    <form action="clubs/del" method="post">
                         <div class="d-flex mt-3">
                         <input type="number" class="form-control form-control-sm" id="id" name="id" value = {{id}} style="display: none">
                         </div>
@@ -38,15 +39,15 @@
                 </div>
             </div>
 
-            <!-- announcements actions -->
+            <!-- clubs actions -->
             <div class="p-3" style="flex: 1;">
-                <h1 style="font-size: 28px;">Announcements Actions</h1>
+                <h1 style="font-size: 28px;">SSL Opps Actions</h1>
 
                 <hr/>
 
                 <div class="my-4">
-                <h2 style="font-size: 20px;">Add Announcement</h2>
-                <form action="announcements/add" method="post">
+                <h2 style="font-size: 20px;">Add SSL Op</h2>
+                <form action="ssl_ops/add" method="post">
                     <div class="d-flex mt-3">
                     <div style="flex: 1; justify-content: center;">
                         <select name="lang", id="lang">
@@ -59,7 +60,34 @@
 
                     <div class="d-flex mt-3">
                     <div style="flex: 1; justify-content: center;">
-                        <p class="my-0">Teacher</p> 
+                        <p class="my-0">Title</p> 
+                    </div>
+                    <div style="flex: 1; align: center;">
+                        <input type="text" class="form-control form-control-sm" id="title" name="title">
+                    </div>
+                    </div>
+
+                    <div class="d-flex mt-3">
+                    <div style="flex: 1; justify-content: center;">
+                        <p class="my-0">Information</p> 
+                    </div>
+                    <div style="flex: 1; align: center;">
+                        <input type="text" class="form-control form-control-sm" id="text" name="text">
+                    </div>
+                    </div>
+
+                    <div class="d-flex mt-3">
+                    <div style="flex: 1; justify-content: center;">
+                        <p class="my-0">Location</p> 
+                    </div>
+                    <div style="flex: 1; align: center;">
+                        <input type="text" class="form-control form-control-sm" id="location" name="location">
+                    </div>
+                    </div>
+
+                    <div class="d-flex mt-3">
+                    <div style="flex: 1; justify-content: center;">
+                        <p class="my-0">Organizer</p> 
                     </div>
                     <div style="flex: 1; align: center;">
                         <input type="text" class="form-control form-control-sm" id="teacher" name="teacher">
@@ -68,28 +96,10 @@
 
                     <div class="d-flex mt-3">
                     <div style="flex: 1; justify-content: center;">
-                        <p class="my-0">Message</p> 
-                    </div>
-                    <div style="flex: 1; align: center;">
-                        <input type="text" class="form-control form-control-sm" id="message" name="message">
-                    </div>
-                    </div>
-
-                    <div class="d-flex mt-3">
-                    <div style="flex: 1; justify-content: center;">
-                        <p class="my-0">Date of Submission</p> 
+                        <p class="my-0">Date of Event</p> 
                     </div>
                     <div style="flex: 1; align: center;">
                         <input type="text" class="form-control form-control-sm" id="date" name="date">
-                    </div>
-                    </div>
-
-                    <div class="d-flex mt-3">
-                    <div style="flex: 1; justify-content: center;">
-                        <p class="my-0">Time of Submission</p> 
-                    </div>
-                    <div style="flex: 1; align: center;">
-                        <input type="text" class="form-control form-control-sm" id="time" name="time">
                     </div>
                     </div>
                     
@@ -98,11 +108,11 @@
                 </div>
 
                 <div class="my-4">
-                <h2 style="font-size: 20px;">Update Announcement</h2>
-                <form action="announcements/upd" method="post">
+                <h2 style="font-size: 20px;">Update SSL Opps</h2>
+                <form action="ssl_ops/upd" method="post">
                     <div class="d-flex mt-3">
                     <div style="flex: 1; justify-content: center;">
-                        <p class="my-0">ID of announcement to update</p> 
+                        <p class="my-0">ID of club to update</p> 
                     </div>
                     <div style="flex: 1; align: center;">
                         <input type="number" class="form-control form-control-sm" id="id" name="id">
@@ -121,7 +131,34 @@
 
                     <div class="d-flex mt-3">
                     <div style="flex: 1; justify-content: center;">
-                        <p class="my-0">Teacher</p> 
+                        <p class="my-0">Title</p> 
+                    </div>
+                    <div style="flex: 1; align: center;">
+                        <input type="text" class="form-control form-control-sm" id="title" name="title">
+                    </div>
+                    </div>
+
+                    <div class="d-flex mt-3">
+                    <div style="flex: 1; justify-content: center;">
+                        <p class="my-0">Information</p> 
+                    </div>
+                    <div style="flex: 1; align: center;">
+                        <input type="text" class="form-control form-control-sm" id="text" name="text">
+                    </div>
+                    </div>
+
+                    <div class="d-flex mt-3">
+                    <div style="flex: 1; justify-content: center;">
+                        <p class="my-0">Location</p> 
+                    </div>
+                    <div style="flex: 1; align: center;">
+                        <input type="text" class="form-control form-control-sm" id="location" name="location">
+                    </div>
+                    </div>
+
+                    <div class="d-flex mt-3">
+                    <div style="flex: 1; justify-content: center;">
+                        <p class="my-0">Organizer</p> 
                     </div>
                     <div style="flex: 1; align: center;">
                         <input type="text" class="form-control form-control-sm" id="teacher" name="teacher">
@@ -130,30 +167,13 @@
 
                     <div class="d-flex mt-3">
                     <div style="flex: 1; justify-content: center;">
-                        <p class="my-0">Message</p> 
-                    </div>
-                    <div style="flex: 1; align: center;">
-                        <input type="text" class="form-control form-control-sm" id="message" name="message">
-                    </div>
-                    </div>
-
-                    <div class="d-flex mt-3">
-                    <div style="flex: 1; justify-content: center;">
-                        <p class="my-0">Date of Submission</p> 
+                        <p class="my-0">Date of Event</p> 
                     </div>
                     <div style="flex: 1; align: center;">
                         <input type="text" class="form-control form-control-sm" id="date" name="date">
                     </div>
                     </div>
 
-                    <div class="d-flex mt-3">
-                    <div style="flex: 1; justify-content: center;">
-                        <p class="my-0">Time of Submission</p> 
-                    </div>
-                    <div style="flex: 1; align: center;">
-                        <input type="text" class="form-control form-control-sm" id="time" name="time">
-                    </div>
-                    </div>
                     <input type="submit", value="Submit">
                 </form>
                 </div>

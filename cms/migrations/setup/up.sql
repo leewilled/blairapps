@@ -21,7 +21,10 @@ CREATE TABLE teachers (
     id SERIAL PRIMARY KEY,
     lang VARCHAR,
     name VARCHAR NOT NULL,
-    emails VARCHAR NOT NULL
+    email VARCHAR NOT NULL,
+    phone VARCHAR NOT NULL,
+    position VARCHAR NOT NULL,
+    image VARCHAR
 );
 
 CREATE TABLE announcements (
@@ -51,14 +54,14 @@ CREATE TABLE lunch_events (
     time TIME
 );
 
-CREATE TABLE ssl_opps (
+CREATE TABLE ssl_ops (
     id SERIAL PRIMARY KEY,
     lang VARCHAR,
     title VARCHAR NOT NULL,
     text VARCHAR NOT NULL,
     location VARCHAR NOT NULL,
     teacher VARCHAR NOT NULL,
-    time TIME
+    date DATE
 );
 
 CREATE TABLE polls (
@@ -75,9 +78,30 @@ CREATE TABLE new (
     new_date DATE
 );
 
+CREATE TABLE challenge (
+    id SERIAL PRIMARY KEY,
+    lang VARCHAR,
+    title VARCHAR NOT NULL, 
+    text VARCHAR NOT NULL,
+    link VARCHAR NOT NULL
+);
+
+CREATE TABLE student (
+    id SERIAL PRIMARY KEY,
+    lang VARCHAR,
+    name VARCHAR NOT NULL,
+    image VARCHAR,
+    grade VARCHAR NOT NULL,
+    messages VARCHAR NOT NULL,
+    hobbies VARCHAR NOT NULL,
+    achievements VARCHAR NOT NULL
+);
+
 CREATE TABLE important (
     id SERIAL PRIMARY KEY,
     lang VARCHAR,
     image VARCHAR,
     text VARCHAR NOT NULL
-)
+);
+
+

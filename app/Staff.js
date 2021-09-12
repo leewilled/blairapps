@@ -179,8 +179,10 @@ class Staffs extends React.Component {
         return response.text();
       })
       .then((json) => {
-        this.setState({data: JSON.parse(json).data});
-        this.setState({dataSearch:JSON.parse(json).data});
+        const data = JSON.parse(json)
+        data.sort((a,b)=>a.id-b.id)
+        this.setState({data: data});
+        this.setState({dataSearch: data});
       })
       .catch((error) => console.error(error))
   }
@@ -197,7 +199,9 @@ class Staffs extends React.Component {
   }
   render() {
     const { data , dataSearch,search} = this.state;
-
+    if (this.state.isLoading) {
+      return <View/>
+    } else {
     return (
       <SafeAreaView style={styles.moreDefault}>
         <SearchBar
@@ -214,7 +218,7 @@ class Staffs extends React.Component {
       />
     </SafeAreaView>
     
-    );
+    );}
   }
 }
 
