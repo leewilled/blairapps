@@ -49,7 +49,7 @@
 
                 <div class="my-4">
                 <h2 style="font-size: 20px;">Add New Item</h2>
-                <form onsubmit="forwardForImage('new_f', 'new/add')" id="new_f" name="new_f" method="post" enctype="multipart/form-data">
+                <form action="new/add" method="post" id="new_f" name="new_f" method="post">
                     <div class="d-flex mt-3">
                     <div style="flex: 1; justify-content: center;">
                         <select name="lang", id="lang" required>
@@ -65,7 +65,7 @@
                         <p class="my-0">What's New Item Image</p> 
                     </div>
                     <div style="flex: 1; align: center;">
-                        <input type="file" name="image", id="image", accept="image/png" required>
+                        <input type="text" class="form-control form-control-sm" name="image", id="image", required>
                     </div>
                     </div>
 
@@ -118,7 +118,7 @@
                         <p class="my-0">What's New Item Image</p> 
                     </div>
                     <div style="flex: 1; align: center;">
-                        <input type="file" name="image", id="image", accept="image/png" required>
+                        <input type="text" class="form-control form-control-sm" name="image", id="image" required>
                     </div>
                     </div>
 
