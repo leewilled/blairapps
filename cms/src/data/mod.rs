@@ -209,7 +209,7 @@ api_route! {
         text: (Text, String, String),
         location: (Text, String, String),
         teacher: (Text, String, String),
-        time: (Time, NaiveTime, TimeForm),
+        date: (Date, NaiveDate, DateForm),
     }
 }
 
