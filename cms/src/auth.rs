@@ -5,7 +5,7 @@ use oauth2::{
 };
 use reqwest::blocking::Client;
 use rocket::{
-    http::{Cookie, Cookies, SameSite, Status},
+    http::{Cookie, Cookies, Status},
     request,
     request::FromRequest,
     response::Redirect,
@@ -170,7 +170,7 @@ pub fn callback(
                             };
                             if auths.into_iter().any(|x| x == email.as_str().unwrap_or("")) {
                                 let mut cook = Cookie::new("token", secret.to_string());
-                                cook.set_same_site(SameSite::Strict);
+                                // cook.set_same_site(SameSite::Strict);
                                 cook.set_http_only(true);
                                 cook.set_secure(true);
                                 cookies.add(cook);

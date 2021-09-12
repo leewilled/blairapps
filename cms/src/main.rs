@@ -73,7 +73,7 @@ fn rocket(port: u16, address: String, env: Environment, pg: PgConnection, sa: Se
         .manage(sa)
         .mount(
             "/",
-            routes![home, home_not_logged_in, login, auth::callback, auth::oauth, static_files],
+            routes![home, home_not_logged_in, login, auth::callback, auth::oauth, static_files, auth::logout],
         )
         .mount("/api", routes![
             data::student::api,

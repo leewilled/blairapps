@@ -125,14 +125,6 @@ pub mod defs {
         type Error = ();
 
         fn from_form_value(value: &'v RawStr) -> Result<Image, ()> {
-            /*
-            println!("{:?}", value);
-            let file = NamedFile::open(value.to_string()); 
-            println!("{:?}", file);
-
-            Ok(Image(String::from("pepega")))
-            */
-
             let value_uri = match value.url_decode() {
                 Ok(n) => n,
                 Err(_) => return Err(()),
