@@ -29,7 +29,7 @@
                     <p class="mb-2">Message: {{messages}}</p>
                     <p class="mb-2">Hobbies: {{hobbies}}</p>
                     <p class="mb-2">Achievements: {{achievements}}</p>
-                    <form action="announcements/del" method="post">
+                    <form action="student/del" method="post">
                         <div class="d-flex mt-3">
                         <input type="number" class="form-control form-control-sm" id="id" name="id" value = {{id}} style="display: none">
                         </div>
@@ -51,7 +51,7 @@
                 <form action="student/add" method="post">
                     <div class="d-flex mt-3">
                     <div style="flex: 1; justify-content: center;">
-                        <select name="lang", id="lang">
+                        <select name="lang", id="lang" required>
                             <option value="" disabled selected>Select Language</option>
                             <option value="en">English</option>
                             <option value="es">Spanish</option>
@@ -64,7 +64,7 @@
                         <p class="my-0">Student Name</p> 
                     </div>
                     <div style="flex: 1; align: center;">
-                        <input type="text" class="form-control form-control-sm" id="name" name="name">
+                        <input type="text" class="form-control form-control-sm" id="name" name="name" required>
                     </div>
                     </div>
 
@@ -73,7 +73,7 @@
                         <p class="my-0">Student Picture</p> 
                     </div>
                     <div style="flex: 1; align: center;">
-                        <input type="file" name="image", id="image", accept="image/png">
+                        <input type="file" name="image", id="image", accept="image/png" required>
                     </div>
                     </div>
 
@@ -82,7 +82,7 @@
                         <p class="my-0">Grade</p> 
                     </div>
                     <div style="flex: 1; align: center;">
-                        <input type="text" class="form-control form-control-sm" id="grade" name="grade">
+                        <input type="text" class="form-control form-control-sm" id="grade" name="grade" required>
                     </div>
                     </div>
 
@@ -91,7 +91,7 @@
                         <p class="my-0">Message</p> 
                     </div>
                     <div style="flex: 1; align: center;">
-                        <input type="text" class="form-control form-control-sm" id="messages" name="messages">
+                        <input type="text" class="form-control form-control-sm" id="messages" name="messages" required>
                     </div>
                     </div>
 
@@ -100,7 +100,7 @@
                         <p class="my-0">Hobbies</p> 
                     </div>
                     <div style="flex: 1; align: center;">
-                        <input type="text" class="form-control form-control-sm" id="hobbies" name="hobbies">
+                        <input type="text" class="form-control form-control-sm" id="hobbies" name="hobbies" required>
                     </div>
                     </div>
 
@@ -109,7 +109,7 @@
                         <p class="my-0">Achievements</p> 
                     </div>
                     <div style="flex: 1; align: center;">
-                        <input type="text" class="form-control form-control-sm" id="achievements" name="achievements">
+                        <input type="text" class="form-control form-control-sm" id="achievements" name="achievements" required>
                     </div>
                     </div>
                     
@@ -125,13 +125,13 @@
                         <p class="my-0">ID of SOTW to update</p> 
                     </div>
                     <div style="flex: 1; align: center;">
-                        <input type="number" class="form-control form-control-sm" id="id" name="id">
+                        <input type="number" class="form-control form-control-sm" id="id" name="id" required>
                     </div>
                     </div>
 
                     <div class="d-flex mt-3">
                     <div style="flex: 1; justify-content: center;">
-                        <select name="lang", id="lang">
+                        <select name="lang", id="lang" required>
                             <option value="" disabled selected>Select Language</option>
                             <option value="en">English</option>
                             <option value="es">Spanish</option>
@@ -144,7 +144,7 @@
                         <p class="my-0">Student Name</p> 
                     </div>
                     <div style="flex: 1; align: center;">
-                        <input type="text" class="form-control form-control-sm" id="name" name="name">
+                        <input type="text" class="form-control form-control-sm" id="name" name="name" required>
                     </div>
                     </div>
 
@@ -153,7 +153,7 @@
                         <p class="my-0">Student Picture</p> 
                     </div>
                     <div style="flex: 1; align: center;">
-                        <input type="file" name="image", id="image", accept="image/png">
+                        <input type="file" name="image", id="image", accept="image/png" required>
                     </div>
                     </div>
 
@@ -162,7 +162,7 @@
                         <p class="my-0">Grade</p> 
                     </div>
                     <div style="flex: 1; align: center;">
-                        <input type="text" class="form-control form-control-sm" id="grade" name="grade">
+                        <input type="text" class="form-control form-control-sm" id="grade" name="grade" required>
                     </div>
                     </div>
 
@@ -171,7 +171,7 @@
                         <p class="my-0">Message</p> 
                     </div>
                     <div style="flex: 1; align: center;">
-                        <input type="text" class="form-control form-control-sm" id="messages" name="messages">
+                        <input type="text" class="form-control form-control-sm" id="messages" name="messages" required>
                     </div>
                     </div>
 
@@ -180,7 +180,7 @@
                         <p class="my-0">Hobbies</p> 
                     </div>
                     <div style="flex: 1; align: center;">
-                        <input type="text" class="form-control form-control-sm" id="hobbies" name="hobbies">
+                        <input type="text" class="form-control form-control-sm" id="hobbies" name="hobbies" required>
                     </div>
                     </div>
 
@@ -189,7 +189,7 @@
                         <p class="my-0">Achievements</p> 
                     </div>
                     <div style="flex: 1; align: center;">
-                        <input type="text" class="form-control form-control-sm" id="achievements" name="achievements">
+                        <input type="text" class="form-control form-control-sm" id="achievements" name="achievements" required>
                     </div>
                     </div>
 
