@@ -22,7 +22,7 @@ function forwardForImage(id, postloc) {
     console.log(data[3]);
     var params = data.join("&");
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", postloc, true);
+    xhr.open("POST", postloc);
     console.log(params);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhr.send(params);
