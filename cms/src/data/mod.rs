@@ -83,6 +83,7 @@ pub mod defs {
         }
     }
 
+    /*
 
     #[derive(Debug)]
     pub struct EmailList(Vec<String>);
@@ -109,6 +110,7 @@ pub mod defs {
                 .collect::<Vec<String>>().clone()))
         }
     }
+    */
 
     #[derive(Debug)]
     pub struct Image(String);
