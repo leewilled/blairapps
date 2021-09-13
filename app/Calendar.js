@@ -35,14 +35,12 @@ const getCurrentDate=()=>{
 }
 export const EventInfo = ({route}) => {
   const item = route.params;
-  const itemDate = new Date(item.event_date)
+  const itemDate = new Date(parseInt(String(item.event_date).split('-')[0]), parseInt(String(item.event_date).split('-')[1])-1, parseInt(String(item.event_date).split('-')[2]))
   const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
   const months = ['January','February','March','April','May','June','July','August','September','October','November','December',]
-  const dayOfWeek = days[itemDate.getDay()+1]
+  const dayOfWeek = days[itemDate.getDay()]
   const month = months[itemDate.getMonth()]
-  const date = itemDate.getDate()+1
-
-  console.log(itemDate.getDate())
+  const date = itemDate.getDate()
   
   return (
     <ScrollView style = {{backgroundColor: 'white', flex:1, padding: '5%', paddingRight: '10%'}}>
@@ -216,8 +214,8 @@ class Calendar extends React.Component {
           else if (itemDate > todayDate && itemDate <= weekFutureDate) {
             future.push(this.state.data[i])
           }
-          //else if (itemDate >= weekPastDate && itemDate < todayDate) {
-          else if (itemDate < todayDate) {
+          else if (itemDate >= weekPastDate && itemDate < todayDate) {
+          //else if (itemDate < todayDate) {
             past.push(this.state.data[i])
           }
         }

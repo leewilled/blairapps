@@ -33,13 +33,13 @@ import I18n from './i18n';
 
 const Stack = createStackNavigator();
 
-export const StaffInfo = ({route}) => {
+/*export const StaffInfo = ({route}) => {
   const item = route.params;
 
   console.log(item);
 
   return (
-    /*<View style = {{padding: 10, backgroundColor: 'white', height: '100%'}}>
+    <View style = {{padding: 10, backgroundColor: 'white', height: '100%'}}>
       {item.emails.map(email =>
         <View style ={[styles.infoContainer, {flexDirection: 'row', alignItems: 'center'}]}>
           <View style={{display: 'flex', justifyContent: 'center'}}>
@@ -50,10 +50,10 @@ export const StaffInfo = ({route}) => {
           </View>
         </View>
       )}
-    </View>*/
+    </View>
     <ScrollView style={{paddingTop:'5%',paddingHorizontal:'10%', backgroundColor: 'white', height: '100%'}}>
       <View style={{backgroundColor: 'white',borderRadius: 150, height: 300, width: 300, alignSelf: 'center', shadowColor: 'red', shadowOffset: {width: 0, height: 2}, shadowOpacity: 0.5, shadowRadius: 7}}>
-        <Image style={{resizeMode: 'cover',borderRadius: 150, height: 300, width: 300, alignSelf: 'center'}} source = {{/* CHANGE */}} /> 
+        <Image style={{resizeMode: 'cover',borderRadius: 150, height: 300, width: 300, alignSelf: 'center'}} source = {{/* CHANGE }} /> 
       </View>
       <Text style={{fontSize:28,marginTop:'5%',textAlign:'center'}}>{item.name}</Text>
       <Text style={{fontSize:20,textAlign:'center', fontWeight: '200'}}>{item.position || ""}</Text>
@@ -91,21 +91,32 @@ export const StaffInfo = ({route}) => {
       }
     </ScrollView>
   )
-}
+}*/
 function StaffElement (props) {
   const item = props.item;
+  const [expand, setExpand] = useState(false);
+
   return(
-	<View>
-      <TouchableOpacity style={[styles.listItem]} onPress={()=>props.navigation.navigate('StaffInfo', {data:props.data,name:props.name,emails:item.emails})} activeOpacity={0.8}>
-        <View style = {[styles.container2, {justifyContent: 'space-between'}]}>
-          <View style={{display: 'flex', flexDirection: 'row'}}> 
-            <Ionicons name = "ios-nutrition-outline" size={36} color={'#323232'} style={{marginRight: 15}} />
-            <Text style={[styles.title, {alignSelf:'center'}]}>{props.item.name}</Text>
-          </View>
-          <Image source = {require('./assets/forward.png')} style={{tintColor: '#b2b2b2'}}/>
-        </View>
-      </TouchableOpacity>
-	</View>
+    <View>
+        <TouchableOpacity style={styles.listItem} onPress={()=>setExpand(!expand)}>
+            <View style={styles.container2}>
+                <Ionicons name="ios-nutrition-outline" size={36} color={'#323232'} style={{marginRight: 15}} />
+                <View style = {styles.accordian}>
+                    <Text style={styles.title}>{item.name}</Text>
+                    {expand?<LinearGradient start={{x: 0, y: 0.25}} end={{x: .5, y: 1}} colors={['red', '#FF7373']} style={{borderRadius: 24, alignSelf: 'center'}}><Image source = {require('./assets/collapse.png')} style={{tintColor: 'white'}}/></LinearGradient>:<Image source = {require('./assets/expand.png')} style={{tintColor: '#b2b2b2', alignSelf: 'center'}}/>}
+                </View>
+            </View>
+            {expand?
+            <View style={{marginLeft: 50}}>
+                <Text style={styles.accordianHeader}>Email</Text>
+                <Text style={styles.accordianText}>{item.email}</Text>
+                <Text style={styles.accordianHeader}>{'\n'}Phone Number</Text>
+                <Text style={[styles.accordianText, {paddingBottom: '4%'}]}>{item.phone}</Text>
+                <Text syle={styles.accordianHeader}>{'\n'}Position</Text>
+                <Text style={[styles.accordianText, {paddingBottom: '4%'}]}>{item.position}</Text>
+            </View>:<></>}
+        </TouchableOpacity>
+    </View>
   )
 }
 
@@ -130,18 +141,6 @@ function Staff () {
             headerBackTitleVisible:false,
             headerTintColor: 'black',
             headerTitleAlign: 'center'
-          })}
-        />
-        <Stack.Screen 
-          name = "StaffInfo"
-          component = {StaffInfo}
-          options={({route})=>({
-            title:route.params.name,
-            headerTitleStyle:[morestyles.headerTitle,{alignSelf:'center'}],
-            headerBackground: ()=>background,
-            headerBackTitleVisible:false,
-            headerTintColor: 'black',
-            headerTitleAlign: 'center',
           })}
         />
       </Stack.Navigator>

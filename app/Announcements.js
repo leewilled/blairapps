@@ -99,8 +99,8 @@ export const TeacherList = ({route}) => {
 		else if (itemDate.getTime() > todayDate.getTime() && itemDate.getTime() <= weekFutureDate.getTime()) {
 			future.push(route.params.data[i])
 		}
-		//else if (itemDate >= weekPastDate && itemDate < todayDate) {
-		else if (itemDate.getTime() < todayDate.getTime()) {
+		else if (itemDate >= weekPastDate && itemDate < todayDate) {
+		//else if (itemDate.getTime() < todayDate.getTime()) {
 			past.push(route.params.data[i])
 		}
 	}

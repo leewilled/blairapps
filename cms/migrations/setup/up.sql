@@ -23,8 +23,7 @@ CREATE TABLE teachers (
     name VARCHAR NOT NULL,
     email VARCHAR NOT NULL,
     phone VARCHAR NOT NULL,
-    position VARCHAR NOT NULL,
-    image VARCHAR
+    position VARCHAR NOT NULL
 );
 
 CREATE TABLE announcements (
@@ -75,6 +74,7 @@ CREATE TABLE new (
     lang VARCHAR,
     image VARCHAR,
     name VARCHAR NOT NULL,
+    text VARCHAR NOT NULL,
     new_date DATE
 );
 

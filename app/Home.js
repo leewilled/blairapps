@@ -113,8 +113,8 @@ export const TeacherList = ({route}) => {
 		else if (itemDate.getTime() > todayDate.getTime() && itemDate.getTime() <= weekFutureDate.getTime()) {
 			future.push(route.params.data[i])
 		}
-		//else if (itemDate >= weekPastDate && itemDate < todayDate) {
-		else if (itemDate.getTime() < todayDate.getTime()) {
+		else if (itemDate >= weekPastDate && itemDate < todayDate) {
+		//else if (itemDate.getTime() < todayDate.getTime()) {
 			past.push(route.params.data[i])
 		}
 	}
@@ -168,15 +168,15 @@ export const whatsNew = ({route}) => {
 	var futureBoolean = true
 	
 	for (var i = 0; i < route.params.data.length; i++) {
-		const itemDate = new Date(route.params.data[i].date)
+		const itemDate = new Date(parseInt(String(route.params.data[i].new_date).split('-')[0]), parseInt(String(route.params.data[i].new_date).split('-')[1])-1, parseInt(String(route.params.data[i].new_date).split('-')[2]))
 		if (itemDate.getTime() == todayDate.getTime()) {
 			today.push(route.params.data[i])
 		}
 		else if (itemDate.getTime() > todayDate.getTime() && itemDate.getTime() <= weekFutureDate.getTime()) {
 			future.push(route.params.data[i])
 		}
-		//else if (itemDate >= weekPastDate && itemDate < todayDate) {
-		else if (itemDate.getTime() < todayDate.getTime()) {
+		else if (itemDate >= weekPastDate && itemDate < todayDate) {
+		//else if (itemDate.getTime() < todayDate.getTime()) {
 			past.push(route.params.data[i])
 		}
 	}
@@ -196,16 +196,16 @@ export const whatsNew = ({route}) => {
 
 export const NewItem = ({route}) => {
   const item = route.params.data
-  const iconURI = item.image !== undefined?`data:image/png;charset=utf-8;base64,${item.image}`:''
   
   return (
     <ScrollView style={{height: '100%', backgroundColor: 'white'}}>
       <View style={{backgroundColor: '#e3e3e3'}}>
-        <Image source={require('./assets/blair_logo.png')} style={{width: windowWidth, height: windowHeight*.6, alignSelf: 'center'}}/>
+        <Image source={{uri: item.image}} style={{width: windowWidth, height: windowHeight*.6, alignSelf: 'center'}}/>
       </View>
       <View style={{backgroundColor: 'white', marginTop: '-5%', padding: '5%', borderTopLeftRadius: 20, borderTopRightRadius: 20}}>
-        <Text style={{fontSize: 14, fontWeight: '200', textAlign: 'center'}}>{item.date}</Text>
+        <Text style={{fontSize: 14, fontWeight: '200', textAlign: 'center'}}>{item.new_date}</Text>
         <Text style={{fontSize: 20, textAlign: 'center', paddingBottom: '2%', fontWeight: 'bold'}}>{item.name}</Text>
+        <Text style={{fontSize: 14}}>{item.text}</Text>
       </View>
     </ScrollView>
   )
@@ -247,9 +247,9 @@ const New = (props) => {
   return (
     <View style={{paddingRight: '2%'}}>
       <TouchableOpacity onPress={()=>props.navigation.navigate('NewItem', {data:props.item.item})}>
-        <ImageBackground style = {{width: windowWidth*.4, height: windowWidth*.55, backgroundColor:'#e3e3e3', borderRadius: 16, alignItems: 'baseline'}}source = {{iconURI}}>
+        <ImageBackground style = {{width: windowWidth*.4, height: windowWidth*.55, backgroundColor:'#e3e3e3', borderRadius: 16, alignItems: 'baseline'}}source = {{uri: item.item.image}}>
           <View style={{padding: '5%', flex: 1, justifyContent: 'flex-end', width: windowWidth*.4, height: windowWidth*.2, shadowColor: '#323232', shadowOffset: {width: 0, height: 0}, shadowOpacity: 0.5}}>
-            <Text style={{fontSize: 12, color: 'white', fontWeight: '700'}}>{item.item.date}</Text>
+            <Text style={{fontSize: 12, color: 'white', fontWeight: '500'}}>{item.item.new_date}</Text>
             <Text style={{fontSize: 16, color: 'white', fontWeight: 'bold'}}>{text}</Text>
           </View>
         </ImageBackground>
@@ -380,7 +380,6 @@ function HomeStack() {
 }
 
 function HomeScreen (props) {
-  console.log(props.studentData)
   var showStudent = true
   if (props.studentData.length==0) {showStudent = false}
   const iconURI = null
@@ -393,16 +392,15 @@ function HomeScreen (props) {
   var todayNewBoolean = true
   var showLunch = false
   for (var i = 0; i < props.annData.length; i++) {
-    const itemDate = new Date(props.annData[i].date)
-    if (itemDate == todayDate) todayAnn.push(props.annData[i])
-    else todayAnn.push(props.annData[i])
+    const itemDate = new Date(parseInt(String(props.annData[i].date).split('-')[0]), parseInt(String(props.annData[i].date).split('-')[1])-1, parseInt(String(props.annData[i].date).split('-')[2]))
+    if (itemDate.getTime() == todayDate.getTime()) todayAnn.push(props.annData[i])
   }
 
   for (var i = 0; i < props.data.length; i++) {
-    const itemDate = new Date(props.data[i].date)
-    if (itemDate == todayDate) todayNew.push(props.data[i])
+    const itemDate = new Date(parseInt(String(props.data[i].new_date).split('-')[0]), parseInt(String(props.data[i].new_date).split('-')[1])-1, parseInt(String(props.data[i].new_date).split('-')[2]))
+    if (itemDate.getTime() == todayDate.getTime()) todayNew.push(props.data[i])
   }
-
+  
   if (todayAnn.length === 0) todayAnnBoolean = false
   if (todayNew.length ===0) todayNewBoolean = false
   todayAnn = todayAnn.slice(0, 4)
@@ -467,7 +465,7 @@ function HomeScreen (props) {
         <Text style={[liststyles.homeTitle, {paddingBottom: '5%'}]}>{I18n.t('home.SOTW')}</Text>
         <View style={{display: 'flex', flexDirection: 'row'}}>
           <View style={{backgroundColor: 'white', width: windowWidth*.30, height: windowWidth*.30, shadowColor: 'red', shadowOffset: {width: 0, height: 2}, shadowOpacity: 0.5, shadowRadius: 7, borderRadius: (windowWidth*.30)/2}}>
-            <Image source = {{iconURI}} style = {{height:'100%', width: '100%', borderTopRightRadius: 8, borderTopLeftRadius:8}}/>
+            <Image source = {{uri: props.studentData[props.studentData.length-1].image}} style = {{height:'100%', width: '100%', borderTopRightRadius: 8, borderTopLeftRadius:8}}/>
           </View>
           <View style ={{width: windowWidth*.60, display: 'flex', paddingLeft: '5%', paddingHorizontal: '2%', alignItems: 'center', justifyContent: 'space-around'}}>
             <Text style={{fontSize: 18, textAlign: 'center'}}>{props.studentData[props.studentData.length-1].name}, <Text style={{fontWeight: '200', textAlign: 'center'}}>Grade {props.studentData[props.studentData.length-1].grade}</Text></Text>
@@ -560,10 +558,11 @@ class Home extends React.Component {
 			return response.text();
 		  })
 		  .then((json) => {
-			const data = JSON.parse(json).data
+			const data = JSON.parse(json)
       data.sort((a,b)=>a.id-b.id)
 			data.sort((a,b)=>new Date(b.date).getTime()-new Date(a.date).getTime())
 			this.setState({data: data});
+      console.log(this.state.data)
 		  })
 		  .catch((error) => console.error(error))
 	}

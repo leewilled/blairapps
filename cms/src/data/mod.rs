@@ -164,7 +164,6 @@ api_route! {
         email: (Text, String, String),
         phone: (Text, String, String),
         position: (Text, String, String),
-        image: (Text, String, Image),
     }
 }
 
@@ -221,6 +220,7 @@ api_route! {
     new {
         image: (Text, String, Image),
         name: (Text, String, String),
+        text: (Text, String, String),
         new_date: (Date, NaiveDate, DateForm),
     }
 }
