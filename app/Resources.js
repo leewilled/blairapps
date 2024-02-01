@@ -49,6 +49,12 @@ class Resources extends React.Component {
           <ResourceLink url='https://sites.google.com/mcpsmd.net/mbhs-schoolcounseling-team/home/mbhs-school-counseling-team' img={require('./assets/counselor.jpeg')} name='Counseling Team'/>
           <ResourceLink url='http://bnconline.net/c/infoflow/' img={require('./assets/infoflow.jpeg')} name='Infoflow'/>
           <ResourceLink url='https://silverchips.mbhs.edu/' img={require('./assets/sco.jpeg')} name='Silver Chips Online'/>
+          <ResourceLink url='https://www.instagram.com/mbhssga/?hl=en' img={require('.assets/___.png')} name='Blair SGA Instagram'/>
+          // add image asset of blazer head, can provide if needed but cant do it rn computer about to explode
+          // changed backgroundColor to red and white gradient as seen in canva!
+          // decide on fonts too.
+
+
 			  </View>
       </ScrollView>
 			

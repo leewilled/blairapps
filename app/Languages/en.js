@@ -2,7 +2,6 @@ export default {
     home: {
         whatsNew: "What's New?",
         viewAll: "View All",
-        SOTW: "Student of the Week",
         Grade: "Grade",
         Hobbies: "Hobbies",
         Achievements: "Achievements",
@@ -15,7 +14,10 @@ export default {
         seeLunch: "See Lunch Events",
         noNews: "No news for today",
         noAnnouncements: "No announcements for today",
-        moreOn: "More on"
+        moreOn: "More on",
+        SGA: "SGA This Week"
+       
+        
     },
     dates: {
         today: "Today",
@@ -71,13 +73,26 @@ export default {
     more: {
         Announcements: "Announcements",
         Resources: "Resources",
-        SOTW: "Student of the Week",
         lunch: "Lunch Events",
         ssl: "SSL Opportunities",
         COTW: "Challenge of the Week",
         Polls: "Polls",
         Settings: "Settings",
         More: "More"
+    },
+    SGA: {
+        searchSGA: "searchSGA",
+        SelectSGACommittee: "Select Committee",
+        blazerstrail: "Blazers Trail",
+        blairapp: "Blair App",
+        blairunity: "Blair Unity",
+        restorativejustice: "Restorative Justice",
+            BlairRJInstagram: "Interested in advocacy and making positive changes? Check out Blair RJ's Instagram",
+        blairwellness: "Blair wellness",
+        blairPR: "Blair PR ",
+            BlairSGAInstragram: "Blair's SGA Instagram! Follow for Blair updates!",
+        Conexiones: "Conexiones",
+        SGAapplication: "SGA Application",
     },
     settings: {
         settings: "Settings",
