@@ -9,7 +9,7 @@
     "test": "jest",
     "lint": "eslint ."
   }
-  "dependencies": {
+  "dependencies": {,
     "@k3rn31p4nic/google-translate-api": "github:k3rn31p4nic/google-translate-api",
     "@react-native-async-storage/async-storage": "^1.21.0",
     "@react-native-masked-view/masked-view": "^0.3.1",
