@@ -1,1 +1,1 @@
-# blazerApp
+# blazerapp
